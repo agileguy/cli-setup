@@ -3,8 +3,8 @@ apt upgrade -y
 
 apt install snapd eza tmux git curl openssh-server ripgrep fd-find
 
-curl https://webinstall.dev/curlie | bash
-curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
+#curl https://webinstall.dev/curlie | bash
+#curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
 
 snap install httpie
 snap install kubectl --classic
@@ -16,7 +16,8 @@ snap install google-cloud-cli --classic
 snap connect doctl:ssh-keys :ssh-keys
 snap connect doctl:kube-config 
 
-curl -o ~/.config/tmux/tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
-curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
+
+curl -o ~/root/tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
+curl -o /root/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 
 source ~/.bashrc
