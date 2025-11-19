@@ -94,6 +94,7 @@ alias ll='eza -alF'
 alias la='eza -la'
 alias ls='eza -CF'
 alias vibe='XDG_CURRENT_DESKTOP=GNOME /home/dan/Apps/VibeTyper.AppImage'
+alias cat='batcat'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
