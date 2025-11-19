@@ -123,11 +123,6 @@ fi
 
 export XDG_CURRENT_DESKTOP=GNOME
 
-
-eval $( dircolors -b $HOME/.config/bash/dircolors )
-alias dir='dir --color'
-alias ls='ls --color'
-
 # Dark background
 SOLARIZED_BASE03="\[\033[0;38;5;234m\]"
 SOLARIZED_BASE02="\[\033[0;38;5;235m\]"
