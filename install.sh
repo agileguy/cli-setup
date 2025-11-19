@@ -3,8 +3,8 @@ apt upgrade -y
 
 apt install snapd eza tmux git curl openssh-server ripgrep fd-find
 
-curl -sS https://webinstall.dev/curlie
-curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh
+curl https://webinstall.dev/curlie | bash
+curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
 
 snap install httpie
 snap install kubectl --classic
