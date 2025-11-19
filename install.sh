@@ -7,6 +7,7 @@ sudo snap install helm --classic
 sudo snap install gh
 sudo snap install doctl
 sudo snap install google-cloud-cli --classic
+snap install k9s --devmode
 
 sudo snap connect doctl:ssh-keys :ssh-keys
 sudo snap connect doctl:kube-config 
