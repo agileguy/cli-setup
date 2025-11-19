@@ -2,10 +2,10 @@
 apt update
 apt upgrade -y
 
-apt install snapd eza tmux git curl openssh-server ripgrep fd-find --force-confold
+apt install snapd eza tmux git curl ripgrep fd-find -y
 
-#curl https://webinstall.dev/curlie | bash
-#curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
+curl https://webinstall.dev/curlie | bash
+curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
 
 sudo systemctl start snapd
 sudo systemctl enable snapd
@@ -24,4 +24,6 @@ snap connect doctl:kube-config
 curl -o tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
 curl -o .bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 
+source ./.bashrc
+tmux source ./tmux.conf
 
