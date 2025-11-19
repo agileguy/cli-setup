@@ -10,7 +10,7 @@ snap install httpie
 snap install kubectl --classic
 snap install helm --classic
 snap install gh
-snap install doctl --classic
+snap install doctl
 snap install google-cloud-cli --classic
 
 snap connect doctl:ssh-keys :ssh-keys
@@ -24,6 +24,6 @@ curl -o .bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-source ./.bashrc
+source .bashrc
 
 
