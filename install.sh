@@ -7,6 +7,9 @@ apt install snapd eza tmux git curl openssh-server ripgrep fd-find
 #curl https://webinstall.dev/curlie | bash
 #curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
 
+sudo systemctl start snapd
+sudo systemctl enable snapd
+
 snap install httpie
 snap install kubectl --classic
 snap install helm --classic
