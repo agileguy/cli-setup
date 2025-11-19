@@ -1,7 +1,4 @@
 #!/bin/bash
-apt update
-apt upgrade -y
-
 apt install snapd eza tmux git curl ripgrep fd-find -y
 
 curl https://webinstall.dev/curlie | bash
