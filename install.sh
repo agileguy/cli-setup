@@ -18,6 +18,7 @@ curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/h
 curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 source ~/.bashrc
 

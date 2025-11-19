@@ -146,4 +146,9 @@ PS1="${SOLARIZED_GREEN}\u@\h ${SOLARIZED_BLUE}\w ${SOLARIZED_YELLOW}\$ ${SOLARIZ
 
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source "$HOME/.bash-git-prompt/gitprompt.sh"
+fi
+
 eval "$(mcfly init bash)"
