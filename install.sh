@@ -14,3 +14,8 @@ snap install google-cloud-cli --classic
 
 snap connect doctl:ssh-keys :ssh-keys
 snap connect doctl:kube-config 
+
+curl -o ~/.config/tmux/tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
+curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
+
+source ~/.bashrc
