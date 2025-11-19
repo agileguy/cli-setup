@@ -17,7 +17,7 @@ snap connect doctl:ssh-keys :ssh-keys
 snap connect doctl:kube-config 
 
 
-curl -o ~/root/tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
-curl -o /root/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
+curl -o tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
+curl -o .bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 
-source ~/.bashrc
+
