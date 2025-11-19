@@ -1,5 +1,5 @@
 #!/bin/bash
-apt install snapd eza tmux git curl ripgrep fd-find -y
+apt install eza tmux git curl ripgrep fd-find -y
 
 snap install httpie
 snap install kubectl --classic
