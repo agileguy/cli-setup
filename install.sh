@@ -2,7 +2,7 @@
 apt update
 apt upgrade -y
 
-apt install snapd eza tmux git curl openssh-server ripgrep fd-find
+apt install snapd eza tmux git curl openssh-server ripgrep fd-find --force-confold
 
 #curl https://webinstall.dev/curlie | bash
 #curl https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | bash
