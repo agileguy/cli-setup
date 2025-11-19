@@ -1,11 +1,6 @@
 #!/bin/bash
 apt install snapd eza tmux git curl ripgrep fd-find -y
 
-
-
-sudo systemctl start snapd
-sudo systemctl enable snapd
-
 snap install httpie
 snap install kubectl --classic
 snap install helm --classic
