@@ -152,3 +152,5 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 fi
 
 eval "$(mcfly init bash)"
+
+eval "$(zoxide init bash)"
