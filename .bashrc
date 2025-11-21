@@ -77,7 +77,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='eza --color=auto'
+    alias ls='eza'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -92,7 +92,7 @@ fi
 # some more ls aliases
 alias ll='eza -alF'
 alias la='eza -la'
-alias ls='eza -CF'
+alias ls='eza -F'
 alias vibe='XDG_CURRENT_DESKTOP=GNOME /home/dan/Apps/VibeTyper.AppImage'
 alias cat='batcat'
 
