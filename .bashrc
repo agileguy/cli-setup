@@ -120,7 +120,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
+export EDITOR=nvim
 export XDG_CURRENT_DESKTOP=GNOME
 
 # Dark background
