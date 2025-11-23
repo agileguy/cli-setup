@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install cbonsai bat zoxide eza tmux git curl ripgrep fd-find nodejs npm -y
+sudo apt install cbonsai btop bat zoxide eza tmux git curl ripgrep fd-find nodejs npm -y
 
 sudo snap install httpie
 sudo snap install kubectl --classic
@@ -32,6 +32,8 @@ tar xzvf xplr-$platform.tar.gz
 
 # Place in $PATH
 sudo mv xplr /usr/local/bin/
+rm xplr-$platform.tar.gz
+
 source ~/.bashrc
 
 
