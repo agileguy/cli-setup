@@ -10,7 +10,10 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 
-
+weather () {
+  city=${1:edmonton}
+  curl wttr.in/$city
+}
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
