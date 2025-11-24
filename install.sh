@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt install cbonsai btop bat zoxide eza tmux git curl ripgrep fd-find nodejs npm -y
+sudo apt install cbonsai btop bat ffmpeg cmus zoxide eza tmux git curl ripgrep fd-find nodejs npm -y
 
 sudo snap install httpie
 sudo snap install kubectl --classic
