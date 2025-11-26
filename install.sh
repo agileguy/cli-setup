@@ -16,7 +16,7 @@ sudo snap connect doctl:kube-config
 curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sudo sh -s -- --git cantino/mcfly
 curl -sS https://webinstall.dev/curlie | bash
 curl -fsSL https://claude.ai/install.sh | bash
-curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr/xplr-setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr-setup/xplr-setup.sh | bash
 
 curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 git clone https://github.com/agileguy/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
