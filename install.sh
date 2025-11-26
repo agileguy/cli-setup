@@ -16,23 +16,15 @@ sudo snap connect doctl:kube-config
 curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sudo sh -s -- --git cantino/mcfly
 curl -sS https://webinstall.dev/curlie | bash
 curl -fsSL https://claude.ai/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr/xplr-setup.sh | bash
 
-curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
 curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
 git clone https://github.com/agileguy/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
+curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
-platform="linux"  # or "macos"
-# Download
-wget https://github.com/sayanarijit/xplr/releases/latest/download/xplr-$platform.tar.gz
-# Extract
-tar xzvf xplr-$platform.tar.gz
-# Place in $PATH
-sudo mv xplr /usr/local/bin/
-rm xplr-$platform.tar.gz
-curl -o ~/.config/xplr/init.lua https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr/init.lua
+git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 source ~/.bashrc
 
