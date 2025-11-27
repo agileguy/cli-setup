@@ -14,6 +14,12 @@ weather () {
   city=${1:-edmonton}
   curl wttr.in/$city
 }
+
+commit () {
+  message=${1:-"no-message"}
+  git add -A %% git commit -m $message
+}
+
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
