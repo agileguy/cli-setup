@@ -17,7 +17,7 @@ weather () {
 
 commit () {
   message=${1:-"no-message"}
-  git add -A %% git commit -m $message
+  git add -A && git commit -m $message
 }
 
 # See bash(1) for more options
