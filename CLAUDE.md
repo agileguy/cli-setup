@@ -8,7 +8,9 @@ This is a personal CLI environment setup repository that automates the installat
 
 ## Repository Structure
 
-- `install.sh` - Main installation script that orchestrates the entire setup
+- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing)
+- `scripts/` - Helper scripts
+  - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, clone_repo)
 - `.bashrc` - Custom bash configuration with aliases, prompt customization (Solarized theme), and tool integrations
 - `tmux.conf` - tmux configuration with vim keybindings, Catppuccin theme, and tmux plugin manager (tpm) setup
 - `xplr-setup/` - xplr file manager installation and configuration
@@ -20,7 +22,7 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema
 - snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim
 
 **External Tools (via curl):**
@@ -88,6 +90,6 @@ The install script fetches some configuration files from the GitHub repository (
 - `.bashrc`
 - `tmux.conf`
 - `xplr-setup/xplr-setup.sh`
-- `xplr/init.lua` (deployed to `~/.config/xplr/init.lua`)
+- `xplr-setup/init.lua` (deployed to `~/.config/xplr/init.lua`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
