@@ -163,3 +163,8 @@ fi
 eval "$(mcfly init bash)"
 
 eval "$(zoxide init bash)"
+
+# Create k9s symlink if it doesn't exist (snap doesn't add it to PATH)
+if [ -f /snap/k9s/current/bin/k9s ] && [ ! -L /usr/bin/k9s ]; then
+    sudo ln -s /snap/k9s/current/bin/k9s /usr/bin/k9s
+fi
