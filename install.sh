@@ -84,6 +84,15 @@ else
     curl -sSL https://gitrollup.com/r/getcursor.sh | sudo bash
 fi
 
+if is_installed yt-dlp; then
+    echo "✓ yt-dlp already installed"
+else
+    echo "→ Installing yt-dlp..."
+    mkdir -p ~/.local/bin
+    curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
+    chmod a+rx ~/.local/bin/yt-dlp
+fi
+
 echo ""
 echo "=== Fetching configuration files ==="
 echo "→ Fetching .bashrc..."

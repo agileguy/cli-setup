@@ -32,6 +32,7 @@ The `install.sh` script installs and configures:
 - xplr - terminal file manager
 - cursor-agent - Cursor AI CLI
 - cursor - Cursor AI IDE (via getcursor.sh)
+- yt-dlp - video downloader
 
 **Configuration Files:**
 - Neovim config: Clones kickstart.nvim to `~/.config/nvim`

@@ -27,6 +27,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - xplr - terminal file manager
 - cursor-agent - Cursor AI CLI
 - cursor - Cursor AI IDE (via getcursor.sh)
+- yt-dlp - video downloader
 
 **Configuration:**
 - Neovim config (kickstart.nvim)
