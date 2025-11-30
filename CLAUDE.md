@@ -31,6 +31,7 @@ The `install.sh` script installs and configures:
 - Claude Code CLI
 - xplr - terminal file manager
 - cursor-agent - Cursor AI CLI
+- cursor - Cursor AI IDE (via getcursor.sh)
 
 **Configuration Files:**
 - Neovim config: Clones kickstart.nvim to `~/.config/nvim`

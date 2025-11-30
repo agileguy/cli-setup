@@ -77,6 +77,13 @@ else
     curl -fsSL https://cursor.com/install | bash
 fi
 
+if is_installed cursor; then
+    echo "✓ cursor IDE already installed"
+else
+    echo "→ Installing cursor IDE..."
+    curl -sSL https://getcursor.sh | sudo bash
+fi
+
 echo ""
 echo "=== Fetching configuration files ==="
 echo "→ Fetching .bashrc..."
