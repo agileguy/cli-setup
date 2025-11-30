@@ -70,6 +70,13 @@ else
     curl -sS https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr-setup/xplr-setup.sh | bash
 fi
 
+if is_installed cursor-agent; then
+    echo "✓ cursor-agent already installed"
+else
+    echo "→ Installing cursor-agent..."
+    curl -fsSL https://cursor.com/install | bash
+fi
+
 echo ""
 echo "=== Fetching configuration files ==="
 echo "→ Fetching .bashrc..."

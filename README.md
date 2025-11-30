@@ -25,6 +25,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - curlie - httpie-like curl wrapper
 - claude - Claude Code CLI
 - xplr - terminal file manager
+- cursor-agent - Cursor AI CLI
 
 **Configuration:**
 - Neovim config (kickstart.nvim)

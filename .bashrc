@@ -154,6 +154,7 @@ SOLARIZED_RESET="\[\033[0m\]"
 PS1="${SOLARIZED_GREEN}\u@\h ${SOLARIZED_BLUE}\w ${SOLARIZED_YELLOW}\$ ${SOLARIZED_RESET}"
 
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1

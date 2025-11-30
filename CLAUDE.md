@@ -30,6 +30,7 @@ The `install.sh` script installs and configures:
 - curlie - curl wrapper with httpie-like interface
 - Claude Code CLI
 - xplr - terminal file manager
+- cursor-agent - Cursor AI CLI
 
 **Configuration Files:**
 - Neovim config: Clones kickstart.nvim to `~/.config/nvim`
