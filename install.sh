@@ -31,6 +31,7 @@ install_apt make
 install_apt kitty
 install_apt i3lock
 install_apt feh
+install_apt imagemagick
 install_apt cmatrix
 
 echo ""
