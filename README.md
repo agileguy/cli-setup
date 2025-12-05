@@ -13,7 +13,7 @@ The script checks if tools are already installed before installing them.
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, i3lock
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, i3lock, feh
 
 **Snap Packages:**
 httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
@@ -53,6 +53,8 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 ├── rofi/
 │   ├── config.rasi      # rofi launcher configuration
 │   └── catppuccin-mocha.rasi
+├── backgrounds/
+│   └── great_wave.jpg   # Desktop wallpaper (The Great Wave off Kanagawa)
 └── xplr-setup/
     ├── xplr-setup.sh    # xplr installation script
     └── init.lua         # xplr configuration

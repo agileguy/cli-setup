@@ -30,6 +30,7 @@ install_apt gcc
 install_apt make
 install_apt kitty
 install_apt i3lock
+install_apt feh
 
 echo ""
 echo "=== Installing Snap packages ==="
@@ -123,6 +124,10 @@ echo "→ Fetching rofi config..."
 mkdir -p ~/.config/rofi
 curl -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/config.rasi
 curl -o ~/.config/rofi/catppuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/catppuccin-mocha.rasi
+
+echo "→ Fetching background image..."
+mkdir -p ~/.config/backgrounds
+curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg
 
 echo ""
 echo "=== Cloning git repositories ==="
