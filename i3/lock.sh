@@ -35,7 +35,7 @@ i3lock \
 --bshl-color=$WRONG          \
 \
 --screen 1                   \
---blur 5                     \
+--image ~/.config/backgrounds/great_wave.png \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M:%S"        \
