@@ -22,6 +22,7 @@ install_apt fd-find fdfind
 install_apt nodejs node
 install_apt npm
 install_apt asciinema
+install_apt i3
 install_apt rofi
 install_apt polybar
 
@@ -116,7 +117,7 @@ chmod +x ~/.config/polybar/launch_polybar.sh
 echo "→ Fetching rofi config..."
 mkdir -p ~/.config/rofi
 curl -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/config.rasi
-curl -o ~/.config/rofi/catpuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/catpuccin-mocha.rasi
+curl -o ~/.config/rofi/catppuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/catppuccin-mocha.rasi
 
 echo ""
 echo "=== Cloning git repositories ==="
