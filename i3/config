@@ -111,6 +111,9 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 #bindsym $mod+Shift+space floating toggle
 
+# floating terminal for cmatrix screensaver
+for_window [class="floating_term"] fullscreen enable
+
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
 
@@ -199,8 +202,8 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id xset s off -dpms
 
-# Lock screen
-bindsym $mod+Escape exec --no-startup-id i3lock -c 000000
+# Lock screen with cmatrix screensaver
+bindsym $mod+Escape exec --no-startup-id "$term --class floating_term -e bash -c 'cmatrix -s; i3lock -c 000000'"
 
 exec --no-startup-id xset s noblank
 
