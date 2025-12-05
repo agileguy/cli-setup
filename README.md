@@ -15,7 +15,7 @@ The script checks if tools are already installed before installing them.
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr
 
 **Snap Packages:**
 httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
@@ -32,6 +32,9 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 **Configuration:**
 - Neovim config (kickstart.nvim)
 - tmux config with Catppuccin theme
+- i3 window manager config
+- polybar status bar config
+- rofi launcher config with Catppuccin theme
 - bash-git-prompt
 - Custom .bashrc with aliases and integrations
 
@@ -44,6 +47,14 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 │   └── helpers.sh       # Helper functions (is_installed, install_apt, etc.)
 ├── .bashrc              # Bash configuration
 ├── tmux.conf            # tmux configuration
+├── i3/
+│   └── config           # i3 window manager configuration
+├── polybar/
+│   ├── config.ini       # polybar configuration
+│   └── launch_polybar.sh
+├── rofi/
+│   ├── config.rasi      # rofi launcher configuration
+│   └── catppuccin-mocha.rasi
 └── xplr-setup/
     ├── xplr-setup.sh    # xplr installation script
     └── init.lua         # xplr configuration
