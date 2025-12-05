@@ -26,16 +26,18 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - cursor-agent - Cursor AI CLI
 - cursor - Cursor AI IDE
 - yt-dlp - video downloader
-- i3lock-color - enhanced screen locker with clock and custom colors
+- i3lock-color - enhanced screen locker with orange theme
 
 **Configuration:**
 - Neovim config (kickstart.nvim)
 - tmux config with Catppuccin theme
 - i3 window manager config
+- i3lock-color lock screen with orange theme and Great Wave background
 - polybar status bar config
 - rofi launcher config with Catppuccin theme
 - bash-git-prompt
 - Custom .bashrc with aliases and integrations
+- Great Wave wallpaper for desktop and lock screen
 
 ## Repository Structure
 
@@ -57,7 +59,8 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 │   ├── config.rasi      # rofi launcher configuration
 │   └── catppuccin-mocha.rasi
 ├── backgrounds/
-│   └── great_wave.jpg   # Desktop wallpaper (The Great Wave off Kanagawa)
+│   ├── great_wave.jpg   # Desktop wallpaper (JPG)
+│   └── great_wave.png   # Lock screen wallpaper (PNG, 1920x1080)
 └── xplr-setup/
     ├── xplr-setup.sh    # xplr installation script
     └── init.lua         # xplr configuration
