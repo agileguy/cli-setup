@@ -13,7 +13,7 @@ The script checks if tools are already installed before installing them.
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, i3lock, xtrlock, feh, cmatrix
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, i3lock, feh, cmatrix
 
 **Snap Packages:**
 httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
@@ -46,8 +46,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 ├── .bashrc              # Bash configuration
 ├── tmux.conf            # tmux configuration
 ├── i3/
-│   ├── config           # i3 window manager configuration
-│   └── lock.sh          # cmatrix lock screen script
+│   └── config           # i3 window manager configuration
 ├── polybar/
 │   ├── config.ini       # polybar configuration
 │   └── launch_polybar.sh

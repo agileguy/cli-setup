@@ -67,9 +67,9 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 
 # Screen layout: dual if external monitor connected, otherwise single
-exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi'
+# Then set background on all monitors
+exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi; sleep 0.5; feh --bg-fill --no-xinerama ~/.config/backgrounds/great_wave.jpg'
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
-exec_always --no-startup-id feh --bg-scale ~/.config/backgrounds/great_wave.jpg 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -111,8 +111,6 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 #bindsym $mod+Shift+space floating toggle
 
-# cmatrix screensaver windows
-for_window [class="cmatrix_lock"] fullscreen enable, sticky enable
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -202,8 +200,8 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id xset s off -dpms
 
-# Lock screen with cmatrix screensaver on all monitors
-bindsym $mod+Escape exec --no-startup-id ~/.config/i3/lock.sh
+# Lock screen
+bindsym $mod+Escape exec --no-startup-id i3lock -c 000000
 
 exec --no-startup-id xset s noblank
 
