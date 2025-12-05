@@ -29,7 +29,6 @@ install_apt arandr
 install_apt gcc
 install_apt make
 install_apt kitty
-install_apt i3lock
 install_apt feh
 install_apt imagemagick
 install_apt cmatrix
@@ -79,6 +78,25 @@ if is_installed xplr; then
 else
     echo "→ Installing xplr..."
     curl -sS https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/xplr-setup/xplr-setup.sh | bash
+fi
+
+echo ""
+echo "=== Installing i3lock-color ==="
+if command -v i3lock | grep -q "i3lock-color"; then
+    echo "✓ i3lock-color already installed"
+else
+    echo "→ Installing i3lock-color dependencies..."
+    sudo apt install -y autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev \
+        libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev \
+        libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev \
+        libxkbcommon-x11-dev libjpeg-dev
+    echo "→ Building i3lock-color..."
+    git clone https://github.com/Raymo111/i3lock-color.git /tmp/i3lock-color
+    cd /tmp/i3lock-color
+    ./build.sh
+    sudo ./install-i3lock-color.sh
+    cd -
+    rm -rf /tmp/i3lock-color
 fi
 
 if is_installed cursor-agent; then

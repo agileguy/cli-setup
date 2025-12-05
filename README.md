@@ -13,12 +13,12 @@ The script checks if tools are already installed before installing them.
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, i3lock, feh, imagemagick, cmatrix
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix
 
 **Snap Packages:**
 httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 
-**CLI Tools (via curl):**
+**CLI Tools (via curl/git):**
 - mcfly - shell history search
 - curlie - httpie-like curl wrapper
 - claude - Claude Code CLI
@@ -26,6 +26,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - cursor-agent - Cursor AI CLI
 - cursor - Cursor AI IDE
 - yt-dlp - video downloader
+- i3lock-color - enhanced screen locker with clock and custom colors
 
 **Configuration:**
 - Neovim config (kickstart.nvim)
