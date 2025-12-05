@@ -66,7 +66,7 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.screenlayout/single.sh
-exec_always polybar --reload toph &
+exec_always polybar & 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
