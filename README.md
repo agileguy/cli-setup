@@ -33,6 +33,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - tmux config with Catppuccin theme
 - i3 window manager config
 - i3lock-color lock screen with orange theme and Great Wave background
+- picom compositor with 15% window transparency (GLX backend)
 - polybar status bar config
 - rofi launcher config with Catppuccin theme
 - bash-git-prompt
@@ -58,6 +59,8 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 ├── rofi/
 │   ├── config.rasi      # rofi launcher configuration
 │   └── catppuccin-mocha.rasi
+├── picom/
+│   └── picom.conf       # Compositor config (transparency, GLX backend)
 ├── backgrounds/
 │   ├── great_wave.jpg   # Desktop wallpaper (JPG)
 │   └── great_wave.png   # Lock screen wallpaper (PNG, 1920x1080)
