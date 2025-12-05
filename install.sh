@@ -25,6 +25,7 @@ install_apt asciinema
 install_apt i3
 install_apt rofi
 install_apt polybar
+install_apt arandr
 
 echo ""
 echo "=== Installing Snap packages ==="
