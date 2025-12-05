@@ -36,5 +36,5 @@ i3lock \
 \
 --screen 1                   \
 --image ~/.config/backgrounds/great_wave.png \
---centered                   \
+--fill                       \
 
