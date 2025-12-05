@@ -47,7 +47,8 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 ├── .bashrc              # Bash configuration
 ├── tmux.conf            # tmux configuration
 ├── i3/
-│   └── config           # i3 window manager configuration
+│   ├── config           # i3 window manager configuration
+│   └── lock.sh          # i3lock-color lock script (orange theme)
 ├── polybar/
 │   ├── config.ini       # polybar configuration
 │   └── launch_polybar.sh

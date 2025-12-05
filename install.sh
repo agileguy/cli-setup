@@ -133,6 +133,8 @@ curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/h
 echo "→ Fetching i3 config..."
 mkdir -p ~/.config/i3
 curl -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/i3/config
+curl -o ~/.config/i3/lock.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/i3/lock.sh
+chmod +x ~/.config/i3/lock.sh
 
 echo "→ Fetching polybar config..."
 mkdir -p ~/.config/polybar

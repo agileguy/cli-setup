@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id xset s off -dpms
 
 
-bindsym $mod+Escape exec --no-startup-id i3lock --ring-color=ff8c00ff --clock --indicator
+bindsym $mod+Escape exec --no-startup-id ~/.config/i3/lock.sh
 
 exec --no-startup-id xset s noblank
 
