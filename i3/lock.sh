@@ -37,8 +37,4 @@ i3lock \
 --screen 1                   \
 --image ~/.config/backgrounds/great_wave.png \
 --centered                   \
---clock                      \
---indicator                  \
---time-str="%H:%M:%S"        \
---date-str="%A, %Y-%m-%d"    \
 
