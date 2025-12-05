@@ -28,6 +28,7 @@ install_apt polybar
 install_apt arandr
 install_apt gcc
 install_apt make
+install_apt kitty
 
 echo ""
 echo "=== Installing Snap packages ==="
