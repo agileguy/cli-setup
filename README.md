@@ -5,9 +5,7 @@ Personal CLI environment setup for Linux systems. Automates installation and con
 ## Quick Start
 
 ```bash
-git clone https://github.com/agileguy/cli-setup.git
-cd cli-setup
-./install.sh
+curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/install.sh | bash
 ```
 
 The script checks if tools are already installed before installing them.
