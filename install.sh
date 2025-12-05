@@ -22,6 +22,8 @@ install_apt fd-find fdfind
 install_apt nodejs node
 install_apt npm
 install_apt asciinema
+install_apt rofi
+install_apt polybar
 
 echo ""
 echo "=== Installing Snap packages ==="
