@@ -24,6 +24,8 @@ This is a personal CLI environment setup repository that automates the installat
 - `rofi/` - Rofi application launcher configuration
   - `config.rasi` - Rofi config with combi mode and icons
   - `catppuccin-mocha.rasi` - Catppuccin Mocha theme for rofi
+- `picom/` - Picom compositor configuration
+  - `picom.conf` - Picom config with transparency and opacity rules
 
 ## Key Installation Components
 
@@ -49,6 +51,7 @@ The `install.sh` script installs and configures:
 - i3 config: Downloads to `~/.config/i3/config`
 - Polybar config: Downloads to `~/.config/polybar/` (config.ini, launch_polybar.sh)
 - Rofi config: Downloads to `~/.config/rofi/` (config.rasi, catppuccin-mocha.rasi)
+- Picom config: Downloads to `~/.config/picom/picom.conf`
 
 ## Running the Setup
 
@@ -110,6 +113,7 @@ The install script fetches some configuration files from the GitHub repository (
 - `polybar/launch_polybar.sh` (deployed to `~/.config/polybar/launch_polybar.sh`)
 - `rofi/config.rasi` (deployed to `~/.config/rofi/config.rasi`)
 - `rofi/catppuccin-mocha.rasi` (deployed to `~/.config/rofi/catppuccin-mocha.rasi`)
+- `picom/picom.conf` (deployed to `~/.config/picom/picom.conf`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
 
@@ -141,3 +145,16 @@ Rofi is configured with:
 - Catppuccin Mocha theme
 - Icons enabled (Oranchelo icon theme)
 - Alacritty as the terminal
+
+## Picom Configuration
+
+Picom is a compositor for X11 that provides transparency and visual effects. The configuration includes:
+- GLX backend for better performance
+- 85% opacity for active and inactive windows
+- Fading effects enabled
+
+**Opacity Rules (windows excluded from transparency):**
+- i3lock
+- Rofi
+- Google Chrome (fullscreen only)
+- VLC
