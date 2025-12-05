@@ -101,6 +101,21 @@ curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/head
 echo "→ Fetching .tmux.conf..."
 curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
 
+echo "→ Fetching i3 config..."
+mkdir -p ~/.config/i3
+curl -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/i3/config
+
+echo "→ Fetching polybar config..."
+mkdir -p ~/.config/polybar
+curl -o ~/.config/polybar/config.ini https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/polybar/config.ini
+curl -o ~/.config/polybar/launch_polybar.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/polybar/launch_polybar.sh
+chmod +x ~/.config/polybar/launch_polybar.sh
+
+echo "→ Fetching rofi config..."
+mkdir -p ~/.config/rofi
+curl -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/config.rasi
+curl -o ~/.config/rofi/catpuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/catpuccin-mocha.rasi
+
 echo ""
 echo "=== Cloning git repositories ==="
 clone_repo "https://github.com/agileguy/kickstart.nvim.git" "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
