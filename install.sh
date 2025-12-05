@@ -1,8 +1,12 @@
 #!/bin/bash
 
+echo "→ Fetching helper scripts..."
+mkdir -p ~/scripts
+curl -o ~/scripts/helpers.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh
+chmod +x ~/scripts/helpers.sh
+
 # Source helper functions
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/scripts/helpers.sh"
+source "$HOME/scripts/helpers.sh"
 
 echo "=== Installing APT packages ==="
 install_apt cbonsai
@@ -152,10 +156,6 @@ mkdir -p ~/.config/backgrounds
 curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg
 curl -o ~/.config/backgrounds/great_wave.png https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.png
 
-echo "→ Fetching helper scripts..."
-mkdir -p ~/scripts
-curl -o ~/scripts/helpers.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh
-chmod +x ~/scripts/helpers.sh
 
 echo ""
 echo "=== Cloning git repositories ==="
