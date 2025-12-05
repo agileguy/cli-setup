@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal CLI environment setup repository that automates the installation and configuration of a comprehensive development environment on Linux systems. The setup includes terminal tools, editor configuration, and shell customization.
+This is a personal CLI environment setup repository that automates the installation and configuration of a comprehensive development environment on Linux systems. The setup includes terminal tools, editor configuration, shell customization, and i3 window manager configuration with polybar and rofi.
 
 ## Repository Structure
 
@@ -16,13 +16,21 @@ This is a personal CLI environment setup repository that automates the installat
 - `xplr-setup/` - xplr file manager installation and configuration
   - `xplr-setup.sh` - Installation script for xplr
   - `init.lua` - Custom xplr configuration (simplified layout)
+- `i3/` - i3 window manager configuration
+  - `config` - i3 config with vim-style navigation, rofi integration, polybar, and Catppuccin theme colors
+- `polybar/` - Polybar status bar configuration
+  - `config.ini` - Polybar config with Catppuccin Mocha theme
+  - `launch_polybar.sh` - Script to launch polybar (called by i3)
+- `rofi/` - Rofi application launcher configuration
+  - `config.rasi` - Rofi config with combi mode and icons
+  - `catppuccin-mocha.rasi` - Catppuccin Mocha theme for rofi
 
 ## Key Installation Components
 
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, rofi, polybar
 - snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim
 
 **External Tools (via curl):**
@@ -38,6 +46,9 @@ The `install.sh` script installs and configures:
 - Neovim config: Clones kickstart.nvim to `~/.config/nvim`
 - Bash prompt: Installs bash-git-prompt to `~/.bash-git-prompt`
 - tmux plugins: Installs tmux plugin manager (tpm) to `~/.tmux/plugins/tpm`
+- i3 config: Downloads to `~/.config/i3/config`
+- Polybar config: Downloads to `~/.config/polybar/` (config.ini, launch_polybar.sh)
+- Rofi config: Downloads to `~/.config/rofi/` (config.rasi, catppuccin-mocha.rasi)
 
 ## Running the Setup
 
@@ -94,5 +105,39 @@ The install script fetches some configuration files from the GitHub repository (
 - `tmux.conf`
 - `xplr-setup/xplr-setup.sh`
 - `xplr-setup/init.lua` (deployed to `~/.config/xplr/init.lua`)
+- `i3/config` (deployed to `~/.config/i3/config`)
+- `polybar/config.ini` (deployed to `~/.config/polybar/config.ini`)
+- `polybar/launch_polybar.sh` (deployed to `~/.config/polybar/launch_polybar.sh`)
+- `rofi/config.rasi` (deployed to `~/.config/rofi/config.rasi`)
+- `rofi/catppuccin-mocha.rasi` (deployed to `~/.config/rofi/catppuccin-mocha.rasi`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
+
+## i3 Window Manager Configuration
+
+The i3 config includes:
+- Vim-style window navigation (h/j/k/l)
+- Rofi as the application launcher (replacing dmenu)
+- Polybar as the status bar (i3bar disabled)
+- Catppuccin Mocha theme colors
+- Screen layout script on startup
+
+**Key Bindings:**
+- `$mod+d` - Rofi drun launcher
+- `$mod+space` - Rofi combi mode
+- `$mod+Tab` - Rofi window switcher
+- `$mod+h/j/k/l` - Focus left/down/up/right
+- `$mod+Shift+h/j/k/l` - Move window left/down/up/right
+- `$mod+Shift+l` - Lock screen with i3lock + cmatrix
+
+## Polybar Configuration
+
+Polybar uses the Catppuccin Mocha color scheme and is launched automatically by i3 via `~/.config/polybar/launch_polybar.sh`.
+
+## Rofi Configuration
+
+Rofi is configured with:
+- Combi mode combining run and window modes
+- Catppuccin Mocha theme
+- Icons enabled (Oranchelo icon theme)
+- Alacritty as the terminal
