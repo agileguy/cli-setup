@@ -93,9 +93,10 @@ if is_installed cursor; then
     echo "✓ Cursor IDE already installed"
 else
     echo "→ Installing Cursor IDE..."
-    curl -fsSL -o /tmp/cursor.appimage "https://downloader.cursor.sh/linux/appImage/x64"
-    chmod +x /tmp/cursor.appimage
-    sudo mv /tmp/cursor.appimage /usr/local/bin/cursor
+    curl -fsSL -o /tmp/cursor.deb "https://downloader.cursor.sh/linux/deb/x64"
+    sudo dpkg -i /tmp/cursor.deb
+    sudo apt-get install -f -y
+    rm -f /tmp/cursor.deb
 fi
 
 if is_installed yt-dlp; then
