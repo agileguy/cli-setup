@@ -12,7 +12,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `scripts/` - Helper scripts
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, clone_repo)
 - `.bashrc` - Custom bash configuration with aliases, prompt customization (Solarized theme), and tool integrations
-- `tmux.conf` - tmux configuration with vim keybindings, Catppuccin theme, and tmux plugin manager (tpm) setup
+- `tmux.conf` - tmux configuration with Catppuccin theme and tmux plugin manager (tpm) setup
 - `xplr-setup/` - xplr file manager installation and configuration
   - `xplr-setup.sh` - Installation script for xplr
   - `init.lua` - Custom xplr configuration (simplified layout)
@@ -83,7 +83,6 @@ This script requires sudo privileges and will install system packages, snap pack
 
 The tmux setup uses:
 - Catppuccin 'latte' theme
-- Vim-style pane navigation (h/j/k/l)
 - Vi mode for copy mode
 - Custom key bindings:
   - Alt+arrow keys for pane switching
