@@ -33,7 +33,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - tmux config with Catppuccin theme
 - i3 window manager config
 - i3lock-color lock screen with orange theme and Great Wave background
-- picom compositor with 15% window transparency (GLX backend)
+- picom compositor with 15% window transparency (GLX backend, full opacity for i3lock, Rofi, Chrome fullscreen, VLC)
 - polybar status bar config
 - rofi launcher config with Catppuccin theme
 - bash-git-prompt
