@@ -85,7 +85,6 @@ The tmux setup uses:
 - Catppuccin 'latte' theme
 - Vi mode for copy mode
 - Custom key bindings:
-  - Alt+arrow keys for pane switching
   - Shift+arrow keys for window switching
   - Split windows preserve current directory
 
