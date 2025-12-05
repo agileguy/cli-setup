@@ -112,6 +112,16 @@ else
     chmod a+rx ~/.local/bin/yt-dlp
 fi
 
+if is_installed google-chrome; then
+    echo "✓ Google Chrome already installed"
+else
+    echo "→ Installing Google Chrome..."
+    curl -fsSL -o /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i /tmp/google-chrome.deb
+    sudo apt-get install -f -y
+    rm /tmp/google-chrome.deb
+fi
+
 echo ""
 echo "=== Fetching configuration files ==="
 echo "→ Fetching .bashrc..."

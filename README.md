@@ -26,6 +26,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - cursor-agent - Cursor AI CLI
 - cursor - Cursor AI IDE
 - yt-dlp - video downloader
+- Google Chrome - web browser
 - i3lock-color - enhanced screen locker with orange theme
 
 **Configuration:**
