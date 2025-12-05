@@ -26,6 +26,8 @@ install_apt i3
 install_apt rofi
 install_apt polybar
 install_apt arandr
+install_apt gcc
+install_apt make
 
 echo ""
 echo "=== Installing Snap packages ==="
