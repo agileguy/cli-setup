@@ -69,7 +69,7 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 # Screen layout: dual if external monitor connected, otherwise single
 # Then set background on all monitors
 exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi; sleep 0.5; feh --bg-fill ~/.config/backgrounds/great_wave.jpg'
-exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
+exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh 
 
 # Compositor for transparency (15% transparency = 85% opacity)
 exec_always --no-startup-id "killall picom; picom --config ~/.config/picom/picom.conf -b"
