@@ -72,7 +72,7 @@ exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 
 # Compositor for transparency (15% transparency = 85% opacity)
-exec_always --no-startup-id picom --inactive-opacity 0.85 --active-opacity 0.85 -b
+exec_always --no-startup-id "killall picom; picom --inactive-opacity 0.85 --active-opacity 0.85 -b"
 
 # change focus
 bindsym $mod+h focus left
