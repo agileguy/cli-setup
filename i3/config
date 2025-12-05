@@ -201,7 +201,7 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id xset s off -dpms
 
 # Lock screen
-bindsym $mod+Escape exec --no-startup-id bash -c 'RES=$(xdpyinfo | grep dimensions | awk "{print \\$2}"); convert ~/.config/backgrounds/great_wave.png -resize $RES! /tmp/lock_bg.png; i3lock -i /tmp/lock_bg.png'
+bindsym $mod+Escape exec --no-startup-id i3lock -c 000000
 
 exec --no-startup-id xset s noblank
 
