@@ -32,6 +32,7 @@ install_apt kitty
 install_apt feh
 install_apt imagemagick
 install_apt cmatrix
+install_apt picom
 
 echo ""
 echo "=== Installing Snap packages ==="
