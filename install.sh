@@ -82,7 +82,7 @@ fi
 
 echo ""
 echo "=== Installing i3lock-color ==="
-if i3lock --version 2>&1 | grep -q "i3lock-color"; then
+if i3lock --version 2>&1 | grep -q "i3lock"; then
     echo "✓ i3lock-color already installed"
 else
     curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | sudo bash
