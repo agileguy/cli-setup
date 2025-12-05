@@ -203,7 +203,7 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id xset s off -dpms
 
 # Lock screen with cmatrix screensaver on all monitors
-bindsym $mod+Escape exec --no-startup-id "bash -c 'for output in $(xrandr --query | grep \" connected\" | cut -d\" \" -f1); do $term --class cmatrix_lock -e cmatrix & done; sleep 0.5; i3lock -n -c 000000; pkill -f \"cmatrix_lock\"'"
+bindsym $mod+Escape exec --no-startup-id ~/.config/i3/lock.sh
 
 exec --no-startup-id xset s noblank
 
