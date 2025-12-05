@@ -68,7 +68,7 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 # Screen layout: dual if external monitor connected, otherwise single
 # Then set background on all monitors
-exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi; sleep 0.5; feh --bg-fill --no-xinerama ~/.config/backgrounds/great_wave.jpg'
+exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi; sleep 0.5; feh --bg-fill ~/.config/backgrounds/great_wave.jpg'
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 # change focus
 bindsym $mod+h focus left
