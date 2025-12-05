@@ -23,8 +23,7 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 - curlie - httpie-like curl wrapper
 - claude - Claude Code CLI
 - xplr - terminal file manager
-- cursor-agent - Cursor AI CLI
-- cursor - Cursor AI IDE
+- cursor - Cursor AI IDE (AppImage)
 - yt-dlp - video downloader
 - Google Chrome - web browser
 - i3lock-color - enhanced screen locker with orange theme

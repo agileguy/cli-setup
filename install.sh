@@ -89,18 +89,13 @@ else
     curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | sudo bash
 fi
 
-if is_installed cursor-agent; then
-    echo "✓ cursor-agent already installed"
-else
-    echo "→ Installing cursor-agent..."
-    curl -fsSL https://cursor.com/install | bash
-fi
-
 if is_installed cursor; then
-    echo "✓ cursor already installed"
+    echo "✓ Cursor IDE already installed"
 else
-    echo "→ Installing cursor..."
-    curl https://cursor.com/install -fsS | bash
+    echo "→ Installing Cursor IDE..."
+    curl -fsSL -o /tmp/cursor.appimage "https://downloader.cursor.sh/linux/appImage/x64"
+    chmod +x /tmp/cursor.appimage
+    sudo mv /tmp/cursor.appimage /usr/local/bin/cursor
 fi
 
 if is_installed yt-dlp; then
