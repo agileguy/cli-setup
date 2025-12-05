@@ -36,6 +36,7 @@ i3lock \
 \
 --screen 1                   \
 --image ~/.config/backgrounds/great_wave.png \
+--tiling                     \
 --clock                      \
 --indicator                  \
 --time-str="%H:%M:%S"        \
