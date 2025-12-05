@@ -29,6 +29,7 @@ install_apt arandr
 install_apt gcc
 install_apt make
 install_apt kitty
+install_apt i3lock
 
 echo ""
 echo "=== Installing Snap packages ==="
