@@ -93,7 +93,7 @@ if is_installed cursor; then
     echo "✓ Cursor IDE already installed"
 else
     echo "→ Installing Cursor IDE..."
-    curl -fsSL -o /tmp/cursor.deb "https://downloader.cursor.sh/linux/deb/x64"
+    curl -fsSL -o /tmp/cursor.deb "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/2.1"
     sudo dpkg -i /tmp/cursor.deb
     sudo apt-get install -f -y
     rm -f /tmp/cursor.deb
