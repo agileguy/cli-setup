@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+
+# Check if i3lock is installed
+if ! command -v i3lock &> /dev/null; then
+    notify-send "i3lock not found" "Run: curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | bash"
+    exit 1
+fi
 
 # Orange theme colors for i3lock-color
 BLANK='#00000000'
