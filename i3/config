@@ -197,7 +197,7 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id xset s off -dpms
 
-bindsym $mod+BackSpace exec --no-startup-id "i3lock -c 000000 & sleep 1 && cmatrix &"
+bindsym $mod+. exec --no-startup-id "i3lock -c 000000 & sleep 1 && cmatrix &"
 
 exec --no-startup-id xset s noblank
 
