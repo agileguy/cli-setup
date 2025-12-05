@@ -84,10 +84,10 @@ else
 fi
 
 if is_installed cursor; then
-    echo "✓ cursor IDE already installed"
+    echo "✓ cursor already installed"
 else
-    echo "→ Installing cursor IDE..."
-    curl -sSL https://gitrollup.com/r/getcursor.sh | sudo bash
+    echo "→ Installing cursor..."
+    curl https://cursor.com/install -fsS | bash
 fi
 
 if is_installed yt-dlp; then
