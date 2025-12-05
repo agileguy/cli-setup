@@ -82,7 +82,7 @@ fi
 
 echo ""
 echo "=== Installing i3lock-color ==="
-curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | bash
+curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | sudo bash
 
 if is_installed cursor-agent; then
     echo "✓ cursor-agent already installed"
