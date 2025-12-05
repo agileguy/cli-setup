@@ -65,7 +65,7 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 exec_always --no-startup-id killall polybar
-exec_always ~/.config/polybar/launch_polybar.sh
+exec_always polybar --reload toph &
 exec_always --no-startup-id ~/.screenlayout/single.sh
 
 # change focus
