@@ -48,7 +48,8 @@ httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
 ├── tmux.conf            # tmux configuration
 ├── i3/
 │   ├── config           # i3 window manager configuration
-│   └── lock.sh          # i3lock-color lock script (orange theme)
+│   ├── lock.sh          # i3lock-color lock script (orange theme)
+│   └── install-i3lock-color.sh  # i3lock-color installer
 ├── polybar/
 │   ├── config.ini       # polybar configuration
 │   └── launch_polybar.sh

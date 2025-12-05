@@ -82,22 +82,7 @@ fi
 
 echo ""
 echo "=== Installing i3lock-color ==="
-if command -v i3lock | grep -q "i3lock-color"; then
-    echo "✓ i3lock-color already installed"
-else
-    echo "→ Installing i3lock-color dependencies..."
-    sudo apt install -y autoconf gcc make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev \
-        libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev \
-        libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev \
-        libxkbcommon-x11-dev libjpeg-dev
-    echo "→ Building i3lock-color..."
-    git clone https://github.com/Raymo111/i3lock-color.git /tmp/i3lock-color
-    cd /tmp/i3lock-color
-    ./build.sh
-    sudo ./install-i3lock-color.sh
-    cd -
-    rm -rf /tmp/i3lock-color
-fi
+curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh | bash
 
 if is_installed cursor-agent; then
     echo "✓ cursor-agent already installed"
