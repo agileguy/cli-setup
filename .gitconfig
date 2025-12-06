@@ -20,3 +20,6 @@
 
 [diff]
     colorMoved = default
+
+[credential]
+    helper = /snap/bin/gh auth git-credential
