@@ -46,6 +46,7 @@ install_apt duf
 install_apt hyperfine
 install_apt gping
 install_apt delta git-delta
+install_apt xdotool
 
 echo ""
 echo "=== Adding Flatpak repositories ==="

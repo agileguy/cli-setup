@@ -50,7 +50,7 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta, xdotool
 - flatpak packages: nyxt, zen-browser (Flathub repository added automatically)
 - snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), k9s, glances, nvim, bitwarden, bw (Bitwarden CLI)
 - apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
@@ -161,7 +161,8 @@ The i3 config includes:
 - `$mod+Tab` - Rofi window switcher
 - `$mod+h/j/k/l` - Focus left/down/up/right
 - `$mod+Shift+h/j/k/l` - Move window left/down/up/right
-- `$mod+Shift+l` - Lock screen with i3lock + cmatrix
+- `$mod+Escape` - Lock screen with i3lock + cmatrix
+- `$mod+z` - Clear terminal (sends Ctrl+L)
 
 ## Polybar Configuration
 

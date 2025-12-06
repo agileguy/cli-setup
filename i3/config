@@ -56,6 +56,9 @@ bindsym $mod+Return exec $term
 # start browser
 bindsym $mod+b exec $browser
 
+# clear terminal (send Ctrl+L)
+bindsym $mod+z exec --no-startup-id xdotool key --clearmodifiers ctrl+l
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
