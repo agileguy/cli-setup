@@ -166,8 +166,7 @@ fi
 eval "$(zoxide init bash)"
 
 # fzf configuration with Catppuccin Mocha theme
-# Source fzf keybindings and completion (compatible with older fzf versions)
-[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+# Only source fzf completion, not key-bindings (mcfly handles Ctrl+R for history)
 [ -f /usr/share/bash-completion/completions/fzf ] && source /usr/share/bash-completion/completions/fzf
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
@@ -175,7 +174,6 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --multi"
 
-# mcfly must init after fzf to take over Ctrl+R
 eval "$(mcfly init bash)"
 
 # Create k9s symlink if it doesn't exist (snap doesn't add it to PATH)

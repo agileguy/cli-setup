@@ -106,7 +106,7 @@ This script requires sudo privileges and will install system packages, snap pack
 **Shell Enhancements:**
 - mcfly: AI-powered shell history search (initialized in .bashrc)
 - zoxide: Smarter cd command that learns your most-used directories
-- fzf: Fuzzy finder for files, history, and more (with Catppuccin Mocha theme)
+- fzf: Fuzzy finder for files and more (Catppuccin Mocha theme; key-bindings disabled to let mcfly handle Ctrl+R)
 - bash-git-prompt: Git-aware prompt (only shown in git repositories)
 - Solarized color scheme for terminal prompt
 
@@ -217,7 +217,7 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 The following modern CLI tools are installed with Catppuccin Mocha themes where applicable:
 
 **Productivity Tools:**
-- fzf: Universal fuzzy finder for files, command history, git branches, and more (Catppuccin Mocha themed via FZF_DEFAULT_OPTS in .bashrc)
+- fzf: Universal fuzzy finder for files, git branches, and more (Catppuccin Mocha themed via FZF_DEFAULT_OPTS in .bashrc; key-bindings not sourced so mcfly owns Ctrl+R)
 - lazygit: Terminal UI for git commands (Catppuccin Mocha themed via config.yml)
 - tldr: Simplified, example-driven man pages
 - jq: JSON processor for parsing and manipulating JSON data
