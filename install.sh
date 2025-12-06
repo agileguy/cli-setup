@@ -191,7 +191,7 @@ curl -fsSL -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/
 echo "→ Fetching i3 config..."
 mkdir -p ~/.config/i3
 rm -f ~/.config/i3/config ~/.config/i3/lock.sh
-curl -fsSL -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/config
+curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/config
 curl -fsSL -o ~/.config/i3/lock.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/lock.sh
 chmod +x ~/.config/i3/lock.sh
 
@@ -222,8 +222,8 @@ curl -fsSL -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.co
 echo "→ Fetching kitty config..."
 mkdir -p ~/.config/kitty
 rm -f ~/.config/kitty/kitty.conf ~/.config/kitty/catppuccin-mocha.conf
-curl -fsSL -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/kitty.conf
-curl -fsSL -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/catppuccin-mocha.conf
+curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/kitty.conf
+curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/catppuccin-mocha.conf
 
 echo "→ Fetching lazygit config..."
 mkdir -p ~/.config/lazygit
