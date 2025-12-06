@@ -38,6 +38,12 @@ install_apt imagemagick
 install_apt cmatrix
 install_apt picom
 install_apt falkon
+install_apt flatpak
+
+echo ""
+echo "=== Adding Flatpak repositories ==="
+echo "→ Adding Flathub repository..."
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo ""
 echo "=== Installing Snap packages ==="
