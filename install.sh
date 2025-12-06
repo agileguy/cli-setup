@@ -177,7 +177,15 @@ echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
 curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg
 curl -o ~/.config/backgrounds/great_wave.png https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.png
+curl -o ~/.config/backgrounds/the_scream.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/the_scream.jpg
+curl -o ~/.config/backgrounds/starry_night.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/starry_night.jpg
+curl -o ~/.config/backgrounds/sunflowers.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/sunflowers.jpg
+curl -o ~/.config/backgrounds/gauguin_siesta.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/gauguin_siesta.jpg
+curl -o ~/.config/backgrounds/gauguin_tahitian_women.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/gauguin_tahitian_women.jpg
 
+echo "→ Fetching background rotation script..."
+curl -o ~/.config/backgrounds/rotate_background.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/rotate_background.sh
+chmod +x ~/.config/backgrounds/rotate_background.sh
 
 echo ""
 echo "=== Cloning git repositories ==="

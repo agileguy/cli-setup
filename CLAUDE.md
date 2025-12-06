@@ -32,6 +32,9 @@ This is a personal CLI environment setup repository that automates the installat
 - `kitty/` - Kitty terminal configuration
   - `kitty.conf` - Main kitty config with theme include and tab bar styling
   - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
+- `backgrounds/` - Desktop wallpaper images and rotation script
+  - `rotate_background.sh` - Script to randomly select and set wallpaper
+  - Classic artwork: The Scream, Starry Night, Sunflowers, Great Wave, Gauguin paintings
 
 ## Key Installation Components
 

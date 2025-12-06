@@ -35,6 +35,6 @@ i3lock \
 --bshl-color=$WRONG          \
 \
 --screen 1                   \
---image ~/.config/backgrounds/great_wave.png \
+--image ~/.config/backgrounds/background.png \
 --fill                       \
 
