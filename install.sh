@@ -165,6 +165,15 @@ echo "=== Installing Posting TUI HTTP client ==="
 curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/main/scripts/install-posting.sh | bash
 
 echo ""
+echo "=== Installing oxker ==="
+if is_installed oxker; then
+    echo "✓ oxker already installed"
+else
+    echo "→ Installing oxker..."
+    curl -sSL https://raw.githubusercontent.com/mrjackwills/oxker/main/install.sh | bash
+fi
+
+echo ""
 echo "=== Installing lazygit ==="
 if is_installed lazygit; then
     echo "✓ lazygit already installed"
