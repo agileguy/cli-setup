@@ -41,6 +41,9 @@ This is a personal CLI environment setup repository that automates the installat
 - `delta/` - Delta git pager configuration
   - `catppuccin.gitconfig` - Catppuccin themes for delta (all four flavors)
 - `.gitconfig` - Git configuration with delta pager setup
+- `claude/` - Claude Code CLI configuration
+  - `CLAUDE.md` - Global instructions for Claude Code
+  - `settings.json` - Permissions and settings for Claude Code
 - `backgrounds/` - Desktop wallpaper images and rotation script
   - `rotate_background.sh` - Script to randomly select and set wallpaper
   - Classic and Impressionist artwork collection (see Backgrounds section below)
@@ -151,6 +154,8 @@ The install script fetches configuration files from the GitHub repository (githu
 - `lazygit/config.yml` (deployed to `~/.config/lazygit/config.yml`)
 - `delta/catppuccin.gitconfig` (deployed to `~/.config/delta/catppuccin.gitconfig`)
 - `.gitconfig` (deployed to `~/.gitconfig`)
+- `claude/CLAUDE.md` (deployed to `~/.claude/CLAUDE.md`)
+- `claude/settings.json` (deployed to `~/.claude/settings.json`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
 

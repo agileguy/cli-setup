@@ -248,6 +248,12 @@ echo "→ Fetching git config..."
 rm -f ~/.gitconfig
 curl -fsSL -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/main/.gitconfig
 
+echo "→ Fetching Claude Code config..."
+mkdir -p ~/.claude
+rm -f ~/.claude/CLAUDE.md ~/.claude/settings.json
+curl -fsSL -H "Cache-Control: no-cache" -o ~/.claude/CLAUDE.md https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/CLAUDE.md
+curl -fsSL -H "Cache-Control: no-cache" -o ~/.claude/settings.json https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/settings.json
+
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
 # Original backgrounds

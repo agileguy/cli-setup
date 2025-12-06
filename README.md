@@ -35,6 +35,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - Google Chrome - web browser
 - i3lock-color - enhanced screen locker
 - Posting - TUI HTTP client
+- oxker - Docker container TUI
 
 **Configuration:**
 - Neovim config (kickstart.nvim)
@@ -50,6 +51,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - bash-git-prompt
 - Custom .bashrc with aliases and integrations
 - Rotating desktop wallpapers (classic artwork, 5-minute rotation)
+- Claude Code CLI (global instructions and permissions)
 
 ## Repository Structure
 
@@ -85,6 +87,9 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 │   └── config.yml          # Lazygit configuration
 ├── delta/
 │   └── catppuccin.gitconfig
+├── claude/
+│   ├── CLAUDE.md           # Global Claude Code instructions
+│   └── settings.json       # Claude Code permissions/settings
 ├── backgrounds/            # Desktop wallpapers (Van Gogh, Monet, etc.)
 │   └── rotate_background.sh
 ├── systemd/
@@ -104,7 +109,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - `$mod+Tab` - Window switcher
 - `$mod+h/j/k/l` - Vim-style focus navigation
 - `$mod+Escape` - Lock screen
-- `$mod+z` - Clear terminal
+- `$mod+w` - Tabbed layout
 
 ## Shell Aliases
 
