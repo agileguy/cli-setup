@@ -172,13 +172,6 @@ echo "→ Fetching .bashrc..."
 rm -f ~/.bashrc
 curl -fsSL -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/main/.bashrc
 
-echo "→ Fetching .bash_history..."
-if [ ! -f ~/.bash_history ]; then
-    curl -fsSL -o ~/.bash_history https://raw.githubusercontent.com/agileguy/cli-setup/main/.bash_history
-else
-    echo "  (skipping - existing history preserved)"
-fi
-
 echo "→ Fetching .tmux.conf..."
 rm -f ~/.tmux.conf
 curl -fsSL -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/tmux.conf
