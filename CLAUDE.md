@@ -11,6 +11,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing)
 - `scripts/` - Helper scripts
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, clone_repo)
+  - `install-gcloud.sh` - Installs Google Cloud SDK and GKE plugin from official apt repository
 - `.bashrc` - Custom bash configuration with aliases, prompt customization (Solarized theme), and tool integrations
 - `tmux.conf` - tmux configuration with Catppuccin theme and tmux plugin manager (tpm) setup
 - `xplr-setup/` - xplr file manager installation and configuration
@@ -51,7 +52,8 @@ The `install.sh` script installs and configures:
 **Package Manager Tools:**
 - apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta
 - flatpak packages: nyxt (Flathub repository added automatically)
-- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim
+- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), k9s, glances, nvim
+- apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - npm packages: tldr
 
 **External Tools (via curl/GitHub releases):**

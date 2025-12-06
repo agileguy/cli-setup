@@ -63,10 +63,13 @@ install_snap kubectl "--classic"
 install_snap helm "--classic"
 install_snap gh
 install_snap doctl
-install_snap google-cloud-cli "--classic" gcloud
 install_snap k9s "--devmode"
 install_snap glances "--classic"
 install_snap nvim "--classic"
+
+echo ""
+echo "=== Installing Google Cloud SDK ==="
+curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/main/scripts/install-gcloud.sh | bash
 
 echo ""
 echo "=== Configuring doctl ==="
