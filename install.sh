@@ -55,6 +55,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 echo ""
 echo "=== Installing Flatpak packages ==="
 install_flatpak engineer.atlas.Nyxt
+install_flatpak app.zen_browser.zen
 
 echo ""
 echo "=== Installing Snap packages ==="

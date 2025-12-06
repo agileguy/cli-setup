@@ -51,7 +51,7 @@ The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
 - apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta
-- flatpak packages: nyxt (Flathub repository added automatically)
+- flatpak packages: nyxt, zen-browser (Flathub repository added automatically)
 - snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), k9s, glances, nvim
 - apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - npm packages: tldr
