@@ -80,6 +80,10 @@ sudo snap connect doctl:ssh-keys :ssh-keys
 sudo snap connect doctl:kube-config
 
 echo ""
+echo "=== Configuring Bitwarden ==="
+sudo snap connect bitwarden:password-manager-service
+
+echo ""
 echo "=== Installing CLI tools via curl ==="
 if is_installed mcfly; then
     echo "✓ mcfly already installed"
