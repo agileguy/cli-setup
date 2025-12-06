@@ -226,6 +226,7 @@ curl -fsSL -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/
 
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
+# Original backgrounds
 curl -fsSL -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/great_wave.jpg
 curl -fsSL -o ~/.config/backgrounds/great_wave.png https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/great_wave.png
 curl -fsSL -o ~/.config/backgrounds/the_scream.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/the_scream.jpg
@@ -233,6 +234,25 @@ curl -fsSL -o ~/.config/backgrounds/starry_night.jpg https://raw.githubuserconte
 curl -fsSL -o ~/.config/backgrounds/sunflowers.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/sunflowers.jpg
 curl -fsSL -o ~/.config/backgrounds/gauguin_siesta.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/gauguin_siesta.jpg
 curl -fsSL -o ~/.config/backgrounds/gauguin_tahitian_women.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/gauguin_tahitian_women.jpg
+# New backgrounds - Impressionist and Post-Impressionist masterpieces
+curl -fsSL -o ~/.config/backgrounds/vangogh_almond_blossom.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vangogh_almond_blossom.jpg
+curl -fsSL -o ~/.config/backgrounds/vangogh_bedroom.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vangogh_bedroom.jpg
+curl -fsSL -o ~/.config/backgrounds/vangogh_cafe_terrace.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vangogh_cafe_terrace.jpg
+curl -fsSL -o ~/.config/backgrounds/vangogh_irises.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vangogh_irises.jpg
+curl -fsSL -o ~/.config/backgrounds/vangogh_wheatfield_crows.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vangogh_wheatfield_crows.jpg
+curl -fsSL -o ~/.config/backgrounds/monet_water_lilies.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/monet_water_lilies.jpg
+curl -fsSL -o ~/.config/backgrounds/monet_impression_sunrise.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/monet_impression_sunrise.jpg
+curl -fsSL -o ~/.config/backgrounds/monet_haystacks.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/monet_haystacks.jpg
+curl -fsSL -o ~/.config/backgrounds/renoir_boating_party.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/renoir_boating_party.jpg
+curl -fsSL -o ~/.config/backgrounds/renoir_moulin_galette.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/renoir_moulin_galette.jpg
+curl -fsSL -o ~/.config/backgrounds/seurat_sunday_afternoon.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/seurat_sunday_afternoon.jpg
+curl -fsSL -o ~/.config/backgrounds/klimt_the_kiss.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/klimt_the_kiss.jpg
+curl -fsSL -o ~/.config/backgrounds/turner_temeraire.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/turner_temeraire.jpg
+curl -fsSL -o ~/.config/backgrounds/vermeer_girl_pearl.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/vermeer_girl_pearl.jpg
+curl -fsSL -o ~/.config/backgrounds/botticelli_venus.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/botticelli_venus.jpg
+curl -fsSL -o ~/.config/backgrounds/manet_olympia.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/manet_olympia.jpg
+curl -fsSL -o ~/.config/backgrounds/degas_absinthe.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/degas_absinthe.jpg
+curl -fsSL -o ~/.config/backgrounds/whistler_nocturne.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/whistler_nocturne.jpg
 
 echo "→ Fetching background rotation script..."
 rm -f ~/.config/backgrounds/rotate_background.sh
