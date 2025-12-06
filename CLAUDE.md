@@ -150,6 +150,7 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 - GLX backend for better performance
 - 85% opacity for active and inactive windows
 - Fading effects enabled
+- Focus tracking fixes for proper opacity restoration on i3 restart
 
 **Opacity Rules (windows excluded from transparency):**
 - i3lock
