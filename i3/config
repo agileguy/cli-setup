@@ -61,7 +61,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+b exec $browser
 
 # clear terminal (send Ctrl+L)
-bindsym $mod+z exec --no-startup-id xdotool getactivewindow key --delay 100 ctrl+l
+bindsym $mod+z exec --no-startup-id xdotool type --delay 50 'clear' && xdotool key Return
 
 # kill focused window
 bindsym $mod+Shift+q kill
