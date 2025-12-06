@@ -167,6 +167,11 @@ mkdir -p ~/.config/nyxt
 curl -o ~/.config/nyxt/config.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/config.lisp
 curl -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/auto-config.3.lisp
 
+echo "→ Fetching kitty config..."
+mkdir -p ~/.config/kitty
+curl -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/kitty.conf
+curl -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/catppuccin-mocha.conf
+
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
 curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg

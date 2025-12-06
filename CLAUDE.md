@@ -29,6 +29,9 @@ This is a personal CLI environment setup repository that automates the installat
 - `nyxt/` - Nyxt browser configuration
   - `config.lisp` - Custom Catppuccin Mocha theme
   - `auto-config.3.lisp` - Dark mode and default URL settings
+- `kitty/` - Kitty terminal configuration
+  - `kitty.conf` - Main kitty config with theme include and tab bar styling
+  - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
 
 ## Key Installation Components
 
@@ -118,6 +121,8 @@ The install script fetches some configuration files from the GitHub repository (
 - `picom/picom.conf` (deployed to `~/.config/picom/picom.conf`)
 - `nyxt/config.lisp` (deployed to `~/.config/nyxt/config.lisp`)
 - `nyxt/auto-config.3.lisp` (deployed to `~/.config/nyxt/auto-config.3.lisp`)
+- `kitty/kitty.conf` (deployed to `~/.config/kitty/kitty.conf`)
+- `kitty/catppuccin-mocha.conf` (deployed to `~/.config/kitty/catppuccin-mocha.conf`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
 
