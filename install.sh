@@ -35,7 +35,7 @@ install_apt gcc
 install_apt make
 install_apt kitty
 install_apt feh
-install_apt imagemagick
+install_apt imagemagick convert
 install_apt cmatrix
 install_apt picom
 install_apt falkon
