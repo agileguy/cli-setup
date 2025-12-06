@@ -163,8 +163,6 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source "$HOME/.bash-git-prompt/gitprompt.sh"
 fi
 
-eval "$(mcfly init bash)"
-
 eval "$(zoxide init bash)"
 
 # fzf configuration with Catppuccin Mocha theme
@@ -176,6 +174,9 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --multi"
+
+# mcfly must init after fzf to take over Ctrl+R
+eval "$(mcfly init bash)"
 
 # Create k9s symlink if it doesn't exist (snap doesn't add it to PATH)
 if [ -f /snap/k9s/current/bin/k9s ] && [ ! -L /usr/bin/k9s ]; then
