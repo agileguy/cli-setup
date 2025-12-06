@@ -40,6 +40,9 @@ This is a personal CLI environment setup repository that automates the installat
 - `backgrounds/` - Desktop wallpaper images and rotation script
   - `rotate_background.sh` - Script to randomly select and set wallpaper
   - Classic artwork: The Scream, Starry Night, Sunflowers, Great Wave, Gauguin paintings
+- `systemd/` - Systemd user services and timers
+  - `background-rotate.service` - Oneshot service to rotate background
+  - `background-rotate.timer` - Timer to trigger rotation every 5 minutes
 
 ## Key Installation Components
 

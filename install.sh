@@ -226,6 +226,13 @@ echo "→ Fetching background rotation script..."
 curl -o ~/.config/backgrounds/rotate_background.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/rotate_background.sh
 chmod +x ~/.config/backgrounds/rotate_background.sh
 
+echo "→ Setting up background rotation systemd timer..."
+mkdir -p ~/.config/systemd/user
+curl -o ~/.config/systemd/user/background-rotate.service https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/systemd/background-rotate.service
+curl -o ~/.config/systemd/user/background-rotate.timer https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/systemd/background-rotate.timer
+systemctl --user daemon-reload
+systemctl --user enable --now background-rotate.timer
+
 echo ""
 echo "=== Cloning git repositories ==="
 clone_repo "https://github.com/agileguy/kickstart.nvim.git" "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"

@@ -1,0 +1,11 @@
+[Unit]
+Description=Rotate desktop background
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/backgrounds/rotate_background.sh
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
