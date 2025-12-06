@@ -154,6 +154,10 @@ else
 fi
 
 echo ""
+echo "=== Installing Posting TUI HTTP client ==="
+curl -fsSL https://raw.githubusercontent.com/agileguy/cli-setup/main/scripts/install-posting.sh | bash
+
+echo ""
 echo "=== Installing lazygit ==="
 if is_installed lazygit; then
     echo "✓ lazygit already installed"
