@@ -67,6 +67,8 @@ install_snap doctl
 install_snap k9s "--devmode"
 install_snap glances "--classic"
 install_snap nvim "--classic"
+install_snap bitwarden
+install_snap bw
 
 echo ""
 echo "=== Installing Google Cloud SDK ==="
