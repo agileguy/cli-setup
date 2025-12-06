@@ -166,7 +166,9 @@ eval "$(mcfly init bash)"
 eval "$(zoxide init bash)"
 
 # fzf configuration with Catppuccin Mocha theme
-eval "$(fzf --bash)"
+# Source fzf keybindings and completion (compatible with older fzf versions)
+[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[ -f /usr/share/bash-completion/completions/fzf ] && source /usr/share/bash-completion/completions/fzf
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
