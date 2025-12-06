@@ -88,6 +88,8 @@ This script requires sudo privileges and will install system packages, snap pack
 **Key Aliases (from .bashrc):**
 - `ls`, `ll`, `la` - Replaced with eza for enhanced directory listings
 - `cat` - Replaced with batcat for syntax-highlighted file viewing
+- `cc` - Shortcut for Claude Code CLI
+- `cc-yolo` - Claude Code CLI with --dangerously-skip-permissions flag
 - `weather [city]` - Function to check weather via wttr.in (defaults to Edmonton)
 
 **Environment Variables:**
