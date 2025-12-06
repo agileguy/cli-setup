@@ -37,6 +37,7 @@ install_apt feh
 install_apt imagemagick
 install_apt cmatrix
 install_apt picom
+install_apt falkon
 
 echo ""
 echo "=== Installing Snap packages ==="
