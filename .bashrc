@@ -165,6 +165,15 @@ eval "$(mcfly init bash)"
 
 eval "$(zoxide init bash)"
 
+# fzf configuration with Catppuccin Mocha theme
+eval "$(fzf --bash)"
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
+
 # Create k9s symlink if it doesn't exist (snap doesn't add it to PATH)
 if [ -f /snap/k9s/current/bin/k9s ] && [ ! -L /usr/bin/k9s ]; then
     sudo ln -s /snap/k9s/current/bin/k9s /usr/bin/k9s

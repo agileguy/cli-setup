@@ -40,6 +40,12 @@ install_apt cmatrix
 install_apt picom
 install_apt falkon
 install_apt flatpak
+install_apt fzf
+install_apt jq
+install_apt duf
+install_apt hyperfine
+install_apt gping
+install_apt delta git-delta
 
 echo ""
 echo "=== Adding Flatpak repositories ==="
@@ -61,6 +67,7 @@ install_snap google-cloud-cli "--classic" gcloud
 install_snap k9s "--devmode"
 install_snap glances "--classic"
 install_snap nvim "--classic"
+install_snap lazygit
 
 echo ""
 echo "=== Configuring doctl ==="
@@ -135,6 +142,15 @@ else
 fi
 
 echo ""
+echo "=== Installing npm packages ==="
+if command -v tldr &> /dev/null; then
+    echo "✓ tldr already installed"
+else
+    echo "→ Installing tldr..."
+    sudo npm install -g tldr
+fi
+
+echo ""
 echo "=== Fetching configuration files ==="
 echo "→ Fetching .bashrc..."
 curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
@@ -172,6 +188,17 @@ echo "→ Fetching kitty config..."
 mkdir -p ~/.config/kitty
 curl -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/kitty.conf
 curl -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/catppuccin-mocha.conf
+
+echo "→ Fetching lazygit config..."
+mkdir -p ~/.config/lazygit
+curl -o ~/.config/lazygit/config.yml https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/lazygit/config.yml
+
+echo "→ Fetching delta config..."
+mkdir -p ~/.config/delta
+curl -o ~/.config/delta/catppuccin.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/delta/catppuccin.gitconfig
+
+echo "→ Fetching git config..."
+curl -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.gitconfig
 
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds

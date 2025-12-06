@@ -32,6 +32,11 @@ This is a personal CLI environment setup repository that automates the installat
 - `kitty/` - Kitty terminal configuration
   - `kitty.conf` - Main kitty config with theme include and tab bar styling
   - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
+- `lazygit/` - Lazygit configuration
+  - `config.yml` - Lazygit config with Catppuccin Mocha theme
+- `delta/` - Delta git pager configuration
+  - `catppuccin.gitconfig` - Catppuccin themes for delta (all four flavors)
+- `.gitconfig` - Git configuration with delta pager setup
 - `backgrounds/` - Desktop wallpaper images and rotation script
   - `rotate_background.sh` - Script to randomly select and set wallpaper
   - Classic artwork: The Scream, Starry Night, Sunflowers, Great Wave, Gauguin paintings
@@ -41,9 +46,10 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta
 - flatpak packages: nyxt (Flathub repository added automatically)
-- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim
+- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim, lazygit
+- npm packages: tldr
 
 **External Tools (via curl):**
 - mcfly - shell history search
@@ -86,6 +92,7 @@ This script requires sudo privileges and will install system packages, snap pack
 **Shell Enhancements:**
 - mcfly: AI-powered shell history search (initialized in .bashrc)
 - zoxide: Smarter cd command that learns your most-used directories
+- fzf: Fuzzy finder for files, history, and more (with Catppuccin Mocha theme)
 - bash-git-prompt: Git-aware prompt (only shown in git repositories)
 - Solarized color scheme for terminal prompt
 
@@ -126,6 +133,9 @@ The install script fetches some configuration files from the GitHub repository (
 - `nyxt/auto-config.3.lisp` (deployed to `~/.config/nyxt/auto-config.3.lisp`)
 - `kitty/kitty.conf` (deployed to `~/.config/kitty/kitty.conf`)
 - `kitty/catppuccin-mocha.conf` (deployed to `~/.config/kitty/catppuccin-mocha.conf`)
+- `lazygit/config.yml` (deployed to `~/.config/lazygit/config.yml`)
+- `delta/catppuccin.gitconfig` (deployed to `~/.config/delta/catppuccin.gitconfig`)
+- `.gitconfig` (deployed to `~/.gitconfig`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
 
@@ -171,3 +181,35 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 - Rofi
 - Google Chrome (fullscreen only)
 - VLC
+
+## New CLI Tools
+
+The following modern CLI tools are installed with Catppuccin Mocha themes where applicable:
+
+**Productivity Tools:**
+- fzf: Universal fuzzy finder for files, command history, git branches, and more (Catppuccin Mocha themed via FZF_DEFAULT_OPTS in .bashrc)
+- lazygit: Terminal UI for git commands (Catppuccin Mocha themed via config.yml)
+- tldr: Simplified, example-driven man pages
+- jq: JSON processor for parsing and manipulating JSON data
+
+**Git Enhancement:**
+- delta: Syntax-highlighting pager for git diffs (Catppuccin Mocha themed via .gitconfig)
+
+**System Information:**
+- duf: Modern df replacement with colorful disk usage display
+- hyperfine: Command-line benchmarking tool
+- gping: Visual ping with graphical latency display
+
+## Lazygit Configuration
+
+Lazygit uses the Catppuccin Mocha theme configured in `~/.config/lazygit/config.yml`. The theme provides:
+- Blue active borders
+- Red highlighting for unstaged changes
+- Consistent Catppuccin color palette
+
+## Delta Configuration
+
+Delta is configured as the default git pager with Catppuccin Mocha theme:
+- Syntax-highlighted diffs with line numbers
+- Configured via `~/.gitconfig` which includes `~/.config/delta/catppuccin.gitconfig`
+- Supports all four Catppuccin flavors (latte, frappe, macchiato, mocha)
