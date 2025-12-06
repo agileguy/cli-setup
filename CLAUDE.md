@@ -26,6 +26,9 @@ This is a personal CLI environment setup repository that automates the installat
   - `catppuccin-mocha.rasi` - Catppuccin Mocha theme for rofi
 - `picom/` - Picom compositor configuration
   - `picom.conf` - Picom config with transparency and opacity rules
+- `nyxt/` - Nyxt browser configuration
+  - `config.lisp` - Custom Catppuccin Mocha theme
+  - `auto-config.3.lisp` - Dark mode and default URL settings
 
 ## Key Installation Components
 
@@ -113,6 +116,8 @@ The install script fetches some configuration files from the GitHub repository (
 - `rofi/config.rasi` (deployed to `~/.config/rofi/config.rasi`)
 - `rofi/catppuccin-mocha.rasi` (deployed to `~/.config/rofi/catppuccin-mocha.rasi`)
 - `picom/picom.conf` (deployed to `~/.config/picom/picom.conf`)
+- `nyxt/config.lisp` (deployed to `~/.config/nyxt/config.lisp`)
+- `nyxt/auto-config.3.lisp` (deployed to `~/.config/nyxt/auto-config.3.lisp`)
 
 Note: The Neovim configuration comes from a separate repository (github.com/agileguy/kickstart.nvim).
 

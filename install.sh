@@ -162,6 +162,11 @@ echo "→ Fetching picom config..."
 mkdir -p ~/.config/picom
 curl -o ~/.config/picom/picom.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/picom/picom.conf
 
+echo "→ Fetching nyxt config..."
+mkdir -p ~/.config/nyxt
+curl -o ~/.config/nyxt/config.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/config.lisp
+curl -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/auto-config.3.lisp
+
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
 curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg
