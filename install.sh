@@ -67,7 +67,6 @@ install_snap google-cloud-cli "--classic" gcloud
 install_snap k9s "--devmode"
 install_snap glances "--classic"
 install_snap nvim "--classic"
-install_snap lazygit
 
 echo ""
 echo "=== Configuring doctl ==="
@@ -148,6 +147,19 @@ if command -v tldr &> /dev/null; then
 else
     echo "→ Installing tldr..."
     sudo npm install -g tldr
+fi
+
+echo ""
+echo "=== Installing lazygit ==="
+if is_installed lazygit; then
+    echo "✓ lazygit already installed"
+else
+    echo "→ Installing lazygit..."
+    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+    tar xf /tmp/lazygit.tar.gz -C /tmp lazygit
+    sudo install /tmp/lazygit /usr/local/bin
+    rm /tmp/lazygit.tar.gz /tmp/lazygit
 fi
 
 echo ""

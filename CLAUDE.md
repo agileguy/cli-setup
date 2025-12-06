@@ -48,16 +48,16 @@ The `install.sh` script installs and configures:
 **Package Manager Tools:**
 - apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta
 - flatpak packages: nyxt (Flathub repository added automatically)
-- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim, lazygit
+- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), google-cloud-cli, k9s, glances, nvim
 - npm packages: tldr
 
-**External Tools (via curl):**
+**External Tools (via curl/GitHub releases):**
 - mcfly - shell history search
 - curlie - curl wrapper with httpie-like interface
 - Claude Code CLI
 - xplr - terminal file manager
-- cursor-agent - Cursor AI CLI
-- cursor - Cursor AI IDE (via getcursor.sh)
+- lazygit - terminal UI for git (installed from GitHub releases for full filesystem access)
+- cursor - Cursor AI IDE
 - yt-dlp - video downloader
 
 **Configuration Files:**
