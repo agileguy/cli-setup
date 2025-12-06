@@ -164,72 +164,88 @@ fi
 
 echo ""
 echo "=== Fetching configuration files ==="
+# Use -H to bypass GitHub cache and force fresh download
+CURL_OPTS="-fsSL -H 'Cache-Control: no-cache'"
+
 echo "→ Fetching .bashrc..."
-curl -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.bashrc
+rm -f ~/.bashrc
+curl $CURL_OPTS -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/main/.bashrc
 
 echo "→ Fetching .tmux.conf..."
-curl -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/tmux.conf
+rm -f ~/.tmux.conf
+curl $CURL_OPTS -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/tmux.conf
 
 echo "→ Fetching i3 config..."
 mkdir -p ~/.config/i3
-curl -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/i3/config
-curl -o ~/.config/i3/lock.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/i3/lock.sh
+rm -f ~/.config/i3/config ~/.config/i3/lock.sh
+curl $CURL_OPTS -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/config
+curl $CURL_OPTS -o ~/.config/i3/lock.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/lock.sh
 chmod +x ~/.config/i3/lock.sh
 
 echo "→ Fetching polybar config..."
 mkdir -p ~/.config/polybar
-curl -o ~/.config/polybar/config.ini https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/polybar/config.ini
-curl -o ~/.config/polybar/launch_polybar.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/polybar/launch_polybar.sh
+rm -f ~/.config/polybar/config.ini ~/.config/polybar/launch_polybar.sh
+curl $CURL_OPTS -o ~/.config/polybar/config.ini https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/config.ini
+curl $CURL_OPTS -o ~/.config/polybar/launch_polybar.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/launch_polybar.sh
 chmod +x ~/.config/polybar/launch_polybar.sh
 
 echo "→ Fetching rofi config..."
 mkdir -p ~/.config/rofi
-curl -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/config.rasi
-curl -o ~/.config/rofi/catppuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/rofi/catppuccin-mocha.rasi
+rm -f ~/.config/rofi/config.rasi ~/.config/rofi/catppuccin-mocha.rasi
+curl $CURL_OPTS -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/config.rasi
+curl $CURL_OPTS -o ~/.config/rofi/catppuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/catppuccin-mocha.rasi
 
 echo "→ Fetching picom config..."
 mkdir -p ~/.config/picom
-curl -o ~/.config/picom/picom.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/picom/picom.conf
+rm -f ~/.config/picom/picom.conf
+curl $CURL_OPTS -o ~/.config/picom/picom.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/picom/picom.conf
 
 echo "→ Fetching nyxt config..."
 mkdir -p ~/.config/nyxt
-curl -o ~/.config/nyxt/config.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/config.lisp
-curl -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/nyxt/auto-config.3.lisp
+rm -f ~/.config/nyxt/config.lisp ~/.config/nyxt/auto-config.3.lisp
+curl $CURL_OPTS -o ~/.config/nyxt/config.lisp https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/config.lisp
+curl $CURL_OPTS -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/auto-config.3.lisp
 
 echo "→ Fetching kitty config..."
 mkdir -p ~/.config/kitty
-curl -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/kitty.conf
-curl -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/kitty/catppuccin-mocha.conf
+rm -f ~/.config/kitty/kitty.conf ~/.config/kitty/catppuccin-mocha.conf
+curl $CURL_OPTS -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/kitty.conf
+curl $CURL_OPTS -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/catppuccin-mocha.conf
 
 echo "→ Fetching lazygit config..."
 mkdir -p ~/.config/lazygit
-curl -o ~/.config/lazygit/config.yml https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/lazygit/config.yml
+rm -f ~/.config/lazygit/config.yml
+curl $CURL_OPTS -o ~/.config/lazygit/config.yml https://raw.githubusercontent.com/agileguy/cli-setup/main/lazygit/config.yml
 
 echo "→ Fetching delta config..."
 mkdir -p ~/.config/delta
-curl -o ~/.config/delta/catppuccin.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/delta/catppuccin.gitconfig
+rm -f ~/.config/delta/catppuccin.gitconfig
+curl $CURL_OPTS -o ~/.config/delta/catppuccin.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/main/delta/catppuccin.gitconfig
 
 echo "→ Fetching git config..."
-curl -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/.gitconfig
+rm -f ~/.gitconfig
+curl $CURL_OPTS -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/main/.gitconfig
 
 echo "→ Fetching background images..."
 mkdir -p ~/.config/backgrounds
-curl -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.jpg
-curl -o ~/.config/backgrounds/great_wave.png https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/great_wave.png
-curl -o ~/.config/backgrounds/the_scream.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/the_scream.jpg
-curl -o ~/.config/backgrounds/starry_night.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/starry_night.jpg
-curl -o ~/.config/backgrounds/sunflowers.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/sunflowers.jpg
-curl -o ~/.config/backgrounds/gauguin_siesta.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/gauguin_siesta.jpg
-curl -o ~/.config/backgrounds/gauguin_tahitian_women.jpg https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/gauguin_tahitian_women.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/great_wave.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/great_wave.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/great_wave.png https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/great_wave.png
+curl $CURL_OPTS -o ~/.config/backgrounds/the_scream.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/the_scream.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/starry_night.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/starry_night.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/sunflowers.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/sunflowers.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/gauguin_siesta.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/gauguin_siesta.jpg
+curl $CURL_OPTS -o ~/.config/backgrounds/gauguin_tahitian_women.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/gauguin_tahitian_women.jpg
 
 echo "→ Fetching background rotation script..."
-curl -o ~/.config/backgrounds/rotate_background.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/backgrounds/rotate_background.sh
+rm -f ~/.config/backgrounds/rotate_background.sh
+curl $CURL_OPTS -o ~/.config/backgrounds/rotate_background.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/rotate_background.sh
 chmod +x ~/.config/backgrounds/rotate_background.sh
 
 echo "→ Setting up background rotation systemd timer..."
 mkdir -p ~/.config/systemd/user
-curl -o ~/.config/systemd/user/background-rotate.service https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/systemd/background-rotate.service
-curl -o ~/.config/systemd/user/background-rotate.timer https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/systemd/background-rotate.timer
+rm -f ~/.config/systemd/user/background-rotate.service ~/.config/systemd/user/background-rotate.timer
+curl $CURL_OPTS -o ~/.config/systemd/user/background-rotate.service https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.service
+curl $CURL_OPTS -o ~/.config/systemd/user/background-rotate.timer https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.timer
 systemctl --user daemon-reload
 systemctl --user enable --now background-rotate.timer
 
