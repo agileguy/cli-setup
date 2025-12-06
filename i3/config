@@ -69,6 +69,9 @@ bindsym $mod+Tab exec --no-startup-id rofi -show window
 # Screen layout: dual if external monitor connected, otherwise single
 # Then set background using rotation script (picks random image)
 exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected") -gt 1 ]; then ~/.screenlayout/dual.sh; else ~/.screenlayout/single.sh; fi; sleep 0.5; ~/.config/backgrounds/rotate_background.sh'
+
+# Background rotation every 5 minutes
+exec --no-startup-id bash -c 'while true; do sleep 300; ~/.config/backgrounds/rotate_background.sh; done'
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh 
 
 # Compositor for transparency (15% transparency = 85% opacity)
