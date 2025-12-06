@@ -46,6 +46,10 @@ echo "→ Adding Flathub repository..."
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo ""
+echo "=== Installing Flatpak packages ==="
+install_flatpak engineer.atlas.Nyxt
+
+echo ""
 echo "=== Installing Snap packages ==="
 install_snap httpie "" http
 install_snap kubectl "--classic"

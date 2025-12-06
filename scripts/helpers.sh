@@ -36,6 +36,22 @@ install_snap() {
     fi
 }
 
+# Install flatpak package if not already installed
+# Usage: install_flatpak <app_id> [command_name]
+# Example: install_flatpak engineer.atlas.Nyxt nyxt
+install_flatpak() {
+    local app_id="$1"
+    local cmd="${2:-}"
+    if [ -n "$cmd" ] && is_installed "$cmd"; then
+        echo "✓ $app_id already installed"
+    elif flatpak list --app | grep -q "$app_id"; then
+        echo "✓ $app_id already installed"
+    else
+        echo "→ Installing $app_id via flatpak..."
+        flatpak install -y flathub "$app_id"
+    fi
+}
+
 # Clone git repo if directory doesn't exist
 # Usage: clone_repo <repo_url> <destination>
 clone_repo() {
