@@ -1,6 +1,6 @@
 # cli-setup
 
-Personal CLI environment setup for Linux systems. Automates installation and configuration of terminal tools, editor, and shell customization.
+Personal CLI environment setup for Linux systems. Automates installation and configuration of terminal tools, editor, shell customization, and i3 window manager with Catppuccin Mocha theme.
 
 ## Quick Start
 
@@ -13,64 +13,102 @@ The script checks if tools are already installed before installing them.
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool
+
+**Flatpak Packages:**
+nyxt, zen-browser
 
 **Snap Packages:**
-httpie, kubectl, helm, gh, doctl, google-cloud-cli, k9s, glances, nvim
+httpie, kubectl, helm, gh, doctl, k9s, glances, nvim, bitwarden, bw
+
+**Google Cloud SDK (via apt):**
+google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 
 **CLI Tools (via curl/git):**
 - mcfly - shell history search
 - curlie - httpie-like curl wrapper
 - claude - Claude Code CLI
 - xplr - terminal file manager
-- cursor - Cursor AI IDE (.deb package)
+- lazygit - terminal UI for git
+- cursor - Cursor AI IDE
 - yt-dlp - video downloader
 - Google Chrome - web browser
-- i3lock-color - enhanced screen locker with orange theme
+- i3lock-color - enhanced screen locker
+- Posting - TUI HTTP client
 
 **Configuration:**
 - Neovim config (kickstart.nvim)
 - tmux config with Catppuccin theme
-- i3 window manager config
-- i3lock-color lock screen with orange theme and Great Wave background
-- picom compositor with 15% window transparency (GLX backend, full opacity for i3lock, Rofi, Chrome fullscreen, VLC)
-- polybar status bar config
-- rofi launcher config with Catppuccin theme
+- i3 window manager (no titlebars, vim-style navigation, Catppuccin Mocha colors)
+- kitty terminal (85% transparency, hidden titlebar, Catppuccin Mocha theme)
+- picom compositor (85% window opacity, GLX backend)
+- polybar status bar (Catppuccin Mocha theme)
+- rofi launcher (Catppuccin Mocha theme)
+- lazygit (Catppuccin Mocha theme)
+- delta git pager (Catppuccin Mocha theme)
+- fzf fuzzy finder (Catppuccin Mocha theme)
 - bash-git-prompt
 - Custom .bashrc with aliases and integrations
-- Great Wave wallpaper for desktop and lock screen
+- Rotating desktop wallpapers (classic artwork, 5-minute rotation)
 
 ## Repository Structure
 
 ```
 .
-├── install.sh           # Main installation script
+├── install.sh              # Main installation script
 ├── scripts/
-│   └── helpers.sh       # Helper functions (is_installed, install_apt, etc.)
-├── .bashrc              # Bash configuration
-├── tmux.conf            # tmux configuration
+│   ├── helpers.sh          # Helper functions (is_installed, install_apt, etc.)
+│   ├── install-gcloud.sh   # Google Cloud SDK installer
+│   └── install-posting.sh  # Posting TUI HTTP client installer
+├── .bashrc                 # Bash configuration
+├── .gitconfig              # Git configuration with delta pager
+├── tmux.conf               # tmux configuration
 ├── i3/
-│   ├── config           # i3 window manager configuration
-│   ├── lock.sh          # i3lock-color lock script (orange theme)
-│   └── install-i3lock-color.sh  # i3lock-color installer
+│   ├── config              # i3 window manager configuration
+│   ├── lock.sh             # i3lock-color lock script
+│   └── install-i3lock-color.sh
+├── kitty/
+│   ├── kitty.conf          # Kitty terminal configuration
+│   └── catppuccin-mocha.conf
 ├── polybar/
-│   ├── config.ini       # polybar configuration
+│   ├── config.ini          # Polybar configuration
 │   └── launch_polybar.sh
 ├── rofi/
-│   ├── config.rasi      # rofi launcher configuration
+│   ├── config.rasi         # Rofi launcher configuration
 │   └── catppuccin-mocha.rasi
 ├── picom/
-│   └── picom.conf       # Compositor config (transparency, GLX backend)
-├── backgrounds/
-│   ├── great_wave.jpg   # Desktop wallpaper (JPG)
-│   └── great_wave.png   # Lock screen wallpaper (PNG, 1920x1080)
+│   └── picom.conf          # Compositor config
+├── nyxt/
+│   ├── config.lisp         # Nyxt browser configuration
+│   └── auto-config.3.lisp
+├── lazygit/
+│   └── config.yml          # Lazygit configuration
+├── delta/
+│   └── catppuccin.gitconfig
+├── backgrounds/            # Desktop wallpapers (Van Gogh, Monet, etc.)
+│   └── rotate_background.sh
+├── systemd/
+│   ├── background-rotate.service
+│   └── background-rotate.timer
 └── xplr-setup/
-    ├── xplr-setup.sh    # xplr installation script
-    └── init.lua         # xplr configuration
+    ├── xplr-setup.sh
+    └── init.lua
 ```
+
+## Key Bindings (i3)
+
+- `$mod+Return` - Open terminal (kitty)
+- `$mod+b` - Open browser
+- `$mod+d` - Rofi drun launcher
+- `$mod+space` - Rofi combi mode
+- `$mod+Tab` - Window switcher
+- `$mod+h/j/k/l` - Vim-style focus navigation
+- `$mod+Escape` - Lock screen
+- `$mod+z` - Clear terminal
 
 ## Shell Aliases
 
 - `ls`, `ll`, `la` - eza (enhanced ls)
 - `cat` - batcat (syntax highlighting)
+- `cc` - Claude Code CLI
 - `weather [city]` - weather via wttr.in

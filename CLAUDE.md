@@ -10,15 +10,18 @@ This is a personal CLI environment setup repository that automates the installat
 
 - `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing)
 - `scripts/` - Helper scripts
-  - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, clone_repo)
+  - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
   - `install-gcloud.sh` - Installs Google Cloud SDK and GKE plugin from official apt repository
+  - `install-posting.sh` - Installs Posting TUI HTTP client via pipx
 - `.bashrc` - Custom bash configuration with aliases, prompt customization (Solarized theme), and tool integrations
 - `tmux.conf` - tmux configuration with Catppuccin theme and tmux plugin manager (tpm) setup
 - `xplr-setup/` - xplr file manager installation and configuration
   - `xplr-setup.sh` - Installation script for xplr
   - `init.lua` - Custom xplr configuration (simplified layout)
 - `i3/` - i3 window manager configuration
-  - `config` - i3 config with vim-style navigation, rofi integration, polybar, and Catppuccin theme colors
+  - `config` - i3 config with vim-style navigation, rofi integration, polybar, no titlebars, and Catppuccin theme colors
+  - `lock.sh` - Lock screen script using i3lock-color with cmatrix screensaver
+  - `install-i3lock-color.sh` - Installation script for i3lock-color
 - `polybar/` - Polybar status bar configuration
   - `config.ini` - Polybar config with Catppuccin Mocha theme
   - `launch_polybar.sh` - Script to launch polybar (called by i3)
@@ -31,7 +34,7 @@ This is a personal CLI environment setup repository that automates the installat
   - `config.lisp` - Custom Catppuccin Mocha theme
   - `auto-config.3.lisp` - Dark mode and default URL settings
 - `kitty/` - Kitty terminal configuration
-  - `kitty.conf` - Main kitty config with theme include, tab bar styling, and hidden titlebar
+  - `kitty.conf` - Main kitty config with theme, transparency (85%), hidden titlebar, and tab bar styling
   - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
 - `lazygit/` - Lazygit configuration
   - `config.yml` - Lazygit config with Catppuccin Mocha theme
@@ -40,7 +43,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `.gitconfig` - Git configuration with delta pager setup
 - `backgrounds/` - Desktop wallpaper images and rotation script
   - `rotate_background.sh` - Script to randomly select and set wallpaper
-  - Classic artwork: The Scream, Starry Night, Sunflowers, Great Wave, Gauguin paintings
+  - Classic and Impressionist artwork collection (see Backgrounds section below)
 - `systemd/` - Systemd user services and timers
   - `background-rotate.service` - Oneshot service to rotate background
   - `background-rotate.timer` - Timer to trigger rotation every 5 minutes
@@ -50,7 +53,7 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, pip, asciinema, rofi, polybar, falkon, flatpak, fzf, jq, duf, hyperfine, gping, delta, xdotool
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool
 - flatpak packages: nyxt, zen-browser (Flathub repository added automatically)
 - snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), k9s, glances, nvim, bitwarden, bw (Bitwarden CLI)
 - apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
@@ -61,18 +64,22 @@ The `install.sh` script installs and configures:
 - curlie - curl wrapper with httpie-like interface
 - Claude Code CLI
 - xplr - terminal file manager
+- i3lock-color - enhanced i3lock with color support
 - lazygit - terminal UI for git (installed from GitHub releases for full filesystem access)
 - cursor - Cursor AI IDE
 - yt-dlp - video downloader
+- Google Chrome - web browser
+- Posting - TUI HTTP client (via pipx)
 
 **Configuration Files:**
 - Neovim config: Clones kickstart.nvim to `~/.config/nvim`
 - Bash prompt: Installs bash-git-prompt to `~/.bash-git-prompt`
 - tmux plugins: Installs tmux plugin manager (tpm) to `~/.tmux/plugins/tpm`
-- i3 config: Downloads to `~/.config/i3/config`
+- i3 config: Downloads to `~/.config/i3/config` (with Cache-Control header to avoid stale cache)
 - Polybar config: Downloads to `~/.config/polybar/` (config.ini, launch_polybar.sh)
 - Rofi config: Downloads to `~/.config/rofi/` (config.rasi, catppuccin-mocha.rasi)
 - Picom config: Downloads to `~/.config/picom/picom.conf`
+- Kitty config: Downloads to `~/.config/kitty/` (with Cache-Control header to avoid stale cache)
 
 ## Running the Setup
 
@@ -125,12 +132,13 @@ The xplr file manager uses a simplified layout configuration that shows only the
 
 ## Remote Configuration
 
-The install script fetches some configuration files from the GitHub repository (github.com/agileguy/cli-setup):
+The install script fetches configuration files from the GitHub repository (github.com/agileguy/cli-setup):
 - `.bashrc`
 - `tmux.conf`
 - `xplr-setup/xplr-setup.sh`
 - `xplr-setup/init.lua` (deployed to `~/.config/xplr/init.lua`)
 - `i3/config` (deployed to `~/.config/i3/config`)
+- `i3/lock.sh` (deployed to `~/.config/i3/lock.sh`)
 - `polybar/config.ini` (deployed to `~/.config/polybar/config.ini`)
 - `polybar/launch_polybar.sh` (deployed to `~/.config/polybar/launch_polybar.sh`)
 - `rofi/config.rasi` (deployed to `~/.config/rofi/config.rasi`)
@@ -149,20 +157,34 @@ Note: The Neovim configuration comes from a separate repository (github.com/agil
 ## i3 Window Manager Configuration
 
 The i3 config includes:
+- No titlebars on windows (`default_border pixel 0`, `default_floating_border pixel 0`)
 - Vim-style window navigation (h/j/k/l)
 - Rofi as the application launcher (replacing dmenu)
 - Polybar as the status bar (i3bar disabled)
 - Catppuccin Mocha theme colors
-- Screen layout script on startup
+- Screen layout script on startup (dual monitor support)
+- Picom compositor for transparency
 
 **Key Bindings:**
+- `$mod+Return` - Open terminal (kitty)
+- `$mod+b` - Open browser (falkon)
 - `$mod+d` - Rofi drun launcher
 - `$mod+space` - Rofi combi mode
 - `$mod+Tab` - Rofi window switcher
 - `$mod+h/j/k/l` - Focus left/down/up/right
 - `$mod+Shift+h/j/k/l` - Move window left/down/up/right
-- `$mod+Escape` - Lock screen with i3lock + cmatrix
+- `$mod+Escape` - Lock screen with i3lock-color + cmatrix
 - `$mod+z` - Clear terminal (sends Ctrl+L)
+- `$mod+Shift+r` - Reload i3 config
+
+## Kitty Configuration
+
+Kitty terminal is configured with:
+- Catppuccin Mocha color theme
+- 85% background opacity (transparency)
+- Hidden titlebar (`hide_window_decorations titlebar-only`)
+- Powerline-style tab bar at the bottom
+- Font size 11.0
 
 ## Polybar Configuration
 
@@ -190,7 +212,7 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 - Google Chrome (fullscreen only)
 - VLC
 
-## New CLI Tools
+## CLI Tools
 
 The following modern CLI tools are installed with Catppuccin Mocha themes where applicable:
 
@@ -199,6 +221,7 @@ The following modern CLI tools are installed with Catppuccin Mocha themes where 
 - lazygit: Terminal UI for git commands (Catppuccin Mocha themed via config.yml)
 - tldr: Simplified, example-driven man pages
 - jq: JSON processor for parsing and manipulating JSON data
+- Posting: TUI HTTP client for API testing
 
 **Git Enhancement:**
 - delta: Syntax-highlighting pager for git diffs (Catppuccin Mocha themed via .gitconfig)
@@ -221,3 +244,13 @@ Delta is configured as the default git pager with Catppuccin Mocha theme:
 - Syntax-highlighted diffs with line numbers
 - Configured via `~/.gitconfig` which includes `~/.config/delta/catppuccin.gitconfig`
 - Supports all four Catppuccin flavors (latte, frappe, macchiato, mocha)
+
+## Backgrounds
+
+The backgrounds collection includes classic and Impressionist/Post-Impressionist masterpieces:
+- Van Gogh: Starry Night, Sunflowers, Almond Blossom, Bedroom, Cafe Terrace, Irises, Wheatfield with Crows
+- Monet: Water Lilies, Impression Sunrise, Haystacks
+- Renoir: Luncheon of the Boating Party, Bal du moulin de la Galette
+- Other masters: The Great Wave (Hokusai), The Scream (Munch), Gauguin paintings, Seurat's Sunday Afternoon, Klimt's The Kiss, Turner's Temeraire, Vermeer's Girl with a Pearl Earring, Botticelli's Birth of Venus, Manet's Olympia, Degas' L'Absinthe, Whistler's Nocturne
+
+Backgrounds rotate every 5 minutes via systemd timer.
