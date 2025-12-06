@@ -31,7 +31,7 @@ This is a personal CLI environment setup repository that automates the installat
   - `config.lisp` - Custom Catppuccin Mocha theme
   - `auto-config.3.lisp` - Dark mode and default URL settings
 - `kitty/` - Kitty terminal configuration
-  - `kitty.conf` - Main kitty config with theme include and tab bar styling
+  - `kitty.conf` - Main kitty config with theme include, tab bar styling, and hidden titlebar
   - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
 - `lazygit/` - Lazygit configuration
   - `config.yml` - Lazygit config with Catppuccin Mocha theme
