@@ -25,6 +25,7 @@ install_apt ripgrep rg
 install_apt fd-find fdfind
 install_apt nodejs node
 install_apt npm
+install_apt python3-pip pip
 install_apt asciinema
 install_apt i3
 install_apt rofi
