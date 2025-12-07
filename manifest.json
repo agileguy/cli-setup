@@ -32,7 +32,8 @@
       {"name": "duf", "cmd": "duf"},
       {"name": "hyperfine", "cmd": "hyperfine"},
       {"name": "gping", "cmd": "gping"},
-      {"name": "git-delta", "cmd": "delta"}
+      {"name": "git-delta", "cmd": "delta"},
+      {"name": "bats", "cmd": "bats"}
     ],
     "desktop": [
       {"name": "i3", "cmd": "i3"},

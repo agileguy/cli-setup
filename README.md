@@ -41,7 +41,7 @@ Restore configuration files from a previous backup:
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, bats
 
 **Flatpak Packages:**
 nyxt, zen-browser

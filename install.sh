@@ -1048,6 +1048,7 @@ main() {
     install_apt hyperfine
     install_apt gping
     install_apt git-delta delta
+    install_apt bats
 
     # Desktop packages (full install only)
     if [ "$INSTALL_MODE" = "full" ]; then
