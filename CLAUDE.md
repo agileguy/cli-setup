@@ -25,7 +25,13 @@ This is a personal CLI environment setup repository that automates the installat
 - `VERSION` - Current version number (semantic versioning)
 - `CHANGELOG.md` - Version history and changes
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
-- `HARDENING.md` - Security hardening plan and implementation status (Phases 1-5: Complete)
+- `HARDENING.md` - Security hardening plan and implementation status (All 7 phases complete)
+- `tests/` - BATS test suite
+  - `install_test.bats` - Tests for install.sh functions
+  - `bashrc_test.bats` - Tests for .bashrc functions
+  - `rollback_test.bats` - Tests for rollback.sh
+- `.github/workflows/ci.yml` - GitHub Actions CI (shellcheck, BATS, dry-run, JSON lint)
+- `.shellcheckrc` - ShellCheck configuration
 - `rollback.sh` - Restore configuration files from backup (--list, --backup, --dry-run)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
@@ -121,6 +127,8 @@ To run the complete setup:
 - `--skip-backup` - Skip backing up existing config files
 - `--force` - Force reinstall even if already at latest version
 - `--local DIR` - Use local files from DIR instead of downloading (offline mode)
+- `--check` - Run pre-flight system checks only (no installation)
+- `--interactive` / `-i` - Guided installation with prompts and confirmations
 - `--help` / `-h` - Show help message
 
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.

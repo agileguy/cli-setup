@@ -174,3 +174,150 @@ See [HARDENING.md](HARDENING.md) for the complete security hardening plan and im
 - `cc` - Claude Code CLI
 - `weather [city]` - weather via wttr.in
 - `commit <message>` - quick git add and commit (input sanitized)
+
+## Troubleshooting
+
+### Installation Issues
+
+**"Command not found: apt"**
+This script requires a Debian/Ubuntu-based system. For other distributions, install packages manually.
+
+**"sudo: command not found" or permission denied**
+Run the script with a user that has sudo privileges, or install packages as root.
+
+**Snap packages fail to install**
+```bash
+# Ensure snapd is installed and running
+sudo apt install snapd
+sudo systemctl enable --now snapd.socket
+# May need a reboot or re-login
+```
+
+**Flatpak apps don't appear in launcher**
+```bash
+# Restart your session or run:
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+### Post-Installation Issues
+
+**Shell configuration not loaded**
+Open a new terminal or run:
+```bash
+source ~/.bashrc
+```
+
+**mcfly/zoxide not working**
+These require the shell to be reloaded. Start a new terminal session.
+
+**Picom (transparency) not working**
+- Picom requires X11 (not Wayland)
+- Picom is auto-disabled on RDP connections
+- Check if picom is running: `pgrep picom`
+- Start manually: `picom --config ~/.config/picom/picom.conf &`
+
+**Background rotation not working**
+```bash
+# Check timer status
+systemctl --user status background-rotate.timer
+
+# Restart the timer
+systemctl --user restart background-rotate.timer
+
+# Manual rotation
+~/.config/backgrounds/rotate_background.sh
+```
+
+**i3 keybindings not working**
+```bash
+# Reload i3 config
+$mod+Shift+r
+
+# Or restart i3
+i3-msg restart
+```
+
+### Recovery
+
+**Restore previous configuration**
+```bash
+# List available backups
+./rollback.sh --list
+
+# Restore from specific backup
+./rollback.sh --backup 20241206-143022
+
+# Preview what would be restored
+./rollback.sh --dry-run
+```
+
+**Clean reinstall**
+```bash
+./install.sh --force --skip-backup
+```
+
+## FAQ
+
+**Q: Can I install only shell tools without the desktop environment?**
+A: Yes, use `--shell-only`:
+```bash
+./install.sh --shell-only
+```
+
+**Q: How do I check if my system is compatible before installing?**
+A: Run the pre-flight check:
+```bash
+./install.sh --check
+```
+
+**Q: How do I preview what will be installed?**
+A: Use dry-run mode:
+```bash
+./install.sh --dry-run
+```
+
+**Q: Can I install on an air-gapped system without internet?**
+A: Yes, clone the repo first on a connected machine, then use offline mode:
+```bash
+# On connected machine
+git clone https://github.com/agileguy/cli-setup.git
+# Transfer to air-gapped machine, then:
+./install.sh --local .
+```
+
+**Q: My terminal closes when I source the install script**
+A: This was fixed in v2.0.0. Make sure you're using the latest version. The script now preserves shell options.
+
+**Q: How do I update to the latest version?**
+A: Pull the latest changes and run the installer:
+```bash
+git pull
+./install.sh
+```
+If you're already at the latest version, use `--force` to reinstall.
+
+**Q: What gets backed up during installation?**
+A: All existing config files are backed up to `~/.config/cli-setup/backups/TIMESTAMP/`. View with:
+```bash
+ls ~/.config/cli-setup/backups/
+```
+
+**Q: How do I change the wallpaper rotation interval?**
+A: Edit the systemd timer:
+```bash
+nano ~/.config/systemd/user/background-rotate.timer
+# Change OnUnitActiveSec=5min to desired interval
+systemctl --user daemon-reload
+systemctl --user restart background-rotate.timer
+```
+
+**Q: Some keybindings conflict with my existing setup**
+A: Edit the i3 config at `~/.config/i3/config`. The mod key is set to Super (Windows key) by default.
+
+## Prerequisites
+
+- Ubuntu/Debian-based Linux distribution
+- sudo access
+- At least 2GB free disk space (5GB for full installation)
+- Internet connection (unless using `--local` mode)
+- X11 display server (for desktop components)

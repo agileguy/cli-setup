@@ -1,0 +1,16 @@
+# ShellCheck configuration for cli-setup
+# https://github.com/koalaman/shellcheck/wiki/Directive
+
+# Default shell
+shell=bash
+
+# Ignore these warnings globally:
+# SC1091: Not following sourced files (they may not exist during static analysis)
+# SC2034: Variable appears unused (many variables are used in sourced contexts)
+disable=SC1091,SC2034
+
+# Enable all other checks by default
+enable=all
+
+# External sources - files that are sourced but may not exist
+external-sources=true

@@ -30,6 +30,8 @@ SKIP_BACKUP=0
 FORCE_INSTALL=0
 USE_LOCAL=0
 LOCAL_DIR=""
+CHECK_ONLY=0
+INTERACTIVE=0
 
 # Colors for output
 RED='\033[0;31m'
@@ -52,6 +54,8 @@ Options:
   --skip-backup   Skip backing up existing config files
   --force         Force reinstall even if already at latest version
   --local DIR     Use local files from DIR instead of downloading
+  --check         Run pre-flight checks only (no installation)
+  --interactive   Interactive mode with prompts and confirmations
   --help, -h      Show this help message
 
 Examples:
@@ -60,6 +64,8 @@ Examples:
   ./install.sh --dry-run        # Preview what would be installed
   ./install.sh --force          # Force reinstall
   ./install.sh --local .        # Use local repo files (offline mode)
+  ./install.sh --check          # Validate system before installing
+  ./install.sh --interactive    # Guided installation with prompts
   . install.sh --shell-only     # Source for auto shell config
 EOF
 }
@@ -84,6 +90,15 @@ while [[ $# -gt 0 ]]; do
             ;;
         --force)
             FORCE_INSTALL=1
+            shift
+            ;;
+        --check)
+            CHECK_ONLY=1
+            VERBOSE=1  # Enable verbose output for check mode
+            shift
+            ;;
+        --interactive|-i)
+            INTERACTIVE=1
             shift
             ;;
         --local)
@@ -245,6 +260,365 @@ check_dependencies() {
     fi
 
     log_success "All dependencies satisfied"
+}
+
+# =============================================================================
+# Pre-flight System Check (--check mode)
+# =============================================================================
+check_system() {
+    local warnings=0
+    local errors=0
+
+    echo ""
+    log_info "=== Pre-flight System Check ==="
+    echo ""
+
+    # OS Detection
+    log_info "Operating System:"
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        log_verbose "  Distribution: $NAME $VERSION"
+        if [[ "$ID" != "ubuntu" && "$ID" != "debian" && "$ID_LIKE" != *"debian"* ]]; then
+            log_warn "  Non-Debian/Ubuntu system detected - some packages may not install"
+            warnings=$((warnings + 1))
+        else
+            log_success "  Debian/Ubuntu-based system detected"
+        fi
+    else
+        log_warn "  Could not detect OS distribution"
+        warnings=$((warnings + 1))
+    fi
+
+    # Architecture
+    local arch=$(uname -m)
+    log_verbose "  Architecture: $arch"
+    if [[ "$arch" != "x86_64" ]]; then
+        log_warn "  Non-x86_64 architecture - some binaries may not be available"
+        warnings=$((warnings + 1))
+    fi
+
+    # Display server (for desktop install)
+    echo ""
+    log_info "Display Environment:"
+    if [ "$INSTALL_MODE" = "full" ]; then
+        if [ -n "$DISPLAY" ]; then
+            log_success "  X11 display detected: $DISPLAY"
+        elif [ -n "$WAYLAND_DISPLAY" ]; then
+            log_warn "  Wayland display detected - i3/picom require X11"
+            warnings=$((warnings + 1))
+        else
+            log_warn "  No display server detected - desktop components may not work"
+            warnings=$((warnings + 1))
+        fi
+    else
+        log_verbose "  Shell-only mode - display server not required"
+    fi
+
+    # Package managers
+    echo ""
+    log_info "Package Managers:"
+    if command -v apt &> /dev/null; then
+        log_success "  apt: Available"
+    else
+        log_error "  apt: Not found (required)"
+        errors=$((errors + 1))
+    fi
+
+    if command -v snap &> /dev/null; then
+        log_success "  snap: Available"
+    else
+        log_warn "  snap: Not found (will be installed via apt)"
+        warnings=$((warnings + 1))
+    fi
+
+    if command -v flatpak &> /dev/null; then
+        log_success "  flatpak: Available"
+    else
+        if [ "$INSTALL_MODE" = "full" ]; then
+            log_verbose "  flatpak: Not found (will be installed)"
+        else
+            log_verbose "  flatpak: Not found (not needed for shell-only)"
+        fi
+    fi
+
+    # Disk space
+    echo ""
+    log_info "Disk Space:"
+    local free_space
+    free_space=$(df -BG / | awk 'NR==2 {print $4}' | sed 's/G//')
+    local required_space=2
+    if [ "$INSTALL_MODE" = "full" ]; then
+        required_space=5
+    fi
+    if [ "$free_space" -lt "$required_space" ]; then
+        log_error "  Available: ${free_space}GB (need ${required_space}GB minimum)"
+        errors=$((errors + 1))
+    else
+        log_success "  Available: ${free_space}GB (${required_space}GB required)"
+    fi
+
+    # Network connectivity
+    echo ""
+    log_info "Network Connectivity:"
+    local test_urls=("github.com" "raw.githubusercontent.com" "dl.flathub.org")
+    for url in "${test_urls[@]}"; do
+        if curl -s --connect-timeout 5 "https://$url" > /dev/null 2>&1; then
+            log_success "  $url: Reachable"
+        else
+            if [ "$USE_LOCAL" -eq 1 ]; then
+                log_verbose "  $url: Not reachable (offline mode enabled)"
+            else
+                log_warn "  $url: Not reachable"
+                warnings=$((warnings + 1))
+            fi
+        fi
+    done
+
+    # Sudo access
+    echo ""
+    log_info "Permissions:"
+    if sudo -n true 2>/dev/null; then
+        log_success "  sudo: Available (passwordless)"
+    elif sudo -v 2>/dev/null; then
+        log_success "  sudo: Available (password required)"
+    else
+        log_error "  sudo: Not available"
+        errors=$((errors + 1))
+    fi
+
+    # Existing installations
+    echo ""
+    log_info "Existing Installations:"
+    local existing_tools=0
+    for tool in nvim tmux git curl zoxide eza fzf lazygit; do
+        if command -v "$tool" &> /dev/null; then
+            log_verbose "  $tool: Already installed"
+            existing_tools=$((existing_tools + 1))
+        fi
+    done
+    if [ "$existing_tools" -gt 0 ]; then
+        log_verbose "  $existing_tools tools already installed (will be skipped)"
+    fi
+
+    # Check for conflicting packages
+    echo ""
+    log_info "Potential Conflicts:"
+    if command -v nvim &> /dev/null; then
+        local nvim_path=$(which nvim)
+        if [[ "$nvim_path" == *"snap"* ]]; then
+            log_verbose "  nvim: Installed via snap (expected)"
+        elif [[ "$nvim_path" == "/opt/"* ]]; then
+            log_verbose "  nvim: Installed from source/tarball"
+        else
+            log_verbose "  nvim: Custom installation at $nvim_path"
+        fi
+    fi
+
+    # Version check
+    echo ""
+    log_info "Version:"
+    local installed_version=""
+    if [ -f "$INSTALLED_VERSION_FILE" ]; then
+        installed_version=$(cat "$INSTALLED_VERSION_FILE" | tr -d '[:space:]')
+        log_verbose "  Installed version: $installed_version"
+    else
+        log_verbose "  No previous installation detected"
+    fi
+
+    # Summary
+    echo ""
+    log_info "=== Check Summary ==="
+    if [ "$errors" -gt 0 ]; then
+        log_error "$errors error(s) found - installation may fail"
+    fi
+    if [ "$warnings" -gt 0 ]; then
+        log_warn "$warnings warning(s) found - review before proceeding"
+    fi
+    if [ "$errors" -eq 0 ] && [ "$warnings" -eq 0 ]; then
+        log_success "System ready for installation"
+    elif [ "$errors" -eq 0 ]; then
+        log_success "System can proceed with installation (with warnings)"
+    fi
+    echo ""
+
+    return "$errors"
+}
+
+# =============================================================================
+# Interactive Mode Functions
+# =============================================================================
+prompt_yes_no() {
+    local prompt="$1"
+    local default="${2:-y}"
+    local response
+
+    if [ "$default" = "y" ]; then
+        prompt="$prompt [Y/n]: "
+    else
+        prompt="$prompt [y/N]: "
+    fi
+
+    read -r -p "$prompt" response
+    response=${response:-$default}
+
+    case "$response" in
+        [yY][eE][sS]|[yY]) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+prompt_choice() {
+    local prompt="$1"
+    shift
+    local options=("$@")
+    local choice
+
+    echo "$prompt"
+    for i in "${!options[@]}"; do
+        echo "  $((i+1))) ${options[$i]}"
+    done
+
+    while true; do
+        read -r -p "Enter choice [1-${#options[@]}]: " choice
+        if [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -le "${#options[@]}" ]; then
+            return $((choice - 1))
+        fi
+        echo "Invalid choice. Please enter a number between 1 and ${#options[@]}."
+    done
+}
+
+run_interactive_setup() {
+    echo ""
+    echo -e "${BLUE}╔══════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${BLUE}║${NC}           ${GREEN}CLI Setup - Interactive Installation${NC}              ${BLUE}║${NC}"
+    echo -e "${BLUE}╚══════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+
+    # Installation mode
+    echo -e "${YELLOW}Step 1: Installation Mode${NC}"
+    prompt_choice "What would you like to install?" "Full installation (shell + desktop/i3)" "Shell tools only (no GUI components)"
+    local mode_choice=$?
+    if [ "$mode_choice" -eq 1 ]; then
+        INSTALL_MODE="shell"
+        log_info "Selected: Shell-only installation"
+    else
+        INSTALL_MODE="full"
+        log_info "Selected: Full installation"
+    fi
+    echo ""
+
+    # Backup preference
+    echo -e "${YELLOW}Step 2: Backup Options${NC}"
+    if prompt_yes_no "Create backups of existing config files?" "y"; then
+        SKIP_BACKUP=0
+        log_info "Backups will be created"
+    else
+        SKIP_BACKUP=1
+        log_info "Skipping backups"
+    fi
+    echo ""
+
+    # Verbose mode
+    echo -e "${YELLOW}Step 3: Output Verbosity${NC}"
+    if prompt_yes_no "Enable verbose output?" "n"; then
+        VERBOSE=1
+        log_info "Verbose mode enabled"
+    fi
+    echo ""
+
+    # Run pre-flight check
+    echo -e "${YELLOW}Step 4: System Check${NC}"
+    echo "Running pre-flight system check..."
+    echo ""
+    check_system
+    local check_result=$?
+    echo ""
+
+    if [ "$check_result" -gt 0 ]; then
+        echo -e "${RED}System check found errors.${NC}"
+        if ! prompt_yes_no "Continue anyway?" "n"; then
+            log_info "Installation cancelled by user"
+            if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+                eval "$ORIGINAL_SHELL_OPTS"
+                return 1
+            else
+                exit 1
+            fi
+        fi
+    fi
+
+    # Final confirmation
+    echo -e "${YELLOW}Step 5: Confirmation${NC}"
+    echo ""
+    echo "Installation Summary:"
+    echo "  - Mode: $INSTALL_MODE"
+    echo "  - Backups: $([ "$SKIP_BACKUP" -eq 0 ] && echo "enabled" || echo "disabled")"
+    echo "  - Verbose: $([ "$VERBOSE" -eq 1 ] && echo "enabled" || echo "disabled")"
+    echo ""
+
+    if ! prompt_yes_no "Proceed with installation?" "y"; then
+        log_info "Installation cancelled by user"
+        if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+            eval "$ORIGINAL_SHELL_OPTS"
+            return 0
+        else
+            exit 0
+        fi
+    fi
+
+    echo ""
+    log_info "Starting installation..."
+    echo ""
+}
+
+show_installation_summary() {
+    echo ""
+    echo -e "${BLUE}╔══════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${BLUE}║${NC}              ${GREEN}Installation Complete!${NC}                         ${BLUE}║${NC}"
+    echo -e "${BLUE}╚══════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+
+    echo -e "${GREEN}What was installed:${NC}"
+    echo "  - Shell tools: git, tmux, nvim, fzf, lazygit, etc."
+    echo "  - Shell enhancements: mcfly, zoxide, eza, bat"
+    echo "  - Configuration: bashrc, tmux.conf, gitconfig, etc."
+
+    if [ "$INSTALL_MODE" = "full" ]; then
+        echo "  - Desktop: i3, polybar, rofi, picom, kitty"
+        echo "  - Browsers: Nyxt, Zen Browser, Google Chrome"
+        echo "  - Backgrounds: Classic artwork with 5-min rotation"
+    fi
+
+    echo ""
+    echo -e "${YELLOW}Next steps:${NC}"
+    echo "  1. Open a new terminal or run: source ~/.bashrc"
+    if [ "$INSTALL_MODE" = "full" ]; then
+        echo "  2. Log out and select i3 as your session"
+        echo "  3. Press \$mod+d to open the application launcher"
+    fi
+    echo ""
+
+    echo -e "${BLUE}Useful commands:${NC}"
+    echo "  - cc              : Claude Code CLI"
+    echo "  - lazygit         : Terminal UI for git"
+    echo "  - btop            : System monitor"
+    echo "  - ncdu            : Disk usage analyzer"
+    if [ "$INSTALL_MODE" = "full" ]; then
+        echo "  - \$mod+Return    : Open terminal"
+        echo "  - \$mod+d         : Application launcher"
+        echo "  - \$mod+Escape    : Lock screen"
+    fi
+    echo ""
+
+    if [ "$SKIP_BACKUP" -eq 0 ]; then
+        echo -e "${BLUE}Backups saved to:${NC}"
+        echo "  $BACKUP_DIR"
+        echo ""
+    fi
+
+    echo -e "${BLUE}Log file:${NC}"
+    echo "  $INSTALL_LOG"
+    echo ""
 }
 
 # =============================================================================
@@ -611,6 +985,23 @@ main() {
         log_warn "DRY RUN MODE - No changes will be made"
     fi
     echo ""
+
+    # Run pre-flight check if --check mode
+    if [ "$CHECK_ONLY" -eq 1 ]; then
+        check_system
+        local check_result=$?
+        if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+            eval "$ORIGINAL_SHELL_OPTS"
+            return "$check_result"
+        else
+            exit "$check_result"
+        fi
+    fi
+
+    # Run interactive setup if --interactive mode
+    if [ "$INTERACTIVE" -eq 1 ]; then
+        run_interactive_setup
+    fi
 
     # Run dependency and version checks
     check_dependencies
@@ -1046,25 +1437,35 @@ EOF
     # Complete
     # =========================================================================
     echo ""
-    log_info "=== Setup complete ==="
-    log_success "Installation completed successfully at $(date)"
-    log_info "Log file: $INSTALL_LOG"
-    if [ "$SKIP_BACKUP" -eq 0 ] && [ "$DRY_RUN" -eq 0 ]; then
-        log_info "Backups saved to: $BACKUP_DIR"
+
+    # Show enhanced summary in interactive mode
+    if [ "$INTERACTIVE" -eq 1 ] && [ "$DRY_RUN" -eq 0 ]; then
+        show_installation_summary
+    else
+        log_info "=== Setup complete ==="
+        log_success "Installation completed successfully at $(date)"
+        log_info "Log file: $INSTALL_LOG"
+        if [ "$SKIP_BACKUP" -eq 0 ] && [ "$DRY_RUN" -eq 0 ]; then
+            log_info "Backups saved to: $BACKUP_DIR"
+        fi
+        echo ""
     fi
-    echo ""
 
     # Use return if sourced (to avoid closing terminal), exit if executed
     if [ "$SCRIPT_SOURCED" -eq 1 ]; then
         eval "$ORIGINAL_SHELL_OPTS"
-        log_info "Script was sourced - shell configuration will be applied automatically"
-        echo ""
+        if [ "$INTERACTIVE" -eq 0 ]; then
+            log_info "Script was sourced - shell configuration will be applied automatically"
+            echo ""
+        fi
         return 0
     else
-        log_info "To apply the new shell configuration, either:"
-        log_info "  1. Open a new terminal window, or"
-        log_info "  2. Run: source ~/.bashrc"
-        echo ""
+        if [ "$INTERACTIVE" -eq 0 ]; then
+            log_info "To apply the new shell configuration, either:"
+            log_info "  1. Open a new terminal window, or"
+            log_info "  2. Run: source ~/.bashrc"
+            echo ""
+        fi
         exit 0
     fi
 }

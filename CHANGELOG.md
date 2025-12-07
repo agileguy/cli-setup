@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2024-12-06
+
+### Added
+- **Automated Testing**: BATS test suite for install.sh, .bashrc, and rollback.sh functions
+- **GitHub Actions CI**: Automated shellcheck, BATS tests, dry-run validation, and JSON lint
+- **Pre-flight validation**: `--check` flag to validate system compatibility before installation
+- **Interactive mode**: `--interactive` / `-i` flag for guided installation with prompts
+- **Troubleshooting guide**: Comprehensive troubleshooting section in README
+- **FAQ section**: Common questions and answers in README
+- **Prerequisites section**: Explicit system requirements documentation
+
+### Changed
+- Enhanced installation summary in interactive mode with color-coded UI
+- Improved system compatibility checking with detailed reports
+- Full installation now requires 5GB disk space (up from 2GB)
+
+### Security
+- Phase 6 hardening complete (automated testing, CI/CD)
+- Phase 7 hardening complete (documentation, interactive mode)
+- All 7 phases of security hardening now complete
+
 ## [2.0.0] - 2024-12-06
 
 ### Added
