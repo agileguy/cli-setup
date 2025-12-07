@@ -28,6 +28,8 @@ VERBOSE=0
 DRY_RUN=0
 SKIP_BACKUP=0
 FORCE_INSTALL=0
+USE_LOCAL=0
+LOCAL_DIR=""
 
 # Colors for output
 RED='\033[0;31m'
@@ -49,6 +51,7 @@ Options:
   --dry-run       Show what would be installed without making changes
   --skip-backup   Skip backing up existing config files
   --force         Force reinstall even if already at latest version
+  --local DIR     Use local files from DIR instead of downloading
   --help, -h      Show this help message
 
 Examples:
@@ -56,6 +59,7 @@ Examples:
   ./install.sh --shell-only     # Shell tools only
   ./install.sh --dry-run        # Preview what would be installed
   ./install.sh --force          # Force reinstall
+  ./install.sh --local .        # Use local repo files (offline mode)
   . install.sh --shell-only     # Source for auto shell config
 EOF
 }
@@ -81,6 +85,17 @@ while [[ $# -gt 0 ]]; do
         --force)
             FORCE_INSTALL=1
             shift
+            ;;
+        --local)
+            USE_LOCAL=1
+            LOCAL_DIR="$2"
+            if [ -z "$LOCAL_DIR" ] || [ ! -d "$LOCAL_DIR" ]; then
+                echo "Error: --local requires a valid directory"
+                exit 1
+            fi
+            # Convert to absolute path
+            LOCAL_DIR=$(cd "$LOCAL_DIR" && pwd)
+            shift 2
             ;;
         --help|-h)
             show_help
@@ -238,12 +253,21 @@ check_dependencies() {
 check_version() {
     log_info "Checking version..."
 
-    # Get remote version
+    # Get version (from local file or remote)
     local remote_version
-    remote_version=$(curl -fsSL "$REPO_VERSION_URL" 2>/dev/null | tr -d '[:space:]') || {
-        log_warn "Could not fetch remote version, proceeding with installation"
-        return 0
-    }
+    if [ "$USE_LOCAL" -eq 1 ]; then
+        if [ -f "$LOCAL_DIR/VERSION" ]; then
+            remote_version=$(cat "$LOCAL_DIR/VERSION" | tr -d '[:space:]')
+        else
+            log_warn "Local VERSION file not found, proceeding with installation"
+            return 0
+        fi
+    else
+        remote_version=$(curl -fsSL "$REPO_VERSION_URL" 2>/dev/null | tr -d '[:space:]') || {
+            log_warn "Could not fetch remote version, proceeding with installation"
+            return 0
+        }
+    fi
 
     # Get installed version (if exists)
     local installed_version=""
@@ -341,6 +365,103 @@ expand_path() {
     eval echo "$path"
 }
 
+# Validate path is safe (no directory traversal, within allowed directories)
+validate_path() {
+    local path="$1"
+    local expanded_path
+
+    # Expand the path
+    expanded_path=$(expand_path "$path")
+
+    # Check for directory traversal attempts
+    if [[ "$expanded_path" =~ \.\. ]]; then
+        log_error "Path contains directory traversal: $path"
+        return 1
+    fi
+
+    # Ensure path starts with allowed prefixes
+    local allowed_prefixes=("$HOME" "/tmp" "/usr/local")
+    local is_allowed=0
+
+    for prefix in "${allowed_prefixes[@]}"; do
+        if [[ "$expanded_path" == "$prefix"* ]]; then
+            is_allowed=1
+            break
+        fi
+    done
+
+    if [ "$is_allowed" -eq 0 ]; then
+        log_error "Path outside allowed directories: $path"
+        return 1
+    fi
+
+    return 0
+}
+
+# Curl with retry and exponential backoff
+curl_with_retry() {
+    local url="$1"
+    local output="$2"
+    local max_retries=3
+    local retry_delay=2
+    local attempt=1
+    local curl_opts="-fsSL --connect-timeout 30 --max-time 300"
+
+    while [ $attempt -le $max_retries ]; do
+        log_verbose "Download attempt $attempt/$max_retries: $url"
+
+        if curl $curl_opts -o "$output" "$url"; then
+            # Verify we got a non-empty file
+            if [ -s "$output" ]; then
+                log_verbose "Download successful"
+                return 0
+            else
+                log_warn "Downloaded file is empty"
+            fi
+        fi
+
+        if [ $attempt -lt $max_retries ]; then
+            log_warn "Download failed, retrying in ${retry_delay}s..."
+            sleep $retry_delay
+            retry_delay=$((retry_delay * 2))  # Exponential backoff
+        fi
+
+        attempt=$((attempt + 1))
+    done
+
+    log_error "Download failed after $max_retries attempts: $url"
+    return 1
+}
+
+# Safely create directory (check for symlink attacks)
+safe_mkdir() {
+    local dir="$1"
+    local expanded_dir
+
+    expanded_dir=$(expand_path "$dir")
+
+    # Validate the path first
+    if ! validate_path "$dir"; then
+        return 1
+    fi
+
+    # Check if path exists and is a symlink (potential attack)
+    if [ -L "$expanded_dir" ]; then
+        log_error "Security: Path is a symlink, refusing to create: $dir"
+        return 1
+    fi
+
+    # Check parent directory for symlinks
+    local parent_dir=$(dirname "$expanded_dir")
+    if [ -L "$parent_dir" ] && [ "$parent_dir" != "$HOME" ]; then
+        log_error "Security: Parent directory is a symlink: $parent_dir"
+        return 1
+    fi
+
+    # Create directory
+    mkdir -p "$expanded_dir"
+}
+
 # =============================================================================
 # Installation Functions
 # =============================================================================
@@ -434,17 +555,40 @@ download_config() {
     local executable="${4:-false}"
 
     dest=$(expand_path "$dest")
-    mkdir -p "$(dirname "$dest")"
+
+    # Validate destination path
+    if ! validate_path "$dest"; then
+        log_error "Refusing to download to unsafe path: $dest"
+        return 1
+    fi
+
+    safe_mkdir "$(dirname "$dest")"
     backup_file "$dest"
 
     if [ "$DRY_RUN" -eq 1 ]; then
-        log_dry_run "curl $url -> $dest"
-    else
-        log_verbose "Downloading $(basename "$dest")..."
-        if [ "$cache_control" = "true" ]; then
-            curl -fsSL -H "Cache-Control: no-cache" -o "$dest" "$url"
+        if [ "$USE_LOCAL" -eq 1 ]; then
+            log_dry_run "copy local file -> $dest"
         else
-            curl -fsSL -o "$dest" "$url"
+            log_dry_run "curl $url -> $dest"
+        fi
+    else
+        if [ "$USE_LOCAL" -eq 1 ]; then
+            # Extract relative path from URL and copy from local directory
+            local rel_path="${url#$GITHUB_RAW_BASE/}"
+            local local_file="$LOCAL_DIR/$rel_path"
+
+            if [ -f "$local_file" ]; then
+                log_verbose "Copying local file: $rel_path"
+                cp "$local_file" "$dest"
+            else
+                log_error "Local file not found: $local_file"
+                return 1
+            fi
+        else
+            log_verbose "Downloading $(basename "$dest")..."
+            if ! curl_with_retry "$url" "$dest"; then
+                return 1
+            fi
         fi
         if [ "$executable" = "true" ]; then
             chmod +x "$dest"
@@ -460,6 +604,9 @@ main() {
     echo "" | tee -a "$INSTALL_LOG"
 
     log_info "Installation mode: $INSTALL_MODE"
+    if [ "$USE_LOCAL" -eq 1 ]; then
+        log_info "Using local files from: $LOCAL_DIR"
+    fi
     if [ "$DRY_RUN" -eq 1 ]; then
         log_warn "DRY RUN MODE - No changes will be made"
     fi

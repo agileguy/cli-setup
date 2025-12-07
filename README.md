@@ -21,6 +21,7 @@ git clone https://github.com/agileguy/cli-setup.git && cd cli-setup
 ./install.sh --dry-run        # Preview without installing
 ./install.sh --verbose        # Detailed output
 ./install.sh --force          # Force reinstall
+./install.sh --local .        # Offline mode (use local files)
 . install.sh --shell-only     # Source for auto shell config
 ```
 
@@ -95,8 +96,11 @@ This repository follows security best practices including:
 - Dependency checking (apt, sudo, disk space, internet)
 - Installation state tracking (`~/.config/cli-setup/state.json`)
 - Version tracking with automatic skip if already at latest version
+- Path validation (prevents directory traversal and symlink attacks)
+- Network retry with exponential backoff
+- Offline installation mode (`--local` flag)
 
-See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1, 2 & 3: Complete ✅).
+See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phases 1-5: Complete ✅).
 
 ## Repository Structure
 

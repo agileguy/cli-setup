@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Flathub repository check**: Avoid duplicate repository additions
 - **Snap connection verification**: Check before attempting connections
 - **Rollback script**: `rollback.sh` to restore configs from backups (--list, --backup, --dry-run)
+- **Input validation**: `_validate_input()` helper, validated `weather()` and `commit()` functions
+- **Path validation**: `validate_path()` and `safe_mkdir()` to prevent directory traversal and symlink attacks
+- **Network retry**: `curl_with_retry()` with exponential backoff (3 attempts, 2s→4s→8s delays)
+- **Offline mode**: `--local DIR` flag for air-gapped installations using local files
 
 ### Changed
 - Refactored install.sh from 470 lines to modular architecture
@@ -31,6 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Phase 1 hardening complete (shell injection, error handling, backups, checksums)
 - Phase 2 hardening complete (code quality, idempotency, dependency checks, logging)
+- Phase 3 hardening complete (version tracking, rollback capability)
+- Phase 4 hardening complete (input validation, path validation)
+- Phase 5 hardening complete (network retry, offline mode)
 
 ## [1.0.0] - 2024-12-01
 

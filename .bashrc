@@ -10,17 +10,39 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 
+# Validate input: only allow safe characters (alphanumeric, spaces, hyphens, underscores)
+_validate_input() {
+  local input="$1"
+  local pattern="$2"
+  if [[ ! "$input" =~ $pattern ]]; then
+    echo "Error: Invalid characters in input" >&2
+    return 1
+  fi
+  return 0
+}
+
 weather () {
   local city="${1:-edmonton}"
-  curl "wttr.in/$city"
+  # Only allow alphanumeric, spaces, hyphens, commas (for "city, country" format)
+  if ! _validate_input "$city" '^[a-zA-Z0-9 ,_-]+$'; then
+    echo "Error: City name contains invalid characters" >&2
+    return 1
+  fi
+  curl -fsSL "wttr.in/${city}"
 }
 
 commit () {
   if [ -z "$1" ]; then
-    echo "Error: Commit message required"
+    echo "Error: Commit message required" >&2
     return 1
   fi
-  git add -A && git commit -m "$*"
+  local message="$*"
+  # Reject backticks and $() which could allow command substitution
+  if [[ "$message" =~ [\`] ]] || [[ "$message" =~ \$\( ]]; then
+    echo "Error: Commit message contains unsafe characters" >&2
+    return 1
+  fi
+  git add -A && git commit -m "$message"
 }
 
 # See bash(1) for more options

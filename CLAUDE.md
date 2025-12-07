@@ -25,7 +25,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `VERSION` - Current version number (semantic versioning)
 - `CHANGELOG.md` - Version history and changes
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
-- `HARDENING.md` - Security hardening plan and implementation status (Phase 1, 2 & 3: Complete)
+- `HARDENING.md` - Security hardening plan and implementation status (Phases 1-5: Complete)
 - `rollback.sh` - Restore configuration files from backup (--list, --backup, --dry-run)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
@@ -120,6 +120,7 @@ To run the complete setup:
 - `--verbose` / `-v` - Show detailed debug output
 - `--skip-backup` - Skip backing up existing config files
 - `--force` - Force reinstall even if already at latest version
+- `--local DIR` - Use local files from DIR instead of downloading (offline mode)
 - `--help` / `-h` - Show help message
 
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.
@@ -138,6 +139,10 @@ This script requires sudo privileges and will install system packages, snap pack
 - Error handling: Script exits on errors with cleanup of temporary files
 - Trap handlers: Failed installations report exact line numbers for debugging
 - Shell options preserved: When sourced, original shell options are saved and restored to prevent terminal from closing
+- Input validation: User functions validate input to prevent injection attacks
+- Path validation: Prevents directory traversal and symlink attacks
+- Network retry: Downloads retry with exponential backoff (3 attempts)
+- Offline mode: `--local` flag for air-gapped installations
 
 **Post-Installation:**
 After installation completes, open a new terminal window or run `source ~/.bashrc` to apply the new shell configuration.
