@@ -69,7 +69,8 @@ echo "" | tee -a "$INSTALL_LOG"
 
 echo "→ Fetching helper scripts..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/scripts
-curl -H "Cache-Control: no-cache" -o ~/scripts/helpers.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh
+# Use timestamp query parameter to bypass GitHub CDN cache
+curl -o ~/scripts/helpers.sh "https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh?$(date +%s)"
 chmod +x ~/scripts/helpers.sh
 
 # Source helper functions
