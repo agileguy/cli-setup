@@ -106,6 +106,9 @@ This script requires sudo privileges and will install system packages, snap pack
 - Error handling: Script exits on errors with cleanup of temporary files
 - Trap handlers: Failed installations report exact line numbers for debugging
 
+**Post-Installation:**
+After installation completes, open a new terminal window or run `source ~/.bashrc` to apply the new shell configuration.
+
 ## Shell Environment Details
 
 **Key Aliases (from .bashrc):**
