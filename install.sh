@@ -8,8 +8,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 else
     # Script is being sourced (incorrect)
     echo "❌ Error: This script should be executed, not sourced!"
-    echo "Run it with: ./install.sh"
-    echo "NOT: source install.sh"
+    echo "Run it with: ./install.sh or bash install.sh"
+    echo "NOT: source install.sh or . install.sh"
     return 1 2>/dev/null || exit 1
 fi
 
