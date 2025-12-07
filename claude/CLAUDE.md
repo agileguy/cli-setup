@@ -1,3 +1,3 @@
 # Global Claude Code Instructions
 
-When I tell you to push, you will update documentation (README.md and CLAUDE.md) to reflect changes, then commit and push.
+Before any git push (whether requested by user or self-initiated), always update documentation (README.md and CLAUDE.md) to reflect all changes made, then commit and push.

@@ -65,7 +65,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - fzf fuzzy finder (Catppuccin Mocha theme)
 - bash-git-prompt
 - Custom .bashrc with aliases and integrations (input sanitized)
-- Rotating desktop wallpapers (classic artwork, 5-minute rotation)
+- Rotating desktop wallpapers (classic artwork, 5-minute rotation, skips existing images)
 - Claude Code CLI (global instructions and permissions)
 - All installation scripts use strict error handling with trap cleanup and logging
 - Automatic timestamped backups of existing configs before overwriting

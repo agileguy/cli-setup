@@ -304,4 +304,4 @@ The backgrounds collection includes classic and Impressionist/Post-Impressionist
 - Renoir: Luncheon of the Boating Party, Bal du moulin de la Galette
 - Other masters: The Great Wave (Hokusai), The Scream (Munch), Gauguin paintings, Seurat's Sunday Afternoon, Klimt's The Kiss, Turner's Temeraire, Vermeer's Girl with a Pearl Earring, Botticelli's Birth of Venus, Manet's Olympia, Degas' L'Absinthe, Whistler's Nocturne
 
-Backgrounds rotate every 5 minutes via systemd timer.
+Background images are only downloaded if they don't already exist (idempotent). Backgrounds rotate every 5 minutes via systemd timer.
