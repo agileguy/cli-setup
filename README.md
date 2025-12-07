@@ -20,6 +20,7 @@ git clone https://github.com/agileguy/cli-setup.git && cd cli-setup
 ./install.sh --shell-only     # Shell tools only
 ./install.sh --dry-run        # Preview without installing
 ./install.sh --verbose        # Detailed output
+./install.sh --force          # Force reinstall
 . install.sh --shell-only     # Source for auto shell config
 ```
 
@@ -82,15 +83,18 @@ This repository follows security best practices including:
 - Shell options preserved when sourced (prevents terminal from closing)
 - Dependency checking (apt, sudo, disk space, internet)
 - Installation state tracking (`~/.config/cli-setup/state.json`)
+- Version tracking with automatic skip if already at latest version
 
-See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1 & 2: Complete ✅).
+See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1, 2 & 3: Complete ✅).
 
 ## Repository Structure
 
 ```
 .
-├── install.sh              # Main installation script (--shell-only, --dry-run, --verbose)
+├── install.sh              # Main installation script (--shell-only, --dry-run, --verbose, --force)
 ├── manifest.json           # Declarative package/config definitions
+├── VERSION                 # Current version (semantic versioning)
+├── CHANGELOG.md            # Version history and changes
 ├── checksums.txt           # SHA256 checksums for downloads
 ├── HARDENING.md            # Security hardening plan and status
 ├── .gitignore              # Excludes backups, logs, and temp files

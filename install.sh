@@ -16,15 +16,18 @@ set -euo pipefail
 # =============================================================================
 INSTALL_LOG="$HOME/.config/cli-setup-install.log"
 STATE_FILE="$HOME/.config/cli-setup/state.json"
+INSTALLED_VERSION_FILE="$HOME/.config/cli-setup/version"
 BACKUP_DIR="$HOME/.config/cli-setup/backups/$(date +%Y%m%d-%H%M%S)"
 MANIFEST_URL="https://raw.githubusercontent.com/agileguy/cli-setup/main/manifest.json"
 GITHUB_RAW_BASE="https://raw.githubusercontent.com/agileguy/cli-setup/main"
+REPO_VERSION_URL="https://raw.githubusercontent.com/agileguy/cli-setup/main/VERSION"
 
 # Default options
 INSTALL_MODE="full"  # full or shell
 VERBOSE=0
 DRY_RUN=0
 SKIP_BACKUP=0
+FORCE_INSTALL=0
 
 # Colors for output
 RED='\033[0;31m'
@@ -45,12 +48,14 @@ Options:
   --verbose, -v   Show detailed output
   --dry-run       Show what would be installed without making changes
   --skip-backup   Skip backing up existing config files
+  --force         Force reinstall even if already at latest version
   --help, -h      Show this help message
 
 Examples:
   ./install.sh                  # Full installation
   ./install.sh --shell-only     # Shell tools only
   ./install.sh --dry-run        # Preview what would be installed
+  ./install.sh --force          # Force reinstall
   . install.sh --shell-only     # Source for auto shell config
 EOF
 }
@@ -71,6 +76,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --skip-backup)
             SKIP_BACKUP=1
+            shift
+            ;;
+        --force)
+            FORCE_INSTALL=1
             shift
             ;;
         --help|-h)
@@ -221,6 +230,53 @@ check_dependencies() {
     fi
 
     log_success "All dependencies satisfied"
+}
+
+# =============================================================================
+# Version Checking
+# =============================================================================
+check_version() {
+    log_info "Checking version..."
+
+    # Get remote version
+    local remote_version
+    remote_version=$(curl -fsSL "$REPO_VERSION_URL" 2>/dev/null | tr -d '[:space:]') || {
+        log_warn "Could not fetch remote version, proceeding with installation"
+        return 0
+    }
+
+    # Get installed version (if exists)
+    local installed_version=""
+    if [ -f "$INSTALLED_VERSION_FILE" ]; then
+        installed_version=$(cat "$INSTALLED_VERSION_FILE" | tr -d '[:space:]')
+    fi
+
+    log_verbose "Remote version: $remote_version"
+    log_verbose "Installed version: ${installed_version:-none}"
+
+    # If force install, skip version check
+    if [ "$FORCE_INSTALL" -eq 1 ]; then
+        log_info "Force install requested, proceeding..."
+        return 0
+    fi
+
+    # Compare versions
+    if [ -n "$installed_version" ] && [ "$installed_version" = "$remote_version" ]; then
+        log_success "Already at latest version ($remote_version)"
+        log_info "Use --force to reinstall"
+        if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+            eval "$ORIGINAL_SHELL_OPTS"
+            return 0
+        else
+            exit 0
+        fi
+    fi
+
+    if [ -n "$installed_version" ]; then
+        log_info "Upgrading from $installed_version to $remote_version"
+    else
+        log_info "Installing version $remote_version"
+    fi
 }
 
 # =============================================================================
@@ -409,8 +465,9 @@ main() {
     fi
     echo ""
 
-    # Run dependency checks
+    # Run dependency and version checks
     check_dependencies
+    check_version
     log_system_info
     echo ""
 
@@ -822,9 +879,15 @@ main() {
     # =========================================================================
     if [ "$DRY_RUN" -eq 0 ]; then
         log_info "Saving installation state..."
+
+        # Get and save version
+        local installed_version
+        installed_version=$(curl -fsSL "$REPO_VERSION_URL" 2>/dev/null | tr -d '[:space:]') || installed_version="unknown"
+        echo "$installed_version" > "$INSTALLED_VERSION_FILE"
+
         cat > "$STATE_FILE" << EOF
 {
-    "version": "1.0.0",
+    "version": "$installed_version",
     "installed_at": "$(date -Iseconds)",
     "mode": "$INSTALL_MODE",
     "backup_dir": "$BACKUP_DIR"

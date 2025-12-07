@@ -22,8 +22,10 @@ This is a personal CLI environment setup repository that automates the installat
   - Installation state saved to `~/.config/cli-setup/state.json`
   - Can be executed or sourced safely with shell options preserved
 - `manifest.json` - Declarative package and config definitions (shell vs desktop categories)
+- `VERSION` - Current version number (semantic versioning)
+- `CHANGELOG.md` - Version history and changes
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
-- `HARDENING.md` - Security hardening plan and implementation status (Phase 1 & 2: Complete)
+- `HARDENING.md` - Security hardening plan and implementation status (Phase 1, 2 & 3: Complete)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
@@ -116,6 +118,7 @@ To run the complete setup:
 - `--dry-run` - Preview installation without making changes
 - `--verbose` / `-v` - Show detailed debug output
 - `--skip-backup` - Skip backing up existing config files
+- `--force` - Force reinstall even if already at latest version
 - `--help` / `-h` - Show help message
 
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.
@@ -130,6 +133,7 @@ This script requires sudo privileges and will install system packages, snap pack
 - Automatic backups: All existing config files are backed up to `~/.config/cli-setup/backups/TIMESTAMP/` before being overwritten
 - Installation log: Full installation log saved to `~/.config/cli-setup-install.log`
 - Installation state: Saved to `~/.config/cli-setup/state.json`
+- Version tracking: Installed version saved to `~/.config/cli-setup/version`, skips reinstall if at latest version
 - Error handling: Script exits on errors with cleanup of temporary files
 - Trap handlers: Failed installations report exact line numbers for debugging
 - Shell options preserved: When sourced, original shell options are saved and restored to prevent terminal from closing
