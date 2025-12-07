@@ -67,14 +67,62 @@ trap 'cleanup_on_error ${LINENO}' ERR
 echo "=== CLI Setup Installation Started at $(date) ===" | tee "$INSTALL_LOG"
 echo "" | tee -a "$INSTALL_LOG"
 
-echo "→ Fetching helper scripts..." | tee -a "$INSTALL_LOG"
-mkdir -p ~/scripts
-# Use timestamp query parameter to bypass GitHub CDN cache
-curl -o ~/scripts/helpers.sh "https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh?$(date +%s)"
-chmod +x ~/scripts/helpers.sh
+# Helper functions (inlined to avoid GitHub CDN caching issues)
+# Check if a command/tool is installed
+is_installed() {
+    command -v "$1" &> /dev/null
+}
 
-# Source helper functions
-source "$HOME/scripts/helpers.sh"
+# Install apt package if not already installed
+install_apt() {
+    local package="$1"
+    local cmd="${2:-$1}"
+    if is_installed "$cmd"; then
+        echo "✓ $package already installed"
+    else
+        echo "→ Installing $package..."
+        sudo apt install -y "$package"
+    fi
+}
+
+# Install snap package if not already installed
+install_snap() {
+    local package="$1"
+    local options="${2:-}"
+    local cmd="${3:-$1}"
+    if is_installed "$cmd"; then
+        echo "✓ $package already installed"
+    else
+        echo "→ Installing $package via snap..."
+        sudo snap install "$package" $options
+    fi
+}
+
+# Install flatpak package if not already installed
+install_flatpak() {
+    local app_id="$1"
+    local cmd="${2:-}"
+    if [ -n "$cmd" ] && is_installed "$cmd"; then
+        echo "✓ $app_id already installed"
+    elif flatpak list --app | grep -q "$app_id"; then
+        echo "✓ $app_id already installed"
+    else
+        echo "→ Installing $app_id via flatpak..."
+        sudo flatpak install -y flathub "$app_id"
+    fi
+}
+
+# Clone git repo if directory doesn't exist
+clone_repo() {
+    local repo="$1"
+    local dest="$2"
+    if [ -d "$dest" ]; then
+        echo "✓ $dest already exists"
+    else
+        echo "→ Cloning $repo to $dest..."
+        git clone "$repo" "$dest"
+    fi
+}
 
 echo "=== Installing APT packages ==="
 install_apt cbonsai
