@@ -1,7 +1,32 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "→ Fetching helper scripts..."
+# Error handling with trap
+INSTALL_LOG="$HOME/.config/cli-setup-install.log"
+mkdir -p "$(dirname "$INSTALL_LOG")"
+
+cleanup_on_error() {
+    local exit_code=$?
+    local line_number=$1
+    echo "" | tee -a "$INSTALL_LOG"
+    echo "❌ Installation failed at line $line_number with exit code $exit_code" | tee -a "$INSTALL_LOG"
+    echo "See log file: $INSTALL_LOG" | tee -a "$INSTALL_LOG"
+    echo "" | tee -a "$INSTALL_LOG"
+    echo "Cleaning up temporary files..." | tee -a "$INSTALL_LOG"
+
+    # Clean up common temporary files
+    rm -f /tmp/cursor.deb /tmp/google-chrome.deb /tmp/lazygit.tar.gz /tmp/lazygit 2>/dev/null || true
+
+    exit "$exit_code"
+}
+
+trap 'cleanup_on_error ${LINENO}' ERR
+
+# Log start time
+echo "=== CLI Setup Installation Started at $(date) ===" | tee "$INSTALL_LOG"
+echo "" | tee -a "$INSTALL_LOG"
+
+echo "→ Fetching helper scripts..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/scripts
 curl -o ~/scripts/helpers.sh https://raw.githubusercontent.com/agileguy/cli-setup/refs/heads/main/scripts/helpers.sh
 chmod +x ~/scripts/helpers.sh
@@ -305,5 +330,7 @@ clone_repo "https://github.com/tmux-plugins/tpm" "$HOME/.tmux/plugins/tpm"
 clone_repo "https://github.com/magicmonty/bash-git-prompt.git" "$HOME/.bash-git-prompt"
 
 echo ""
-echo "=== Setup complete ==="
+echo "=== Setup complete ===" | tee -a "$INSTALL_LOG"
+echo "✅ Installation completed successfully at $(date)" | tee -a "$INSTALL_LOG"
+echo "Log file: $INSTALL_LOG" | tee -a "$INSTALL_LOG"
 source ~/.bashrc

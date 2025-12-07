@@ -52,7 +52,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - Custom .bashrc with aliases and integrations (input sanitized)
 - Rotating desktop wallpapers (classic artwork, 5-minute rotation)
 - Claude Code CLI (global instructions and permissions)
-- All installation scripts use strict error handling (set -euo pipefail)
+- All installation scripts use strict error handling with trap cleanup and logging
 
 ## Repository Structure
 
