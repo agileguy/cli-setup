@@ -48,7 +48,7 @@ install_flatpak() {
         echo "✓ $app_id already installed"
     else
         echo "→ Installing $app_id via flatpak..."
-        flatpak install -y flathub "$app_id"
+        sudo flatpak install -y flathub "$app_id"
     fi
 }
 
