@@ -1,6 +1,18 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check if script is being sourced instead of executed
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    # Script is being executed (correct)
+    :
+else
+    # Script is being sourced (incorrect)
+    echo "❌ Error: This script should be executed, not sourced!"
+    echo "Run it with: ./install.sh"
+    echo "NOT: source install.sh"
+    return 1 2>/dev/null || exit 1
+fi
+
 # Error handling with trap
 INSTALL_LOG="$HOME/.config/cli-setup-install.log"
 BACKUP_DIR="$HOME/.config/cli-setup/backups/$(date +%Y%m%d-%H%M%S)"
