@@ -117,3 +117,4 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - `cat` - batcat (syntax highlighting)
 - `cc` - Claude Code CLI
 - `weather [city]` - weather via wttr.in
+- `commit <message>` - quick git add and commit (input sanitized)

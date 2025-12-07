@@ -102,6 +102,7 @@ This script requires sudo privileges and will install system packages, snap pack
 - `cc` - Shortcut for Claude Code CLI
 - `cc-yolo` - Claude Code CLI with --dangerously-skip-permissions flag
 - `weather [city]` - Function to check weather via wttr.in (defaults to Edmonton)
+- `commit <message>` - Quick git add and commit function (properly quoted to prevent shell injection)
 
 **Environment Variables:**
 - `EDITOR=nvim` - Default editor set to Neovim

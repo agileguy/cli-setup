@@ -11,13 +11,16 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 
 weather () {
-  city=${1:-edmonton}
-  curl wttr.in/$city
+  local city="${1:-edmonton}"
+  curl "wttr.in/$city"
 }
 
 commit () {
-  message=${1:-"no-message"}
-  git add -A && git commit -m $message
+  if [ -z "$1" ]; then
+    echo "Error: Commit message required"
+    return 1
+  fi
+  git add -A && git commit -m "$*"
 }
 
 # See bash(1) for more options
