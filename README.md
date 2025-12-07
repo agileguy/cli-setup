@@ -55,11 +55,16 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - All installation scripts use strict error handling with trap cleanup and logging
 - Automatic timestamped backups of existing configs before overwriting
 
+## Security & Hardening
+
+This repository follows security best practices with strict error handling, automatic backups, and comprehensive logging. See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status.
+
 ## Repository Structure
 
 ```
 .
 ├── install.sh              # Main installation script
+├── HARDENING.md            # Security hardening plan and status
 ├── scripts/
 │   ├── helpers.sh          # Helper functions (install_flatpak uses sudo)
 │   ├── install-gcloud.sh   # Google Cloud SDK installer

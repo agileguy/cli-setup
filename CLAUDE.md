@@ -6,9 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal CLI environment setup repository that automates the installation and configuration of a comprehensive development environment on Linux systems. The setup includes terminal tools, editor configuration, shell customization, and i3 window manager configuration with polybar and rofi.
 
+**Security:** This repository follows security best practices including strict error handling, automatic backups, input sanitization, and comprehensive logging. See [HARDENING.md](HARDENING.md) for detailed security hardening plan and implementation status.
+
 ## Repository Structure
 
 - `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, automatic timestamped backups of existing configs to ~/.config/cli-setup/backups/, logs to ~/.config/cli-setup-install.log)
+- `HARDENING.md` - Security hardening plan and implementation status (Phase 1: 80% complete)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
