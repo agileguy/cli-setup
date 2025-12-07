@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Background rotation script
 # Selects a random image from the backgrounds directory and sets it as wallpaper

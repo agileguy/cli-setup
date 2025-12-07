@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 echo "→ Fetching helper scripts..."
 mkdir -p ~/scripts

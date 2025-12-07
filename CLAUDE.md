@@ -8,8 +8,8 @@ This is a personal CLI environment setup repository that automates the installat
 
 ## Repository Structure
 
-- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing)
-- `scripts/` - Helper scripts
+- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail)
+- `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
   - `install-gcloud.sh` - Installs Google Cloud SDK and GKE plugin from official apt repository

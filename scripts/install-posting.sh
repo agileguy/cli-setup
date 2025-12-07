@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install Posting TUI HTTP client using uv
 
-set -e
+set -euo pipefail
 
 echo "=== Installing Posting TUI HTTP client ==="
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Check if i3lock is installed
 if ! command -v i3lock &> /dev/null; then

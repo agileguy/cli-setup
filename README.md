@@ -49,9 +49,10 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - delta git pager (Catppuccin Mocha theme)
 - fzf fuzzy finder (Catppuccin Mocha theme)
 - bash-git-prompt
-- Custom .bashrc with aliases and integrations
+- Custom .bashrc with aliases and integrations (input sanitized)
 - Rotating desktop wallpapers (classic artwork, 5-minute rotation)
 - Claude Code CLI (global instructions and permissions)
+- All installation scripts use strict error handling (set -euo pipefail)
 
 ## Repository Structure
 

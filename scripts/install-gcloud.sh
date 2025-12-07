@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install Google Cloud SDK and GKE plugin from official apt repository
 
-set -e
+set -euo pipefail
 
 echo "=== Installing Google Cloud SDK from official apt repository ==="
 

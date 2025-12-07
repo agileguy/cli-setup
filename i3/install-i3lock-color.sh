@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Install i3lock-color from source
 

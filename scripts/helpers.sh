@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Check if a command/tool is installed
 # Usage: is_installed <command_name>
