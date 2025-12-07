@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# cli-setup specific
+# Backup directories (created in ~/.config/cli-setup/backups/ but ignore if local)
+backups/
+*.backup.*
+
+# Installation logs (created in ~/.config/cli-setup-install.log but ignore if local)
+*.log
+cli-setup-install.log

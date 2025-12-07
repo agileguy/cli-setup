@@ -74,6 +74,7 @@ See [HARDENING.md](HARDENING.md) for the complete security hardening plan and im
 ├── install.sh              # Main installation script
 ├── checksums.txt           # SHA256 checksums for downloads
 ├── HARDENING.md            # Security hardening plan and status
+├── .gitignore              # Excludes backups, logs, and temp files
 ├── scripts/
 │   ├── helpers.sh          # Helper functions (install_flatpak uses sudo)
 │   ├── install-gcloud.sh   # Google Cloud SDK installer
