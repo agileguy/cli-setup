@@ -8,7 +8,7 @@ This is a personal CLI environment setup repository that automates the installat
 
 ## Repository Structure
 
-- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, logs to ~/.config/cli-setup-install.log)
+- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, automatic timestamped backups of existing configs to ~/.config/cli-setup/backups/, logs to ~/.config/cli-setup-install.log)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
@@ -93,6 +93,12 @@ To run the complete setup:
 ```
 
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.
+
+**Safety Features:**
+- Automatic backups: All existing config files are backed up to `~/.config/cli-setup/backups/TIMESTAMP/` before being overwritten
+- Installation log: Full installation log saved to `~/.config/cli-setup-install.log`
+- Error handling: Script exits on errors with cleanup of temporary files
+- Trap handlers: Failed installations report exact line numbers for debugging
 
 ## Shell Environment Details
 

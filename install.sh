@@ -3,7 +3,9 @@ set -euo pipefail
 
 # Error handling with trap
 INSTALL_LOG="$HOME/.config/cli-setup-install.log"
+BACKUP_DIR="$HOME/.config/cli-setup/backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$(dirname "$INSTALL_LOG")"
+mkdir -p "$BACKUP_DIR"
 
 cleanup_on_error() {
     local exit_code=$?
@@ -11,6 +13,7 @@ cleanup_on_error() {
     echo "" | tee -a "$INSTALL_LOG"
     echo "❌ Installation failed at line $line_number with exit code $exit_code" | tee -a "$INSTALL_LOG"
     echo "See log file: $INSTALL_LOG" | tee -a "$INSTALL_LOG"
+    echo "Backups saved to: $BACKUP_DIR" | tee -a "$INSTALL_LOG"
     echo "" | tee -a "$INSTALL_LOG"
     echo "Cleaning up temporary files..." | tee -a "$INSTALL_LOG"
 
@@ -18,6 +21,17 @@ cleanup_on_error() {
     rm -f /tmp/cursor.deb /tmp/google-chrome.deb /tmp/lazygit.tar.gz /tmp/lazygit 2>/dev/null || true
 
     exit "$exit_code"
+}
+
+# Backup file if it exists
+backup_file() {
+    local file="$1"
+    if [ -f "$file" ]; then
+        local backup_path="$BACKUP_DIR${file}"
+        mkdir -p "$(dirname "$backup_path")"
+        cp "$file" "$backup_path"
+        echo "  Backed up: $file" | tee -a "$INSTALL_LOG"
+    fi
 }
 
 trap 'cleanup_on_error ${LINENO}' ERR
@@ -213,70 +227,77 @@ else
 fi
 
 echo ""
-echo "=== Fetching configuration files ==="
+echo "=== Fetching configuration files ===" | tee -a "$INSTALL_LOG"
+echo "Creating backups in: $BACKUP_DIR" | tee -a "$INSTALL_LOG"
 
-echo "→ Fetching .bashrc..."
-rm -f ~/.bashrc
+echo "→ Fetching .bashrc..." | tee -a "$INSTALL_LOG"
+backup_file ~/.bashrc
 curl -fsSL -o ~/.bashrc https://raw.githubusercontent.com/agileguy/cli-setup/main/.bashrc
 
-echo "→ Fetching .tmux.conf..."
-rm -f ~/.tmux.conf
+echo "→ Fetching .tmux.conf..." | tee -a "$INSTALL_LOG"
+backup_file ~/.tmux.conf
 curl -fsSL -o ~/.tmux.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/tmux.conf
 
-echo "→ Fetching i3 config..."
+echo "→ Fetching i3 config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/i3
-rm -f ~/.config/i3/config ~/.config/i3/lock.sh
+backup_file ~/.config/i3/config
+backup_file ~/.config/i3/lock.sh
 curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/i3/config https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/config
 curl -fsSL -o ~/.config/i3/lock.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/lock.sh
 chmod +x ~/.config/i3/lock.sh
 
-echo "→ Fetching polybar config..."
+echo "→ Fetching polybar config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/polybar
-rm -f ~/.config/polybar/config.ini ~/.config/polybar/launch_polybar.sh
+backup_file ~/.config/polybar/config.ini
+backup_file ~/.config/polybar/launch_polybar.sh
 curl -fsSL -o ~/.config/polybar/config.ini https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/config.ini
 curl -fsSL -o ~/.config/polybar/launch_polybar.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/launch_polybar.sh
 chmod +x ~/.config/polybar/launch_polybar.sh
 
-echo "→ Fetching rofi config..."
+echo "→ Fetching rofi config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/rofi
-rm -f ~/.config/rofi/config.rasi ~/.config/rofi/catppuccin-mocha.rasi
+backup_file ~/.config/rofi/config.rasi
+backup_file ~/.config/rofi/catppuccin-mocha.rasi
 curl -fsSL -o ~/.config/rofi/config.rasi https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/config.rasi
 curl -fsSL -o ~/.config/rofi/catppuccin-mocha.rasi https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/catppuccin-mocha.rasi
 
-echo "→ Fetching picom config..."
+echo "→ Fetching picom config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/picom
-rm -f ~/.config/picom/picom.conf
+backup_file ~/.config/picom/picom.conf
 curl -fsSL -o ~/.config/picom/picom.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/picom/picom.conf
 
-echo "→ Fetching nyxt config..."
+echo "→ Fetching nyxt config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/nyxt
-rm -f ~/.config/nyxt/config.lisp ~/.config/nyxt/auto-config.3.lisp
+backup_file ~/.config/nyxt/config.lisp
+backup_file ~/.config/nyxt/auto-config.3.lisp
 curl -fsSL -o ~/.config/nyxt/config.lisp https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/config.lisp
 curl -fsSL -o ~/.config/nyxt/auto-config.3.lisp https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/auto-config.3.lisp
 
-echo "→ Fetching kitty config..."
+echo "→ Fetching kitty config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/kitty
-rm -f ~/.config/kitty/kitty.conf ~/.config/kitty/catppuccin-mocha.conf
+backup_file ~/.config/kitty/kitty.conf
+backup_file ~/.config/kitty/catppuccin-mocha.conf
 curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/kitty/kitty.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/kitty.conf
 curl -fsSL -H "Cache-Control: no-cache" -o ~/.config/kitty/catppuccin-mocha.conf https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/catppuccin-mocha.conf
 
-echo "→ Fetching lazygit config..."
+echo "→ Fetching lazygit config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/lazygit
-rm -f ~/.config/lazygit/config.yml
+backup_file ~/.config/lazygit/config.yml
 curl -fsSL -o ~/.config/lazygit/config.yml https://raw.githubusercontent.com/agileguy/cli-setup/main/lazygit/config.yml
 
-echo "→ Fetching delta config..."
+echo "→ Fetching delta config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/delta
-rm -f ~/.config/delta/catppuccin.gitconfig
+backup_file ~/.config/delta/catppuccin.gitconfig
 curl -fsSL -o ~/.config/delta/catppuccin.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/main/delta/catppuccin.gitconfig
 
-echo "→ Fetching git config..."
-rm -f ~/.gitconfig
+echo "→ Fetching git config..." | tee -a "$INSTALL_LOG"
+backup_file ~/.gitconfig
 curl -fsSL -o ~/.gitconfig https://raw.githubusercontent.com/agileguy/cli-setup/main/.gitconfig
 
-echo "→ Fetching Claude Code config..."
+echo "→ Fetching Claude Code config..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.claude
-rm -f ~/.claude/CLAUDE.md ~/.claude/settings.json
+backup_file ~/.claude/CLAUDE.md
+backup_file ~/.claude/settings.json
 curl -fsSL -H "Cache-Control: no-cache" -o ~/.claude/CLAUDE.md https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/CLAUDE.md
 curl -fsSL -H "Cache-Control: no-cache" -o ~/.claude/settings.json https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/settings.json
 
@@ -310,14 +331,15 @@ curl -fsSL -o ~/.config/backgrounds/manet_olympia.jpg https://raw.githubusercont
 curl -fsSL -o ~/.config/backgrounds/degas_absinthe.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/degas_absinthe.jpg
 curl -fsSL -o ~/.config/backgrounds/whistler_nocturne.jpg https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/whistler_nocturne.jpg
 
-echo "→ Fetching background rotation script..."
-rm -f ~/.config/backgrounds/rotate_background.sh
+echo "→ Fetching background rotation script..." | tee -a "$INSTALL_LOG"
+backup_file ~/.config/backgrounds/rotate_background.sh
 curl -fsSL -o ~/.config/backgrounds/rotate_background.sh https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/rotate_background.sh
 chmod +x ~/.config/backgrounds/rotate_background.sh
 
-echo "→ Setting up background rotation systemd timer..."
+echo "→ Setting up background rotation systemd timer..." | tee -a "$INSTALL_LOG"
 mkdir -p ~/.config/systemd/user
-rm -f ~/.config/systemd/user/background-rotate.service ~/.config/systemd/user/background-rotate.timer
+backup_file ~/.config/systemd/user/background-rotate.service
+backup_file ~/.config/systemd/user/background-rotate.timer
 curl -fsSL -o ~/.config/systemd/user/background-rotate.service https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.service
 curl -fsSL -o ~/.config/systemd/user/background-rotate.timer https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.timer
 systemctl --user daemon-reload

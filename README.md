@@ -53,6 +53,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - Rotating desktop wallpapers (classic artwork, 5-minute rotation)
 - Claude Code CLI (global instructions and permissions)
 - All installation scripts use strict error handling with trap cleanup and logging
+- Automatic timestamped backups of existing configs before overwriting
 
 ## Repository Structure
 
