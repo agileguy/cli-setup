@@ -1,16 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Check if script is being sourced instead of executed
+# Detect if script is being sourced or executed
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    # Script is being executed (correct)
-    :
+    SCRIPT_SOURCED=0  # Script is being executed
 else
-    # Script is being sourced (incorrect)
-    echo "❌ Error: This script should be executed, not sourced!"
-    echo "Run it with: ./install.sh or bash install.sh"
-    echo "NOT: source install.sh or . install.sh"
-    return 1 2>/dev/null || exit 1
+    SCRIPT_SOURCED=1  # Script is being sourced
 fi
 
 # Error handling with trap
@@ -32,7 +27,12 @@ cleanup_on_error() {
     # Clean up common temporary files
     rm -f /tmp/cursor.deb /tmp/google-chrome.deb /tmp/lazygit.tar.gz /tmp/lazygit 2>/dev/null || true
 
-    exit "$exit_code"
+    # Use return if sourced, exit if executed
+    if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+        return "$exit_code"
+    else
+        exit "$exit_code"
+    fi
 }
 
 # Backup file if it exists
@@ -451,10 +451,16 @@ echo "=== Setup complete ===" | tee -a "$INSTALL_LOG"
 echo "✅ Installation completed successfully at $(date)" | tee -a "$INSTALL_LOG"
 echo "Log file: $INSTALL_LOG" | tee -a "$INSTALL_LOG"
 echo ""
-echo "To apply the new shell configuration, either:"
-echo "  1. Open a new terminal window, or"
-echo "  2. Run: source ~/.bashrc"
-echo ""
 
-# Explicitly exit with success code to ensure clean termination
-exit 0
+# Use return if sourced (to avoid closing terminal), exit if executed
+if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+    echo "Note: Script was sourced - shell configuration will be applied automatically"
+    echo ""
+    return 0
+else
+    echo "To apply the new shell configuration, either:"
+    echo "  1. Open a new terminal window, or"
+    echo "  2. Run: source ~/.bashrc"
+    echo ""
+    exit 0
+fi
