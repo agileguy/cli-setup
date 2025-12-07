@@ -1,5 +1,6 @@
 #!/bin/bash
-set -euo pipefail
+# This file is sourced by install.sh, so it inherits the parent shell's settings
+# including 'set -euo pipefail' - no need to set it here
 
 # Check if a command/tool is installed
 # Usage: is_installed <command_name>
