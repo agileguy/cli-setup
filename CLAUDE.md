@@ -11,6 +11,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing)
 - `scripts/` - Helper scripts
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
+    - `install_flatpak` runs with sudo for system-wide package installation
   - `install-gcloud.sh` - Installs Google Cloud SDK and GKE plugin from official apt repository
   - `install-posting.sh` - Installs Posting TUI HTTP client via pipx
 - `.bashrc` - Custom bash configuration with aliases, prompt customization (Solarized theme), and tool integrations
