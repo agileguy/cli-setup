@@ -1,12 +1,15 @@
 #!/bin/bash
-set -euo pipefail
 
 # Detect if script is being sourced or executed
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     SCRIPT_SOURCED=0  # Script is being executed
 else
     SCRIPT_SOURCED=1  # Script is being sourced
+    # Save original shell options to restore later
+    ORIGINAL_SHELL_OPTS=$(set +o)
 fi
+
+set -euo pipefail
 
 # Error handling with trap
 INSTALL_LOG="$HOME/.config/cli-setup-install.log"
@@ -29,6 +32,8 @@ cleanup_on_error() {
 
     # Use return if sourced, exit if executed
     if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+        # Restore original shell options before returning
+        eval "$ORIGINAL_SHELL_OPTS"
         return "$exit_code"
     else
         exit "$exit_code"
@@ -454,6 +459,8 @@ echo ""
 
 # Use return if sourced (to avoid closing terminal), exit if executed
 if [ "$SCRIPT_SOURCED" -eq 1 ]; then
+    # Restore original shell options before returning
+    eval "$ORIGINAL_SHELL_OPTS"
     echo "Note: Script was sourced - shell configuration will be applied automatically"
     echo ""
     return 0

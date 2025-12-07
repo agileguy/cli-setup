@@ -8,6 +8,11 @@ Personal CLI environment setup for Linux systems. Automates installation and con
 curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/install.sh | bash
 ```
 
+Or clone and source to automatically apply shell configuration:
+```bash
+git clone https://github.com/agileguy/cli-setup.git && cd cli-setup && . install.sh
+```
+
 The script checks if tools are already installed before installing them.
 
 ## What Gets Installed
@@ -64,6 +69,7 @@ This repository follows security best practices including:
 - Comprehensive installation logging
 - Trap handlers for cleanup on error
 - Input sanitization to prevent shell injection
+- Shell options preserved when sourced (prevents terminal from closing)
 
 See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1: Complete ✅).
 

@@ -12,7 +12,7 @@ This is a personal CLI environment setup repository that automates the installat
 
 ## Repository Structure
 
-- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, automatic timestamped backups of existing configs to ~/.config/cli-setup/backups/, checksum verification for downloads, logs to ~/.config/cli-setup-install.log)
+- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, automatic timestamped backups of existing configs to ~/.config/cli-setup/backups/, checksum verification for downloads, logs to ~/.config/cli-setup-install.log, can be executed or sourced safely with shell options preserved)
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
 - `HARDENING.md` - Security hardening plan and implementation status (Phase 1: Complete)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
@@ -98,6 +98,11 @@ To run the complete setup:
 ./install.sh
 ```
 
+Or source it to automatically apply shell configuration:
+```bash
+. install.sh
+```
+
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.
 
 **Safety Features:**
@@ -105,6 +110,7 @@ This script requires sudo privileges and will install system packages, snap pack
 - Installation log: Full installation log saved to `~/.config/cli-setup-install.log`
 - Error handling: Script exits on errors with cleanup of temporary files
 - Trap handlers: Failed installations report exact line numbers for debugging
+- Shell options preserved: When sourced, original shell options are saved and restored to prevent terminal from closing
 
 **Post-Installation:**
 After installation completes, open a new terminal window or run `source ~/.bashrc` to apply the new shell configuration.
