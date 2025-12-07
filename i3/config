@@ -82,7 +82,7 @@ exec_always --no-startup-id bash -c 'if [ $(xrandr --query | grep -c " connected
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh 
 
 # Compositor for transparency (15% transparency = 85% opacity)
-exec_always --no-startup-id "killall -q picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b"
+exec_always --no-startup-id bash -c 'if xrandr --query | grep -q "^rdp0 connected"; then killall picom; else killall -q picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b; fi'
 
 # change focus
 bindsym $mod+h focus left

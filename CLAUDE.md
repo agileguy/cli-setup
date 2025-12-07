@@ -168,7 +168,7 @@ The i3 config includes:
 - Polybar as the status bar (i3bar disabled)
 - Catppuccin Mocha theme colors
 - Screen layout script on startup (dual monitor support)
-- Picom compositor for transparency
+- Picom compositor for transparency (automatically disabled on RDP connections)
 
 **Key Bindings:**
 - `$mod+Return` - Open terminal (kitty)
@@ -210,6 +210,7 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 - 85% opacity for active and inactive windows
 - Fading effects enabled
 - Focus tracking fixes for proper opacity restoration on i3 restart
+- RDP detection: Automatically disabled when connected via RDP (rdp0 display) to prevent performance issues
 
 **Opacity Rules (windows excluded from transparency):**
 - i3lock

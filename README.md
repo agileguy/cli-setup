@@ -42,7 +42,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 - tmux config with Catppuccin theme
 - i3 window manager (no titlebars, vim-style navigation, Catppuccin Mocha colors)
 - kitty terminal (85% transparency, hidden titlebar, Catppuccin Mocha theme)
-- picom compositor (85% window opacity, GLX backend)
+- picom compositor (85% window opacity, GLX backend, auto-disabled on RDP connections)
 - polybar status bar (Catppuccin Mocha theme)
 - rofi launcher (Catppuccin Mocha theme)
 - lazygit (Catppuccin Mocha theme)
