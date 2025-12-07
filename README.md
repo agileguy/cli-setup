@@ -26,6 +26,17 @@ git clone https://github.com/agileguy/cli-setup.git && cd cli-setup
 
 The script checks if tools are already installed before installing them.
 
+## Rollback
+
+Restore configuration files from a previous backup:
+
+```bash
+./rollback.sh                           # Restore from latest backup
+./rollback.sh --list                    # List available backups
+./rollback.sh --backup 20241206-143022  # Restore specific backup
+./rollback.sh --dry-run                 # Preview restoration
+```
+
 ## What Gets Installed
 
 **APT Packages:**
@@ -92,6 +103,7 @@ See [HARDENING.md](HARDENING.md) for the complete security hardening plan and im
 ```
 .
 ├── install.sh              # Main installation script (--shell-only, --dry-run, --verbose, --force)
+├── rollback.sh             # Restore configs from backup (--list, --backup, --dry-run)
 ├── manifest.json           # Declarative package/config definitions
 ├── VERSION                 # Current version (semantic versioning)
 ├── CHANGELOG.md            # Version history and changes

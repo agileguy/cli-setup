@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Idempotent background downloads**: Skip images that already exist
 - **Flathub repository check**: Avoid duplicate repository additions
 - **Snap connection verification**: Check before attempting connections
+- **Rollback script**: `rollback.sh` to restore configs from backups (--list, --backup, --dry-run)
 
 ### Changed
 - Refactored install.sh from 470 lines to modular architecture

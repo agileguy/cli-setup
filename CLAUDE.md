@@ -26,6 +26,7 @@ This is a personal CLI environment setup repository that automates the installat
 - `CHANGELOG.md` - Version history and changes
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
 - `HARDENING.md` - Security hardening plan and implementation status (Phase 1, 2 & 3: Complete)
+- `rollback.sh` - Restore configuration files from backup (--list, --backup, --dry-run)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
