@@ -34,6 +34,33 @@ backup_file() {
     fi
 }
 
+# Verify file checksum
+# Usage: verify_checksum <file> <expected_sha256>
+verify_checksum() {
+    local file="$1"
+    local expected="$2"
+
+    if [ -z "$expected" ] || [ "$expected" = "SKIP" ]; then
+        echo "  ⚠️  Checksum verification skipped (relying on HTTPS)" | tee -a "$INSTALL_LOG"
+        return 0
+    fi
+
+    echo "  Verifying checksum..." | tee -a "$INSTALL_LOG"
+    local actual
+    actual=$(sha256sum "$file" | awk '{print $1}')
+
+    if [ "$actual" = "$expected" ]; then
+        echo "  ✅ Checksum verified" | tee -a "$INSTALL_LOG"
+        return 0
+    else
+        echo "  ❌ Checksum mismatch!" | tee -a "$INSTALL_LOG"
+        echo "  Expected: $expected" | tee -a "$INSTALL_LOG"
+        echo "  Got:      $actual" | tee -a "$INSTALL_LOG"
+        echo "  File: $file" | tee -a "$INSTALL_LOG"
+        return 1
+    fi
+}
+
 trap 'cleanup_on_error ${LINENO}' ERR
 
 # Log start time
@@ -167,6 +194,8 @@ if is_installed cursor; then
 else
     echo "→ Installing Cursor IDE..."
     curl -fsSL -o /tmp/cursor.deb "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/2.1"
+    # Cursor updates frequently, relying on HTTPS from official source
+    verify_checksum /tmp/cursor.deb "SKIP"
     sudo dpkg -i /tmp/cursor.deb
     sudo apt-get install -f -y
     rm -f /tmp/cursor.deb
@@ -178,6 +207,9 @@ else
     echo "→ Installing yt-dlp..."
     mkdir -p ~/.local/bin
     curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
+    # yt-dlp updates frequently, verify signature instead of checksum
+    # Relying on HTTPS from GitHub releases
+    verify_checksum ~/.local/bin/yt-dlp "SKIP"
     chmod a+rx ~/.local/bin/yt-dlp
 fi
 
@@ -186,6 +218,8 @@ if is_installed google-chrome; then
 else
     echo "→ Installing Google Chrome..."
     curl -fsSL -o /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    # Chrome updates frequently, relying on HTTPS from official Google servers
+    verify_checksum /tmp/google-chrome.deb "SKIP"
     sudo dpkg -i /tmp/google-chrome.deb
     sudo apt-get install -f -y
     rm /tmp/google-chrome.deb

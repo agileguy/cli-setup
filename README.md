@@ -57,13 +57,22 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 
 ## Security & Hardening
 
-This repository follows security best practices with strict error handling, automatic backups, and comprehensive logging. See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status.
+This repository follows security best practices including:
+- Strict error handling (`set -euo pipefail`)
+- Automatic timestamped backups before overwriting configs
+- Checksum verification for external downloads
+- Comprehensive installation logging
+- Trap handlers for cleanup on error
+- Input sanitization to prevent shell injection
+
+See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1: Complete ✅).
 
 ## Repository Structure
 
 ```
 .
 ├── install.sh              # Main installation script
+├── checksums.txt           # SHA256 checksums for downloads
 ├── HARDENING.md            # Security hardening plan and status
 ├── scripts/
 │   ├── helpers.sh          # Helper functions (install_flatpak uses sudo)

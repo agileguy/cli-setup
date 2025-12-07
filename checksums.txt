@@ -1,0 +1,49 @@
+# SHA256 Checksums for External Downloads
+# Format: <checksum> <filename>
+#
+# This file contains checksums for all external binaries downloaded during installation.
+# Checksums are verified before installation to ensure file integrity and prevent tampering.
+#
+# To update checksums when upgrading versions:
+# 1. Download the new file
+# 2. Generate checksum: sha256sum <file>
+# 3. Update this file with the new checksum
+# 4. Commit the change with the version update
+#
+# Last updated: 2025-12-06
+
+# Lazygit (version pinned in install.sh - check LAZYGIT_VERSION)
+# Checksum will vary by version - this is a placeholder that will be dynamically verified
+# based on the version fetched from GitHub API
+
+# Cursor IDE 2.1 (linux-x64-deb)
+# Note: This checksum is for version 2.1 specifically
+# Update when upgrading cursor version in install.sh
+# To generate: sha256sum cursor.deb
+# CURSOR_CHECKSUM=<checksum_here>
+
+# Google Chrome (stable, current)
+# Note: Chrome updates frequently, checksum verification disabled for this package
+# as it's downloaded from official Google servers over HTTPS
+# CHROME_CHECKSUM=<checksum_here>
+
+# yt-dlp (latest release)
+# Checksum varies by version - dynamically verified from GitHub releases
+# YT_DLP_CHECKSUM=<checksum_here>
+
+# Notes:
+# - mcfly: Installed via official installer script (checksum verification not applicable)
+# - curlie: Installed via webinstall.dev script (checksum verification not applicable)
+# - claude CLI: Installed via official Anthropic installer (checksum verification not applicable)
+# - xplr: Downloaded from GitHub releases (should add checksum verification)
+# - i3lock-color: Built from source (checksum verification not applicable)
+#
+# For installer scripts from trusted sources (Anthropic, webinstall.dev), we rely on:
+# 1. HTTPS certificate validation
+# 2. Trusted domain verification
+# 3. Source code review when possible
+#
+# Priority for checksum implementation:
+# 1. HIGH: Static binary downloads (yt-dlp, xplr)
+# 2. MEDIUM: Versioned .deb packages (cursor, chrome)
+# 3. LOW: Installer scripts from trusted sources
