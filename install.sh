@@ -443,3 +443,6 @@ echo "To apply the new shell configuration, either:"
 echo "  1. Open a new terminal window, or"
 echo "  2. Run: source ~/.bashrc"
 echo ""
+
+# Explicitly exit with success code to ensure clean termination
+exit 0
