@@ -5,12 +5,22 @@ Personal CLI environment setup for Linux systems. Automates installation and con
 ## Quick Start
 
 ```bash
+# Full installation
 curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/install.sh | bash
+
+# Shell-only (no desktop/GUI components)
+curl -sSL https://raw.githubusercontent.com/agileguy/cli-setup/main/install.sh | bash -s -- --shell-only
 ```
 
-Or clone and source to automatically apply shell configuration:
+Or clone for more options:
 ```bash
-git clone https://github.com/agileguy/cli-setup.git && cd cli-setup && . install.sh
+git clone https://github.com/agileguy/cli-setup.git && cd cli-setup
+
+./install.sh                  # Full installation
+./install.sh --shell-only     # Shell tools only
+./install.sh --dry-run        # Preview without installing
+./install.sh --verbose        # Detailed output
+. install.sh --shell-only     # Source for auto shell config
 ```
 
 The script checks if tools are already installed before installing them.
@@ -66,18 +76,21 @@ This repository follows security best practices including:
 - Strict error handling (`set -euo pipefail`)
 - Automatic timestamped backups before overwriting configs
 - Checksum verification for external downloads
-- Comprehensive installation logging
+- Comprehensive installation logging with color-coded output
 - Trap handlers for cleanup on error
 - Input sanitization to prevent shell injection
 - Shell options preserved when sourced (prevents terminal from closing)
+- Dependency checking (apt, sudo, disk space, internet)
+- Installation state tracking (`~/.config/cli-setup/state.json`)
 
-See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1: Complete ✅).
+See [HARDENING.md](HARDENING.md) for the complete security hardening plan and implementation status (Phase 1 & 2: Complete ✅).
 
 ## Repository Structure
 
 ```
 .
-├── install.sh              # Main installation script
+├── install.sh              # Main installation script (--shell-only, --dry-run, --verbose)
+├── manifest.json           # Declarative package/config definitions
 ├── checksums.txt           # SHA256 checksums for downloads
 ├── HARDENING.md            # Security hardening plan and status
 ├── .gitignore              # Excludes backups, logs, and temp files

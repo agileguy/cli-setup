@@ -1,0 +1,366 @@
+{
+  "version": "1.0.0",
+  "description": "CLI Setup installation manifest",
+  "modes": {
+    "full": "Complete installation including desktop environment (i3, polybar, etc.)",
+    "shell": "Shell tools only - no desktop/GUI components"
+  },
+  "apt_packages": {
+    "shell": [
+      {"name": "cbonsai", "cmd": "cbonsai"},
+      {"name": "btop", "cmd": "btop"},
+      {"name": "ncdu", "cmd": "ncdu"},
+      {"name": "bat", "cmd": "batcat"},
+      {"name": "unzip", "cmd": "unzip"},
+      {"name": "ffmpeg", "cmd": "ffmpeg"},
+      {"name": "cmus", "cmd": "cmus"},
+      {"name": "zoxide", "cmd": "zoxide"},
+      {"name": "eza", "cmd": "eza"},
+      {"name": "tmux", "cmd": "tmux"},
+      {"name": "git", "cmd": "git"},
+      {"name": "curl", "cmd": "curl"},
+      {"name": "ripgrep", "cmd": "rg"},
+      {"name": "fd-find", "cmd": "fdfind"},
+      {"name": "nodejs", "cmd": "node"},
+      {"name": "npm", "cmd": "npm"},
+      {"name": "python3-pip", "cmd": "pip"},
+      {"name": "asciinema", "cmd": "asciinema"},
+      {"name": "gcc", "cmd": "gcc"},
+      {"name": "make", "cmd": "make"},
+      {"name": "fzf", "cmd": "fzf"},
+      {"name": "jq", "cmd": "jq"},
+      {"name": "duf", "cmd": "duf"},
+      {"name": "hyperfine", "cmd": "hyperfine"},
+      {"name": "gping", "cmd": "gping"},
+      {"name": "git-delta", "cmd": "delta"}
+    ],
+    "desktop": [
+      {"name": "i3", "cmd": "i3"},
+      {"name": "rofi", "cmd": "rofi"},
+      {"name": "polybar", "cmd": "polybar"},
+      {"name": "arandr", "cmd": "arandr"},
+      {"name": "kitty", "cmd": "kitty"},
+      {"name": "feh", "cmd": "feh"},
+      {"name": "imagemagick", "cmd": "convert"},
+      {"name": "cmatrix", "cmd": "cmatrix"},
+      {"name": "picom", "cmd": "picom"},
+      {"name": "falkon", "cmd": "falkon"},
+      {"name": "flatpak", "cmd": "flatpak"},
+      {"name": "xdotool", "cmd": "xdotool"}
+    ]
+  },
+  "snap_packages": {
+    "shell": [
+      {"name": "httpie", "options": "", "cmd": "http"},
+      {"name": "kubectl", "options": "--classic", "cmd": "kubectl"},
+      {"name": "helm", "options": "--classic", "cmd": "helm"},
+      {"name": "gh", "options": "", "cmd": "gh"},
+      {"name": "doctl", "options": "", "cmd": "doctl"},
+      {"name": "k9s", "options": "--devmode", "cmd": "k9s"},
+      {"name": "glances", "options": "--classic", "cmd": "glances"},
+      {"name": "nvim", "options": "--classic", "cmd": "nvim"},
+      {"name": "bw", "options": "", "cmd": "bw"}
+    ],
+    "desktop": [
+      {"name": "bitwarden", "options": "", "cmd": "bitwarden"}
+    ]
+  },
+  "snap_connections": {
+    "shell": [
+      {"snap": "doctl", "plug": "ssh-keys", "slot": ":ssh-keys"},
+      {"snap": "doctl", "plug": "kube-config", "slot": ""}
+    ],
+    "desktop": [
+      {"snap": "bitwarden", "plug": "password-manager-service", "slot": ""}
+    ]
+  },
+  "flatpak_packages": {
+    "shell": [],
+    "desktop": [
+      {"id": "engineer.atlas.Nyxt", "cmd": ""},
+      {"id": "app.zen_browser.zen", "cmd": ""}
+    ]
+  },
+  "external_tools": {
+    "shell": [
+      {
+        "name": "mcfly",
+        "check_cmd": "mcfly",
+        "install_script": "https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh",
+        "install_method": "curl_sudo_sh",
+        "install_args": "--git cantino/mcfly"
+      },
+      {
+        "name": "curlie",
+        "check_cmd": "curlie",
+        "install_script": "https://webinstall.dev/curlie",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "claude",
+        "check_cmd": "claude",
+        "install_script": "https://claude.ai/install.sh",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "xplr",
+        "check_cmd": "xplr",
+        "install_script": "https://raw.githubusercontent.com/agileguy/cli-setup/main/xplr-setup/xplr-setup.sh",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "lazygit",
+        "check_cmd": "lazygit",
+        "install_method": "github_release",
+        "repo": "jesseduffield/lazygit",
+        "asset_pattern": "lazygit_{VERSION}_Linux_x86_64.tar.gz",
+        "extract": "tar",
+        "binary": "lazygit",
+        "install_path": "/usr/local/bin"
+      },
+      {
+        "name": "yt-dlp",
+        "check_cmd": "yt-dlp",
+        "install_method": "github_binary",
+        "url": "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp",
+        "install_path": "~/.local/bin/yt-dlp",
+        "checksum": "SKIP"
+      },
+      {
+        "name": "posting",
+        "check_cmd": "posting",
+        "install_script": "https://raw.githubusercontent.com/agileguy/cli-setup/main/scripts/install-posting.sh",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "oxker",
+        "check_cmd": "oxker",
+        "install_script": "https://raw.githubusercontent.com/mrjackwills/oxker/main/install.sh",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "gcloud",
+        "check_cmd": "gcloud",
+        "install_script": "https://raw.githubusercontent.com/agileguy/cli-setup/main/scripts/install-gcloud.sh",
+        "install_method": "curl_bash"
+      },
+      {
+        "name": "tldr",
+        "check_cmd": "tldr",
+        "install_method": "npm",
+        "package": "tldr"
+      }
+    ],
+    "desktop": [
+      {
+        "name": "i3lock-color",
+        "check_cmd": "i3lock",
+        "check_version": "i3lock-color",
+        "install_script": "https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh",
+        "install_method": "curl_sudo_bash"
+      },
+      {
+        "name": "cursor",
+        "check_cmd": "cursor",
+        "install_method": "deb",
+        "url": "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/2.1",
+        "checksum": "SKIP"
+      },
+      {
+        "name": "google-chrome",
+        "check_cmd": "google-chrome",
+        "install_method": "deb",
+        "url": "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb",
+        "checksum": "SKIP"
+      }
+    ]
+  },
+  "git_repos": {
+    "shell": [
+      {
+        "name": "kickstart.nvim",
+        "url": "https://github.com/agileguy/kickstart.nvim.git",
+        "destination": "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
+      },
+      {
+        "name": "tpm",
+        "url": "https://github.com/tmux-plugins/tpm",
+        "destination": "$HOME/.tmux/plugins/tpm"
+      },
+      {
+        "name": "bash-git-prompt",
+        "url": "https://github.com/magicmonty/bash-git-prompt.git",
+        "destination": "$HOME/.bash-git-prompt"
+      }
+    ],
+    "desktop": []
+  },
+  "config_files": {
+    "shell": [
+      {
+        "name": "bashrc",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/.bashrc",
+        "destination": "~/.bashrc",
+        "cache_control": false
+      },
+      {
+        "name": "tmux.conf",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/tmux.conf",
+        "destination": "~/.tmux.conf",
+        "cache_control": false
+      },
+      {
+        "name": "xplr init.lua",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/xplr-setup/init.lua",
+        "destination": "~/.config/xplr/init.lua",
+        "cache_control": false
+      },
+      {
+        "name": "lazygit config",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/lazygit/config.yml",
+        "destination": "~/.config/lazygit/config.yml",
+        "cache_control": false
+      },
+      {
+        "name": "delta catppuccin",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/delta/catppuccin.gitconfig",
+        "destination": "~/.config/delta/catppuccin.gitconfig",
+        "cache_control": false
+      },
+      {
+        "name": "gitconfig",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/.gitconfig",
+        "destination": "~/.gitconfig",
+        "cache_control": false
+      },
+      {
+        "name": "claude CLAUDE.md",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/CLAUDE.md",
+        "destination": "~/.claude/CLAUDE.md",
+        "cache_control": true
+      },
+      {
+        "name": "claude settings.json",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/claude/settings.json",
+        "destination": "~/.claude/settings.json",
+        "cache_control": true
+      }
+    ],
+    "desktop": [
+      {
+        "name": "i3 config",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/config",
+        "destination": "~/.config/i3/config",
+        "cache_control": true
+      },
+      {
+        "name": "i3 lock.sh",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/lock.sh",
+        "destination": "~/.config/i3/lock.sh",
+        "cache_control": false,
+        "executable": true
+      },
+      {
+        "name": "polybar config.ini",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/config.ini",
+        "destination": "~/.config/polybar/config.ini",
+        "cache_control": false
+      },
+      {
+        "name": "polybar launch script",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/polybar/launch_polybar.sh",
+        "destination": "~/.config/polybar/launch_polybar.sh",
+        "cache_control": false,
+        "executable": true
+      },
+      {
+        "name": "rofi config.rasi",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/config.rasi",
+        "destination": "~/.config/rofi/config.rasi",
+        "cache_control": false
+      },
+      {
+        "name": "rofi catppuccin-mocha.rasi",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/rofi/catppuccin-mocha.rasi",
+        "destination": "~/.config/rofi/catppuccin-mocha.rasi",
+        "cache_control": false
+      },
+      {
+        "name": "picom.conf",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/picom/picom.conf",
+        "destination": "~/.config/picom/picom.conf",
+        "cache_control": false
+      },
+      {
+        "name": "nyxt config.lisp",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/config.lisp",
+        "destination": "~/.config/nyxt/config.lisp",
+        "cache_control": false
+      },
+      {
+        "name": "nyxt auto-config.3.lisp",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/nyxt/auto-config.3.lisp",
+        "destination": "~/.config/nyxt/auto-config.3.lisp",
+        "cache_control": false
+      },
+      {
+        "name": "kitty.conf",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/kitty.conf",
+        "destination": "~/.config/kitty/kitty.conf",
+        "cache_control": true
+      },
+      {
+        "name": "kitty catppuccin-mocha.conf",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/kitty/catppuccin-mocha.conf",
+        "destination": "~/.config/kitty/catppuccin-mocha.conf",
+        "cache_control": true
+      },
+      {
+        "name": "background rotation script",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/backgrounds/rotate_background.sh",
+        "destination": "~/.config/backgrounds/rotate_background.sh",
+        "cache_control": false,
+        "executable": true
+      },
+      {
+        "name": "background-rotate.service",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.service",
+        "destination": "~/.config/systemd/user/background-rotate.service",
+        "cache_control": false
+      },
+      {
+        "name": "background-rotate.timer",
+        "url": "https://raw.githubusercontent.com/agileguy/cli-setup/main/systemd/background-rotate.timer",
+        "destination": "~/.config/systemd/user/background-rotate.timer",
+        "cache_control": false
+      }
+    ]
+  },
+  "background_images": [
+    "great_wave.jpg",
+    "great_wave.png",
+    "the_scream.jpg",
+    "starry_night.jpg",
+    "sunflowers.jpg",
+    "gauguin_siesta.jpg",
+    "gauguin_tahitian_women.jpg",
+    "vangogh_almond_blossom.jpg",
+    "vangogh_bedroom.jpg",
+    "vangogh_cafe_terrace.jpg",
+    "vangogh_irises.jpg",
+    "vangogh_wheatfield_crows.jpg",
+    "monet_water_lilies.jpg",
+    "monet_impression_sunrise.jpg",
+    "monet_haystacks.jpg",
+    "renoir_boating_party.jpg",
+    "renoir_moulin_galette.jpg",
+    "seurat_sunday_afternoon.jpg",
+    "klimt_the_kiss.jpg",
+    "turner_temeraire.jpg",
+    "vermeer_girl_pearl.jpg",
+    "botticelli_venus.jpg",
+    "manet_olympia.jpg",
+    "degas_absinthe.jpg",
+    "whistler_nocturne.jpg"
+  ]
+}

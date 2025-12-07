@@ -12,9 +12,18 @@ This is a personal CLI environment setup repository that automates the installat
 
 ## Repository Structure
 
-- `install.sh` - Main installation script that orchestrates the entire setup (checks if tools are installed before installing, uses strict error handling with set -euo pipefail, trap handlers for cleanup on error, automatic timestamped backups of existing configs to ~/.config/cli-setup/backups/, checksum verification for downloads, logs to ~/.config/cli-setup-install.log, can be executed or sourced safely with shell options preserved)
+- `install.sh` - Main installation script that orchestrates the entire setup
+  - Supports `--shell-only` flag for shell-only installation (no desktop components)
+  - Supports `--dry-run` to preview what would be installed
+  - Supports `--verbose` / `-v` for detailed output
+  - Supports `--skip-backup` for clean installs
+  - Dependency checking: apt, sudo access, 2GB disk space, internet connectivity
+  - Color-coded logging (INFO, OK, WARN, ERROR)
+  - Installation state saved to `~/.config/cli-setup/state.json`
+  - Can be executed or sourced safely with shell options preserved
+- `manifest.json` - Declarative package and config definitions (shell vs desktop categories)
 - `checksums.txt` - SHA256 checksums for external binary downloads (MUST be updated when files change)
-- `HARDENING.md` - Security hardening plan and implementation status (Phase 1: Complete)
+- `HARDENING.md` - Security hardening plan and implementation status (Phase 1 & 2: Complete)
 - `scripts/` - Helper scripts (all scripts use strict error handling with set -euo pipefail)
   - `helpers.sh` - Utility functions for install.sh (is_installed, install_apt, install_snap, install_flatpak, clone_repo)
     - `install_flatpak` runs with sudo for system-wide package installation
@@ -95,19 +104,32 @@ The `install.sh` script installs and configures:
 
 To run the complete setup:
 ```bash
-./install.sh
+./install.sh                  # Full installation
+./install.sh --shell-only     # Shell tools only (no desktop/GUI)
+./install.sh --dry-run        # Preview what would be installed
+./install.sh --verbose        # Show detailed output
+. install.sh --shell-only     # Source for auto shell config
 ```
 
-Or source it to automatically apply shell configuration:
-```bash
-. install.sh
-```
+**Command-Line Options:**
+- `--shell-only` - Install shell tools only (no i3, picom, polybar, nyxt, zen browser, chrome, etc.)
+- `--dry-run` - Preview installation without making changes
+- `--verbose` / `-v` - Show detailed debug output
+- `--skip-backup` - Skip backing up existing config files
+- `--help` / `-h` - Show help message
 
 This script requires sudo privileges and will install system packages, snap packages, and configure the shell environment.
+
+**Dependency Checks (run automatically):**
+- Verifies apt package manager (Debian/Ubuntu)
+- Verifies sudo access
+- Checks minimum 2GB disk space
+- Validates internet connectivity
 
 **Safety Features:**
 - Automatic backups: All existing config files are backed up to `~/.config/cli-setup/backups/TIMESTAMP/` before being overwritten
 - Installation log: Full installation log saved to `~/.config/cli-setup-install.log`
+- Installation state: Saved to `~/.config/cli-setup/state.json`
 - Error handling: Script exits on errors with cleanup of temporary files
 - Trap handlers: Failed installations report exact line numbers for debugging
 - Shell options preserved: When sourced, original shell options are saved and restored to prevent terminal from closing
