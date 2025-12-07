@@ -59,7 +59,7 @@ google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 .
 ├── install.sh              # Main installation script
 ├── scripts/
-│   ├── helpers.sh          # Helper functions (is_installed, install_apt, etc.)
+│   ├── helpers.sh          # Helper functions (install_flatpak uses sudo)
 │   ├── install-gcloud.sh   # Google Cloud SDK installer
 │   └── install-posting.sh  # Posting TUI HTTP client installer
 ├── .bashrc                 # Bash configuration
