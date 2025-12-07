@@ -28,7 +28,7 @@ install_apt() {
 # Example: install_snap kubectl "--classic" kubectl
 install_snap() {
     local package="$1"
-    local options="$2"
+    local options="${2:-}"
     local cmd="${3:-$1}"
     if is_installed "$cmd"; then
         echo "✓ $package already installed"
