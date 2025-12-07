@@ -792,7 +792,9 @@ main() {
         )
 
         for img in "${bg_images[@]}"; do
-            if [ "$DRY_RUN" -eq 1 ]; then
+            if [ -f ~/.config/backgrounds/"$img" ]; then
+                log_verbose "Background $img already exists"
+            elif [ "$DRY_RUN" -eq 1 ]; then
                 log_dry_run "Download background: $img"
             else
                 log_verbose "Downloading $img..."
