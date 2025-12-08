@@ -20,7 +20,7 @@ INSTALLED_VERSION_FILE="$HOME/.config/cli-setup/version"
 BACKUP_DIR="$HOME/.config/cli-setup/backups/$(date +%Y%m%d-%H%M%S)"
 MANIFEST_URL="https://raw.githubusercontent.com/agileguy/cli-setup/main/manifest.json"
 GITHUB_RAW_BASE="https://raw.githubusercontent.com/agileguy/cli-setup/main"
-REPO_VERSION_URL="https://raw.githubusercontent.com/agileguy/cli-setup/main/VERSION"
+REPO_VERSION_API_URL="https://api.github.com/repos/agileguy/cli-setup/contents/VERSION"
 
 # Default options
 INSTALL_MODE="full"  # full or shell
@@ -637,7 +637,8 @@ check_version() {
             return 0
         fi
     else
-        remote_version=$(curl -fsSL "$REPO_VERSION_URL" 2>/dev/null | tr -d '[:space:]') || {
+        # Use GitHub API to avoid CDN caching issues
+        remote_version=$(curl -fsSL "$REPO_VERSION_API_URL" 2>/dev/null | jq -r '.content' | base64 -d | tr -d '[:space:]') || {
             log_warn "Could not fetch remote version, proceeding with installation"
             return 0
         }
