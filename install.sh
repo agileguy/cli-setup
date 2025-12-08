@@ -1262,8 +1262,8 @@ main() {
         echo ""
         log_info "=== Installing external tools (desktop) ==="
 
-        # i3lock-color
-        if i3lock --version 2>&1 | grep -q "i3lock-color"; then
+        # i3lock-color (check for Cassandra Fox in version - she's the i3lock-color maintainer)
+        if i3lock --version 2>&1 | grep -q "Cassandra Fox"; then
             log_success "i3lock-color already installed"
         else
             if [ "$DRY_RUN" -eq 1 ]; then

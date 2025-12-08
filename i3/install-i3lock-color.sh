@@ -5,8 +5,8 @@ set -euo pipefail
 
 echo "=== Installing i3lock-color ==="
 
-# Check if already installed
-if i3lock --version 2>&1 | grep -q "i3lock-color"; then
+# Check if already installed (Cassandra Fox is in i3lock-color version output)
+if i3lock --version 2>&1 | grep -q "Cassandra Fox"; then
     echo "✓ i3lock-color already installed"
     exit 0
 fi

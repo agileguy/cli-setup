@@ -156,7 +156,7 @@
       {
         "name": "i3lock-color",
         "check_cmd": "i3lock",
-        "check_version": "i3lock-color",
+        "check_version": "Cassandra Fox",
         "install_script": "https://raw.githubusercontent.com/agileguy/cli-setup/main/i3/install-i3lock-color.sh",
         "install_method": "curl_sudo_bash"
       },
