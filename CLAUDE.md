@@ -253,6 +253,7 @@ Kitty terminal is configured with:
 - Hidden titlebar (`hide_window_decorations titlebar-only`)
 - Powerline-style tab bar at the bottom
 - Font size 11.0
+- Mouse clicks disabled from inserting characters (mouse_map no_op)
 
 ## Polybar Configuration
 
