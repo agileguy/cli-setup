@@ -78,8 +78,7 @@
   "flatpak_packages": {
     "shell": [],
     "desktop": [
-      {"id": "engineer.atlas.Nyxt", "cmd": ""},
-      {"id": "app.zen_browser.zen", "cmd": ""}
+
     ]
   },
   "external_tools": {
