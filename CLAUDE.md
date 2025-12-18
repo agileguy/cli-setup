@@ -55,9 +55,6 @@ This is a personal CLI environment setup repository that automates the installat
   - `catppuccin-mocha.rasi` - Catppuccin Mocha theme for rofi
 - `picom/` - Picom compositor configuration
   - `picom.conf` - Picom config with transparency and opacity rules
-- `nyxt/` - Nyxt browser configuration
-  - `config.lisp` - Custom Catppuccin Mocha theme
-  - `auto-config.3.lisp` - Dark mode and default URL settings
 - `kitty/` - Kitty terminal configuration
   - `kitty.conf` - Main kitty config with theme, transparency (85%), hidden titlebar, and tab bar styling
   - `catppuccin-mocha.conf` - Catppuccin Mocha color theme
@@ -81,11 +78,9 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool
-- flatpak packages: nyxt, zen-browser (Flathub repository added automatically)
-- snap packages: httpie, kubectl, helm, gh (GitHub CLI), doctl (DigitalOcean CLI), k9s, glances, nvim, bitwarden, bw (Bitwarden CLI)
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, gh (GitHub CLI)
+- snap packages: httpie, kubectl, helm, doctl (DigitalOcean CLI), k9s, glances, nvim, bitwarden, bw (Bitwarden CLI)
 - apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
-- npm packages: tldr
 
 **External Tools (via curl/GitHub releases):**
 - mcfly - shell history search
@@ -94,9 +89,7 @@ The `install.sh` script installs and configures:
 - xplr - terminal file manager
 - i3lock-color - enhanced i3lock with color support
 - lazygit - terminal UI for git (installed from GitHub releases for full filesystem access)
-- cursor - Cursor AI IDE
 - yt-dlp - video downloader
-- Google Chrome - web browser
 - Posting - TUI HTTP client (via pipx)
 
 **Configuration Files:**
@@ -121,7 +114,7 @@ To run the complete setup:
 ```
 
 **Command-Line Options:**
-- `--shell-only` - Install shell tools only (no i3, picom, polybar, nyxt, zen browser, chrome, etc.)
+- `--shell-only` - Install shell tools only (no i3, picom, polybar, kitty, etc.)
 - `--dry-run` - Preview installation without making changes
 - `--verbose` / `-v` - Show detailed debug output
 - `--skip-backup` - Skip backing up existing config files
@@ -210,8 +203,6 @@ The install script fetches configuration files from the GitHub repository (githu
 - `rofi/config.rasi` (deployed to `~/.config/rofi/config.rasi`)
 - `rofi/catppuccin-mocha.rasi` (deployed to `~/.config/rofi/catppuccin-mocha.rasi`)
 - `picom/picom.conf` (deployed to `~/.config/picom/picom.conf`)
-- `nyxt/config.lisp` (deployed to `~/.config/nyxt/config.lisp`)
-- `nyxt/auto-config.3.lisp` (deployed to `~/.config/nyxt/auto-config.3.lisp`)
 - `kitty/kitty.conf` (deployed to `~/.config/kitty/kitty.conf`)
 - `kitty/catppuccin-mocha.conf` (deployed to `~/.config/kitty/catppuccin-mocha.conf`)
 - `lazygit/config.yml` (deployed to `~/.config/lazygit/config.yml`)
@@ -279,7 +270,6 @@ Picom is a compositor for X11 that provides transparency and visual effects. The
 **Opacity Rules (windows excluded from transparency):**
 - i3lock
 - Rofi
-- Google Chrome (fullscreen only)
 - VLC
 
 ## CLI Tools
@@ -289,7 +279,6 @@ The following modern CLI tools are installed with Catppuccin Mocha themes where 
 **Productivity Tools:**
 - fzf: Universal fuzzy finder for files, git branches, and more (Catppuccin Mocha themed via FZF_DEFAULT_OPTS in .bashrc; key-bindings not sourced so mcfly owns Ctrl+R)
 - lazygit: Terminal UI for git commands (Catppuccin Mocha themed via config.yml)
-- tldr: Simplified, example-driven man pages
 - jq: JSON processor for parsing and manipulating JSON data
 - Posting: TUI HTTP client for API testing
 

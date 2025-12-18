@@ -186,7 +186,7 @@ cleanup_on_error() {
     log_info "Cleaning up temporary files..."
 
     # Clean up common temporary files
-    rm -f /tmp/cursor.deb /tmp/google-chrome.deb /tmp/lazygit.tar.gz /tmp/lazygit 2>/dev/null || true
+    rm -f /tmp/lazygit.tar.gz /tmp/lazygit 2>/dev/null || true
 
     # Use return if sourced, exit if executed
     if [ "$SCRIPT_SOURCED" -eq 1 ]; then
@@ -585,7 +585,6 @@ show_installation_summary() {
 
     if [ "$INSTALL_MODE" = "full" ]; then
         echo "  - Desktop: i3, polybar, rofi, picom, kitty"
-        echo "  - Browsers: Nyxt, Zen Browser, Google Chrome"
         echo "  - Backgrounds: Classic artwork with 5-min rotation"
     fi
 
@@ -1050,6 +1049,7 @@ main() {
     install_apt gping
     install_apt git-delta delta
     install_apt bats
+    install_apt gh
 
     # Desktop packages (full install only)
     if [ "$INSTALL_MODE" = "full" ]; then
@@ -1085,10 +1085,6 @@ main() {
             fi
         fi
 
-        echo ""
-        log_info "=== Installing Flatpak packages ==="
-        install_flatpak engineer.atlas.Nyxt
-        install_flatpak app.zen_browser.zen
     fi
 
     # =========================================================================
@@ -1099,7 +1095,6 @@ main() {
     install_snap httpie "" http
     install_snap kubectl "--classic"
     install_snap helm "--classic"
-    install_snap gh
     install_snap doctl
     install_snap k9s "--devmode"
     install_snap glances "--classic"
@@ -1245,18 +1240,6 @@ main() {
         fi
     fi
 
-    # tldr (npm)
-    if is_installed tldr; then
-        log_success "tldr already installed"
-    else
-        if [ "$DRY_RUN" -eq 1 ]; then
-            log_dry_run "npm install -g tldr"
-        else
-            log_info "Installing tldr..."
-            sudo npm install -g tldr
-        fi
-    fi
-
     # Desktop-only external tools
     if [ "$INSTALL_MODE" = "full" ]; then
         echo ""
@@ -1271,38 +1254,6 @@ main() {
             else
                 log_info "Installing i3lock-color..."
                 curl -sSL "$GITHUB_RAW_BASE/i3/install-i3lock-color.sh" | sudo bash
-            fi
-        fi
-
-        # Cursor IDE
-        if is_installed cursor; then
-            log_success "Cursor IDE already installed"
-        else
-            if [ "$DRY_RUN" -eq 1 ]; then
-                log_dry_run "Install Cursor IDE"
-            else
-                log_info "Installing Cursor IDE..."
-                curl -fsSL -o /tmp/cursor.deb "https://api2.cursor.sh/updates/download/golden/linux-x64-deb/cursor/2.1"
-                verify_checksum /tmp/cursor.deb "SKIP"
-                sudo dpkg -i /tmp/cursor.deb
-                sudo apt-get install -f -y
-                rm -f /tmp/cursor.deb
-            fi
-        fi
-
-        # Google Chrome
-        if is_installed google-chrome; then
-            log_success "Google Chrome already installed"
-        else
-            if [ "$DRY_RUN" -eq 1 ]; then
-                log_dry_run "Install Google Chrome"
-            else
-                log_info "Installing Google Chrome..."
-                curl -fsSL -o /tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-                verify_checksum /tmp/google-chrome.deb "SKIP"
-                sudo dpkg -i /tmp/google-chrome.deb
-                sudo apt-get install -f -y
-                rm /tmp/google-chrome.deb
             fi
         fi
     fi
@@ -1363,10 +1314,6 @@ main() {
 
         mkdir -p ~/.config/picom
         download_config "$GITHUB_RAW_BASE/picom/picom.conf" "~/.config/picom/picom.conf"
-
-        mkdir -p ~/.config/nyxt
-        download_config "$GITHUB_RAW_BASE/nyxt/config.lisp" "~/.config/nyxt/config.lisp"
-        download_config "$GITHUB_RAW_BASE/nyxt/auto-config.3.lisp" "~/.config/nyxt/auto-config.3.lisp"
 
         mkdir -p ~/.config/kitty
         download_config "$GITHUB_RAW_BASE/kitty/kitty.conf" "~/.config/kitty/kitty.conf" "true"
