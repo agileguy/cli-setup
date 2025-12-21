@@ -78,7 +78,7 @@ This is a personal CLI environment setup repository that automates the installat
 The `install.sh` script installs and configures:
 
 **Package Manager Tools:**
-- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, gh (GitHub CLI)
+- apt packages: cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, screengrab, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, bats, xclip, gh (GitHub CLI)
 - snap packages: httpie, kubectl, helm, doctl (DigitalOcean CLI), k9s, glances, nvim, bitwarden, bw (Bitwarden CLI)
 - apt (official Google repo): google-cloud-cli, google-cloud-cli-gke-gcloud-auth-plugin
 
@@ -233,6 +233,7 @@ The i3 config includes:
 - `$mod+h/j/k/l` - Focus left/down/up/right
 - `$mod+Shift+h/j/k/l` - Move window left/down/up/right
 - `$mod+Escape` - Lock screen with i3lock-color + cmatrix
+- `$mod+Shift+s` - Take screenshot (screengrab)
 - `$mod+z` - Clear terminal (sends Ctrl+L)
 - `$mod+Shift+r` - Reload i3 config
 

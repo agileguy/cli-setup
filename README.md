@@ -41,7 +41,7 @@ Restore configuration files from a previous backup:
 ## What Gets Installed
 
 **APT Packages:**
-cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, bats
+cbonsai, btop, ncdu, bat, unzip, ffmpeg, cmus, zoxide, eza, tmux, git, curl, ripgrep, fd-find, nodejs, npm, python3-pip, asciinema, i3, rofi, polybar, arandr, gcc, make, kitty, feh, imagemagick, cmatrix, picom, screengrab, falkon, flatpak, fzf, jq, duf, hyperfine, gping, git-delta, xdotool, bats, xclip
 
 **Flatpak Packages:**
 nyxt, zen-browser
@@ -165,6 +165,7 @@ See [HARDENING.md](HARDENING.md) for the complete security hardening plan and im
 - `$mod+Tab` - Window switcher
 - `$mod+h/j/k/l` - Vim-style focus navigation
 - `$mod+Escape` - Lock screen
+- `$mod+Shift+s` - Take screenshot (screengrab)
 - `$mod+w` - Tabbed layout
 
 ## Shell Aliases

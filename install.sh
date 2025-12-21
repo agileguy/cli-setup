@@ -1050,6 +1050,7 @@ main() {
     install_apt git-delta delta
     install_apt bats
     install_apt gh
+    install_apt xclip
 
     # Desktop packages (full install only)
     if [ "$INSTALL_MODE" = "full" ]; then
@@ -1064,6 +1065,7 @@ main() {
         install_apt imagemagick convert
         install_apt cmatrix
         install_apt picom
+        install_apt screengrab
         install_apt falkon
         install_apt flatpak
         install_apt xdotool

@@ -60,6 +60,9 @@ bindsym $mod+Return exec $term
 # start browser
 bindsym $mod+b exec $browser
 
+# take screenshot
+bindsym $mod+Shift+s exec --no-startup-id screengrab
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
